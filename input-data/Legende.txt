@@ -1,0 +1,7 @@
+Endungen spezifizieren den Datensatz:
+
+- p:		Personal questionnaire
+- page17:	Questions from the Youth questionnaire not included in BIOAGE17
+- pbrutto:	Gross Individual Data
+- pkal:		Individual Calendar --> generated data
+- pluecke:	
