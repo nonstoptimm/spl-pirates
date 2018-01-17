@@ -1,11 +1,11 @@
 ### IMPORT DATA SKRIPT ###
 # Install Package "Foreign", preinstalled by default, so just skip
 # install.packages("foreign")
-
+library("foreign")
 # Make Sure you check your Working Directory so that the import code works properly!
 
 # Load all Data from "Input-Data"
-# bap <- read.dta("input-data/2010_bap.dta") #2010 START
+#bap <- read.dta("input-data/2010/2010_bap.dta", convert.factors = TRUE) #2010 START
 # bapage17 <- read.dta("input-data/2010_bapage17.dta")
 # bapbrutto <- read.dta("input-data/2010_bapbrutto.dta")
 # bapkal <- read.dta("input-data/2010_bapkal.dta")
@@ -34,8 +34,11 @@
 # bfpbrutto <- read.dta("input-data/2015_bfpbrutto.dta") 
 # bfpkal <- read.dta("input-data/2015_bfpkal.dta") #2015 END
 
-### IMPORT AND MERGE ALL DATA ###
+# Cleanup-Command - BE CAREFUL WITH IT!
+# rm(list=ls(all=TRUE))
 
+### IMPORT AND MERGE ALL DATA ###
+#library(readstata13)
 filenames10 <- list.files(path="input-data/2010", full.names=TRUE)
 import.list10 <- lapply(filenames10, read.dta)
 merged10 <- Reduce(function(x, y) merge(x, y, all=FALSE,by.x="persnr",by.y="persnr",all.x =TRUE, all.y =TRUE),import.list10,accumulate=F)
