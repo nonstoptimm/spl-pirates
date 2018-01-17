@@ -34,6 +34,9 @@ bap <- read.dta("input-data/2010/2010_bap.dta", convert.factors = TRUE) #2010 ST
 # bfpbrutto <- read.dta("input-data/2015_bfpbrutto.dta") 
 # bfpkal <- read.dta("input-data/2015_bfpkal.dta") #2015 END
 
+# Cleanup-Command - BE CAREFUL WITH IT!
+# rm(list=ls(all=TRUE))
+
 ### IMPORT AND MERGE ALL DATA ###
 library(readstata13)
 filenames10 <- list.files(path="input-data/2010", full.names=TRUE)
