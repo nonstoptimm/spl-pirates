@@ -21,6 +21,14 @@ list_years <- str_sub(list_dirs, -4)
 list_varnames <- paste("merged", list_years, sep="")
 # Load the feature list we cleaned manually in Excel as CSV
 soep_selection <- read.table("variable-selection/soep-feature-selection.csv", header = TRUE, sep = ";", check.names=FALSE)
+# Select the Label Column and the Variable Column of the current Year
+#soep_subcrit <- c(1, k)
+# Subset the Feature list so that only the label and the current year exist
+#soep_selection_sub <- soep_selection[soep_subcrit]
+# Delete NA-Values from the list
+# soep_selection_sub <- na.omit(soep_selection_sub)
+# Get all Labels, unfiltered
+labels <- soep_selection[,1]
 
 # Loop through all the years, import the data, merge, clean and label them
 for (years in list_years) {
@@ -29,19 +37,46 @@ for (years in list_years) {
   # Import all the data from the current list with the read.dta-Function for SPSS-Files
   list_import <- lapply(list_files, read.dta)
   # Merge it into one file
-  data_merged <- Reduce(function(x, y) merge(x, y, all=FALSE,by.x="persnr",by.y="persnr",all.x =TRUE, all.y =TRUE, check.names=FALSE),list_import,accumulate=F)
+  #  data_merged <- Reduce(function(x, y) merge(x, y, all=FALSE,by.x="persnr",by.y="persnr",all.x = TRUE, all.y = TRUE),list_import,accumulate=F)
+  #  data_merged <- Reduce(function(x, y) merge(x, y, all=FALSE,by="persnr",all.x = TRUE),list_import,accumulate=F)
+  data_merged <- Reduce(function(x, y) merge(x, y, by='persnr', all.x=TRUE), list_import)
   # Label the data with proper names, based on our feature list
-  colnames(data_merged) <- soep_selection[,1]
-  # This command would cut the x and y values for duplicates but we prefer to use labels
-  # colnames(data_merged) <- gsub(".x|.y", "", colnames(data_merged))
+  # colnames(data_merged) <- soep_selection[,1]
+  # labels_cleaned <- subset(labels, shortlist = names(cleaned))
+  # colnames(data_merged)[which(names(data_merged) == soep_selection[,i]] <- sor
+  # Cut the .x and y. values from the merge process, so that we have clean column names
+  colnames(data_merged) <- gsub("\\.x|\\.y", "", colnames(data_merged))
   # Get the feature list of the current year
-  current_list <- soep_selection[,k]
+  current_list <- sort(soep_selection[,k])
   # Delete all columns where no data exists (as the surveys differed every year)
-  shortlist <- current_list[!is.na(current_list)]
-  cleaned <- subset(data_merged, select = shortlist)
+  shortlist <- na.omit(current_list)
+  # shortlistcleaned <- subset(data_merged, sort(names(data_merged)) %in% shortlist)
+  #cleaned <- data_merged[,current_list]
+  #test <- data_merged[with(data_merged, shortlist) ]
+
+  # ONLY take the data shortlisted for the current year
+  cleaned <- data_merged[ ,which(names(data_merged) %in% shortlist==TRUE)]
+  
+  # Select the Label Column and the Variable Column of the current Year
+  soep_subcrit <- c(1, k)
+  # Subset the Feature list so that only the label and the current year exist
+  soep_selection_sub <- soep_selection[soep_subcrit]
+  # Delete NA-Values from the list
+  soep_selection_sub <- na.omit(soep_selection_sub)
+  
+  # Create a subset of the clean labels, where all codenames match, to make sure that the labels are correct
+  clean_labels <- subset(soep_selection_sub, sort(soep_selection_sub[,2]) ==  sort(names(cleaned)))
+  # Label the columns properly
+  colnames(cleaned) <- clean_labels[,1]
+  #testen <- names(data_merged)
+  # cleaned <- subset(data_merged, select = shortlist)
+  # Clean all Labels based on the shortlist
+  # labels_cleaned <- subset(labels, soep_selection[,k] == names(cleaned))
   # Assign data_merged to current merge[year]
   assign(list_varnames[i], cleaned)
   # Update our variables for the next round
   i <- i + 1
   k <- k + 1
 }
+# Delete the intermediate variables to clean up the workspace
+#rm(list_files, cleaned, data_merged, list_import, i, k, shortlist, current_list)
