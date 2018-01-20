@@ -61,7 +61,6 @@
       i <- i + 1
       k <- k + 1
   }
-
   
 # Delete the intermediate variables to clean up the workspace - all except merged[year]
   # rm(list = ls()[!ls() %in% list_varnames])
@@ -69,6 +68,4 @@
 # Delete everything - Cleanup-Command - BE CAREFUL WITH IT!
   # rm(list=ls(all=TRUE))
   
-  
-  
-#rm(list_files, cleaned, data_merged, list_import, i, k, shortlist, current_list)
+#rm(list_files, cleaned, data_merged, list_import, i, k, shortlist, current_list
