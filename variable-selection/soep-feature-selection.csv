@@ -1,4 +1,4 @@
-﻿;2010;2011;2012;2013;2014;2015
+﻿Label;y2010;y2011;y2012;y2013;y2014;y2015
 never Changing Person ID;persnr;persnr;persnr;persnr;persnr;persnr
 Year of Birth;bap15002;bbp13202;bcp12803;bdp13403;bep12603;bfpbirthy
 Sex;bap15001;bbp13201;bcp12801;bdp13401;bep12601;bfpsex
@@ -72,8 +72,6 @@ Label;bap13203;bbp13603;NA;bdp13903;NA;bfp15403
 Contracted Weekly Working Time;NA;NA;NA;NA;bep_zaz08;bfp_zaz08
 Actual Weekly Working Hours;NA;NA;NA;NA;bep_zaz10;bfp_zaz10
 Salary/Earnings 2014 Non_Response;NA;NA;NA;NA;bep_zvek01;bfp_zvek01
-EU Citizen;NA;NA;NA;NA;NA;bfpm_p_48
-Permanent Residency;NA;NA;NA;NA;NA;bfpm_p_49
 Nationality;nation10;nation11;nation12;nation13;nation14;nation15
 Current Gross Labor Income in Euro;labgro10;labgro11;labgro12;labgro13;labgro14;labgro15
 Current Net Labor Income in Euro;labnet10;labnet11;labnet12;labnet13;labnet14;labnet15
