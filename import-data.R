@@ -21,6 +21,8 @@
   soep_selection <- read.table("variable-selection/soep-feature-selection.csv", header = TRUE, sep = ";", check.names=FALSE)
 # Get all Labels, unfiltered
   labels <- soep_selection[,1]
+# Create a vector to put object names of all years in it
+  datalist <- c()
 
 # Loop through all the years, import the data, merge, clean and label them
   for (years in list_years) {
@@ -57,9 +59,12 @@
       colnames(clean_sorted) <- ordered_colnames[,1]
     # Assign data_merged to current merge[year]
       assign(list_varnames[i], clean_sorted)
+    # Add Year Variable to a list so that we can access all years by a loop  
+      datalist <- c(datalist, list_varnames[i])
     # Update our variables for the next round
       i <- i + 1
       k <- k + 1
+      
   }
   
 # Delete the intermediate variables to clean up the workspace - all except merged[year]
