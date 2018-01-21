@@ -83,16 +83,21 @@
             print(current_year)
           # 1. Control Dummy
             current_data$`Control_1`[current_data$`Hourly earnings` >= 8.5 & current_data$`Hourly earnings` < 9] <- 1
-            # merged2014$`Control_1`[merged2014$`Hourly earnings` >= 8.5 & merged2014$`Hourly earnings` < 9] <- 1
             current_data$`Control_1`[is.na(current_data$Control_1)] <- 0
+            # merged2014$`Control_1`[merged2014$`Hourly earnings` >= 8.5 & merged2014$`Hourly earnings` < 9] <- 1
+            # merged2014$`Control_1`[is.na(merged2014$Control_1)] <- 0
             #table(merged2014$Control_1)
           # 2. Control Dummy
             current_data$`Control_2`[current_data$`Hourly earnings` >= 8.5 & current_data$`Hourly earnings` < 9.5] <- 1
             current_data$`Control_2`[is.na(current_data$Control_2)] <- 0
+            # merged2014$`Control_2`[merged2014$`Hourly earnings` >= 8.5 & merged2014$`Hourly earnings` < 9.5] <- 1
+            # merged2014$`Control_2`[is.na(merged2014$Control_2)] <- 0
             #table(merged2014$Control_2)
           # 3. Control Dummy
             current_data$`Control_3`[current_data$`Hourly earnings` >= 8.5 & current_data$`Hourly earnings` < 10] <- 1
             current_data$`Control_3`[is.na(current_data$Control_3)] <- 0
+            # merged2014$`Control_3`[merged2014$`Hourly earnings` >= 8.5 & merged2014$`Hourly earnings` < 10] <- 1
+            # merged2014$`Control_3`[is.na(merged2014$Control_3)] <- 0
             #table(merged2014$Control_3)
       }
     
