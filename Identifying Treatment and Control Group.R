@@ -38,7 +38,7 @@
           # SET THE CURRENT YEAR
           # We start with the first year of our dataset
           y <- 1  
-            for(y in c(1:length(datalist))) {
+            for(years in c(datalist)) {
               current_year <- datalist[y]
               current_data <- get(current_year)
               #deparse(current_year)
@@ -49,12 +49,13 @@
               # eliminate the values "-3", "-2", "-1"
               # Also add Weihnachtsgeld and Stuff?
               print(summary(current_data$`Current Gross Labor Income in Euro`))
+              y <- y + 1
             }
 
       # eliminate the values "-2", "-1"
       #Create hourly wage:
           y <- 1 
-          for (y in c(1:length(datalist))) {
+          for (years in c(datalist)) {
             # Rewrite the minus values as NA
               current_year <- datalist[y]
               current_data <- get(current_year)
@@ -70,6 +71,10 @@
               current_data$`Treatment`[current_data$`Hourly earnings` < 8.5] <- 1
               current_data$Treatment[is.na(current_data$Treatment)] <- 0
               table(current_data$Treatment)
+              
+            # Assign it to the correct year  
+              assign(current_year, current_data)
+              y <- y + 1
           }
 
 #### DER CODE FUNKTIONIERT IRGENDWIE NUR MIT DEM 2014er DATENSATZ? GIBT ES HIER UNTERSCHIEDE? #####
@@ -77,7 +82,7 @@
   # Use a loop function to identify the treatment group for the years 2010 - 2015
   # We use the generated "hourly earnings" variable
         y <- 1
-        for (y in c(1:length(datalist))) {
+        for (years in c(datalist)) {
             current_year <- datalist[y]
             current_data <- get(current_year)
             print(current_year)
@@ -99,5 +104,10 @@
             # merged2014$`Control_3`[merged2014$`Hourly earnings` >= 8.5 & merged2014$`Hourly earnings` < 10] <- 1
             # merged2014$`Control_3`[is.na(merged2014$Control_3)] <- 0
             #table(merged2014$Control_3)
+            
+          # Assign it to the correct year  
+            assign(current_year, current_data)
+            
+            y <- y + 1
       }
     
