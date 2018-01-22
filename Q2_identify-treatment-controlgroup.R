@@ -17,7 +17,7 @@
 # 'Minimum Wage EUR' and 'Minimum Wage Cent' The values '-2' and '-1' refer to 'Does not apply' and 'No anwer' respectively
 # Looking for a nicer way to code this, kind of to ignore the -2 and -1 values and just label them to zero or so.
 # Execute only if data with minimum wage exists
-  if("merged2015" %in% current_year) {
+  if("merged2015" %in% datalist) {
     merged2015$`Minimum Wage` = merged2015$`Minimum Wage EUR` + merged2015$`Minimum Wage Cent`/100
     
     # Create the treatment dummy
@@ -34,6 +34,7 @@
 y = 1
 for (years in c(datalist)) {
     current_year = datalist[y]
+    if(current_year != "merged2015") {
     current_data = get(current_year)
     # deparse(current_year)
     print(current_year)
@@ -41,6 +42,7 @@ for (years in c(datalist)) {
     # summary(get(current_year)$`Actual Work Time Per Week`) value '-3' are implausible answers, such as weekly working time
     # over 80hours eliminate the values '-3', '-2', '-1' Also add Weihnachtsgeld and Stuff?
     print(summary(current_data$`Current Gross Labor Income in Euro`))
+    }
     y = y + 1
 }
 
@@ -59,10 +61,11 @@ for (years in c(datalist)) {
     
     # Variable Hourly earnings
     current_data$`Hourly earnings` = current_data$`Current Gross Labor Income in Euro`/(4 * current_data$`Actual Work Time Per Week`)
+    if(current_year != "merged2015") {
     current_data$Treatment[current_data$`Hourly earnings` < 8.5] = 1
     current_data$Treatment[is.na(current_data$Treatment)] = 0
     table(current_data$Treatment)
-    
+    }
     # Assign it to the correct year
     assign(current_year, current_data)
     y = y + 1
