@@ -26,8 +26,7 @@ for (years_plot in c(datalist)) {
 
 # Integrate all vectors into one vector
 p_values = c(p_control1, p_control2, p_control3, p_controlsum, p_treatm)
-
-p_condition = rep(list_years, length(p_values))
+p_condition = rep(datalist, 5)
 # Combine data, conditions and variable names
 p_data = data.frame(p_type, p_condition, p_values)
 

@@ -1,4 +1,6 @@
 ### EXECUTE ENTIRE R CODE ###
+# Install FormatR Package
+install.packages("formatR")
 
 # Tidy up the source code
 #  tidy_source(file = "output.R")
