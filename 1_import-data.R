@@ -1,14 +1,19 @@
+#### SKRIPT "IMPORT-DATA.R" ####
+#### This script imports, merges and labels the required data for every year ####
+
 ### IMPORT DATA SKRIPT ###
-# Install Package "Foreign", preinstalled by default, so just skip
-# install.packages("foreign")
-# Load required libraries
+# Load required libraries. They are preinstalled.
   library(foreign)
   library(stringr)
 # Make Sure you check your Working Directory so that the code works flawless!
   getwd()
+# Otherwise Set the Working Directory
+# setwd("/Your/Path/to/Happiness")  
 
 ### IMPORT, MERGE AND CLEAN ALL DATA ###
-# We need two variables: i is to step through the list of years, k is always one digit higher as it reads the second column of the feature selection list (the first column is the label)
+# We need two control variables: 
+# i is to step through the list of years, beginning with 1
+# k is always one digit higher as it reads the second column of the feature selection list (the first column is the label)
   i <- 1
   k <- 2
 # List all directories within the input data, non-recursive
@@ -72,5 +77,3 @@
   
 # Delete everything - Cleanup-Command - BE CAREFUL WITH IT!
   # rm(list=ls(all=TRUE))
-  
-#rm(list_files, cleaned, data_merged, list_import, i, k, shortlist, current_list
