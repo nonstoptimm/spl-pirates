@@ -2,7 +2,6 @@
 
 ### IMPORT DATA SKRIPT ### Load required libraries. They are preinstalled.
 library(foreign)
-library(stringr)
 # Make Sure you check your Working Directory so that the code works flawless!
 getwd()
 # Otherwise Set the Working Directory setwd('/Your/Path/to/Happiness')
@@ -29,7 +28,7 @@ datalist = c()
 for (years in list_years) {
     # Define Current List of import data based on the 'i' value
     list_files = list.files(path = list_dirs[i], pattern = "", full.names = TRUE)
-    # Import all the data from the current list with the read.dta-Function for SPSS-Files
+    # Import all the data from the current list with the read.dta-Function (part of foreign package) for SPSS-Files
     list_import = lapply(list_files, read.dta)
     # Merge it into one file
     data_merged = Reduce(function(x, y) merge(x, y, by = "persnr", all.x = TRUE), list_import)
@@ -67,6 +66,8 @@ for (years in list_years) {
     k = k + 1
     
 }
+
+
 
 # Delete the intermediate variables to clean up the workspace - all except merged[year] rm(list = ls()[!ls() %in%
 # list_varnames])

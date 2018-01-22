@@ -1,2 +1,10 @@
 # spl-pirates
-Repository für das SPL-Projekt
+Repository for the SPL-Project
+
+**Team Members:**
+Albert Thieme
+Timm Walz
+Meret Borchmann
+Jupp Kerschek
+
+

@@ -1,5 +1,5 @@
 # Analysis of treatment & control group
-
+if("merged2015" %in% current_year) {
 # rewrite Sex as numeric and shows the gender variable of the Treatment group (1 for women)
 table(merged2015$Sex)
 # Sex for treatment group
@@ -132,3 +132,7 @@ summary(merged2015$`Year of Birth`[merged2015$`Year of Birth` > 0 & (merged2015$
 # 11.50 years, Mean 11.54 years Current gross labor income in € Median 1300 €, Mean 1177 € Actual work time per week in
 # hours Median 35.00 h, Mean 32.06 h Working expirience in years Median 7.90 years, Mean 11.48 years Minimum wage in €
 # Median 8.500 €, Mean 8.828 € Collective wage agreement min wage 20.34 % Year of birth Median 1972, Mean 1973
+
+print("Executed!")
+
+}

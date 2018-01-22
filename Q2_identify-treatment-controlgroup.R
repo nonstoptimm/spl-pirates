@@ -16,11 +16,16 @@
 # Treatment dummy 2015 Create a unique minimum wage earnings variable Minimum wage earnings are split in 2 variables
 # 'Minimum Wage EUR' and 'Minimum Wage Cent' The values '-2' and '-1' refer to 'Does not apply' and 'No anwer' respectively
 # Looking for a nicer way to code this, kind of to ignore the -2 and -1 values and just label them to zero or so.
-merged2015$`Minimum Wage` = merged2015$`Minimum Wage EUR` + merged2015$`Minimum Wage Cent`/100
+# Execute only if data with minimum wage exists
+  if("merged2015" %in% current_year) {
+    merged2015$`Minimum Wage` = merged2015$`Minimum Wage EUR` + merged2015$`Minimum Wage Cent`/100
+    
+    # Create the treatment dummy
+    merged2015$Treatment[merged2015$`Minimum Wage` > 0 & merged2015$`Minimum Wage` <= 8.5] = 1
+    merged2015$Treatment[is.na(merged2015$Treatment)] = 0
+    print("Executed!")
+  }
 
-# Create the treatment dummy
-merged2015$Treatment[merged2015$`Minimum Wage` > 0 & merged2015$`Minimum Wage` <= 8.5] = 1
-merged2015$Treatment[is.na(merged2015$Treatment)] = 0
 # table(get(current_year)$Treatment) 842 observations who are earning the minimum wage of 8.50 in 2015
 
 # 2010 - 2014 Use a loop function to identify the treatment group for these years We need to generate a hourly earnings
