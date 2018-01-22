@@ -2,6 +2,7 @@
 
 ### IMPORT DATA SKRIPT ### Load required libraries. They are preinstalled.
 library(foreign)
+library(stringr)
 # Make Sure you check your Working Directory so that the code works flawless!
 getwd()
 # Otherwise Set the Working Directory setwd('/Your/Path/to/Happiness')
