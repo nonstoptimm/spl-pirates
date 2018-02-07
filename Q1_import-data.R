@@ -11,6 +11,7 @@ getwd()
 ### 1 k is always one digit higher as it reads the second column of the feature selection list (the first column is the label)
 i = 1
 k = 2
+success = TRUE
 # List all directories within the input data, non-recursive
 list_dirs = list.dirs(path = "input-data", recursive = FALSE)
 # Extract the year name of the directories, so the last 4 digits
@@ -19,7 +20,7 @@ list_years = str_sub(list_dirs, -4)
 list_varnames = paste("merged", list_years, sep = "")
 # Load the feature list we cleaned manually in Excel as CSV
 soep_selection = read.table("variable-selection/soep-feature-selection.csv", header = TRUE, sep = ";", check.names = FALSE)
-close(soep_selection)
+#close(soep_selection)
 # Get all Labels, unfiltered
 labels = soep_selection[, 1]
 # Create a vector to put object names of all years in it
@@ -65,10 +66,8 @@ for (years in list_years) {
     # Update our variables for the next round
     i = i + 1
     k = k + 1
-    
+    success = TRUE   
 }
-
-
 
 # Delete the intermediate variables to clean up the workspace - all except merged[year] rm(list = ls()[!ls() %in%
 # list_varnames])
