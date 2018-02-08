@@ -1,111 +1,111 @@
-﻿Label;y2010;y2011;y2012;y2013;y2014;y2015
-never Changing Person ID;persnr;persnr;persnr;persnr;persnr;persnr
-Year of Birth;bap15002;bbp13202;bcp12803;bdp13403;bep12603;bfpbirthy
-Sex;bap15001;bbp13201;bcp12801;bdp13401;bep12601;bfpsex
-Black Economy Work in Personal Environment 2014;NA;NA;NA;NA;NA;bfp08
-Black Economy Work Personal Environment Today;NA;NA;NA;NA;NA;bfp09
-Hours Weekdays Job, Training;bap0301;bbp0201;bcp0401;bdp1001;bep0501;bfp1001
-Hours Weekdays Running Errands;bap0302;bbp0202;bcp0402;bdp1002;bep0502;bfp1002
-Hours Weekday Housework;bap0303;bbp0203;bcp0403;bdp1003;bep0503;bfp1003
-Hours Weekday Child Care;bap0304;bbp0204;bcp0404;bdp1004;bep0504;bfp1004
-Support Persons in Care, Weekday;bap0305;bbp0205;bcp0405;bdp1005;bep0505;bfp1005
-Hours Weekdays Training, Education;bap0306;bbp0206;bcp0406;bdp1006;bep0506;bfp1006
-Hours Weekday Repairs;bap0307;bbp0207;bcp0407;bdp1007;bep0507;bfp1007
-Hours Weekdays Physical Activities;bap0308;bbp0208;bcp0408;bdp1008;bep0508;bfp1008
-Hours Weekday Leisure, Hobbies;bap0309;bbp0209;bcp0409;bdp1009;bep0509;bfp1009
-Registered Unemployed;bap06;bbp06;bcp08;bdp15;bep09;bfp15
-Now Receiving Education, Training;bap07;bbp07;bcp09;bdp16;bep1001;bfp1601
-Now General-Education School;bap0801;bbp0801;bcp1001;bdp1701;bep1101;bfp1701
-Now Specialized College;bap0802;bbp0802;bcp1002;bdp1702;bep1102;bfp1702
-Vocational Training: Further Training/Retraining;bap0804;bbp0804;NA;bdp1706;bep1106;bfp1707
-Now Vocational Training;bap0805;bbp0805;bcp1007;bdp1707;bep1107;bfp1709
-Left Job Since Beginning of Prev Year;bap75;bbp85;bcp73;bdp91;bep78;bfp26
-Last Job Ended - Item Nonresponse;bap76;bbp8603;bcp7403;bdp9203;bep7903;bfp2703
-Years Worked on Last Job;bap7701;bbp8701;bcp7501;bdp9301;bep8001;bfp2801
-Why Job Terminated;bap78;bbp88;bcp76;bdp94;bep81;bfp29
-Future Job Prospects;bap80;bbp90;bcp78;bdp96;bep83;bfp31
-Employment Status;bap09;bbp09;bcp11;bdp18;bep12;bfp32
-Monthly Salary at which would take Job;bap1401;bbp1401;bcp1601;bdp2301;bep1701;bfp3701
-Temporary or Contractual Basis;bap35;bbp39;bcp37;bdp48;bep37;bfp60
-Duration of Work ;bap36;bbp40;bcp38;bdp49;bep38;bfp61
-1-Euro-Job;NA;NA;NA;NA;NA;bfp62
-Just Gross Income;NA;NA;NA;NA;NA;bfp67
-Just Net Income;NA;NA;NA;NA;NA;bfp69
-Difficulty of Finding New Job;bap40;bbp46;bcp41;bdp55;bep40;bfp71
-Working Days per Week;NA;bbp5401;bcp4701;bdp6301;NA;bfp8001
-Contracted Working Hours;bap5001;bbp6301;bcp5001;bdp6501;bep4701;bfp8101
-Flexible Hours of Work per Week;bap5002;bbp6302;bcp5002;bdp6502;bep4702;bfp8102
-Hours per Week Actual;bap51;bbp64;bcp51;bdp66;bep48;bfp82
-Mini- Job, Midi- Job;bap52;bbp65;bcp52;bdp67;bep49;bfp83
-Changes in Labor Intensity;NA;NA;NA;NA;NA;bfp91
-Do not Take Paid Breaks;NA;NA;NA;NA;NA;bfp9602
-Work Overtime;bap57;bbp69;bcp55;bdp72;bep52;bfp97
-Financial Compensation for Overtime;NA;NA;NA;NA;NA;bfp10101
-Tariff Standard in Earnings;NA;NA;NA;NA;NA;bfp103
-Collective Wage Agreement Minimum Wage;NA;NA;NA;NA;NA;bfp10401
-Minimum Wage EUR;NA;NA;NA;NA;NA;bfp10402
-Minimum Wage Cent;NA;NA;NA;NA;NA;bfp10403
-Fixed Minimum Wage Prev. Yr;NA;NA;NA;NA;NA;bfp10501
-Minimum Wage Pr Yr Eur;NA;NA;NA;NA;NA;bfp10502
-Minimum Wage Pr Yr Cents;NA;NA;NA;NA;NA;bfp10503
-Bonus for Work Under Difficult Conditions;bap6203;NA;bcp6003;NA;bep5803;bfp10603
-Additional Regular Payment;bap6204;NA;NA;NA;bep5804;bfp10604
-Tips;bap6205;NA;bcp6005;NA;bep5805;bfp10605
-Benefits from Employers: Meal Stipend;bap6301;NA;bcp6101;NA;bep5901;bfp10701
-Benefits from Employers: Company car;bap6302;NA;bcp6102;NA;bep5902;bfp10702
-Benefits from Employers: Cell Phone;bap6303;NA;bcp6103;NA;bep5903;bfp10703
-Benefits from Employers: Expense Payments;bap6304;NA;bcp6104;NA;bep5904;bfp10704
-Benefits from Employers: Personal Computer;bap6305;NA;bcp6105;NA;bep5905;bfp10705
-Benefits from Employers: Other Benefits;bap6306;NA;bcp6106;NA;bep5906;bfp10706
-Benefits from Employers: None;bap6307;NA;bcp6107;NA;bep5907;bfp10707
-Regular Second Job;bap6402;bbp7402;bcp6202;bdp8002;bep6002;bfp10902
-Second Job, Days Per Month;bap66;bbp76;bcp64;bdp83;bep62;bfp111
-Hours Per Week on Second Job;NA;NA;NA;NA;NA;bfp112
-Second Job, Gross Income last Month;bap69;bbp79;bcp67;bdp85;bep64;bfp113
-Unemployment Benefit Jan-Dec Prev Yr;bap82h01;bbp92h01;bcp80h01;bdp98h01;bep85h01;bfp114h01
-Unemployment Benefit;bap7005;bbp8005;bcp6805;bdp8605;bep6505;bfp114h01m
-Current Health;bap87;bbp97;bcp91;bdp110;bep89;bfp127
-Both Parents German Native Language;NA;bbp135;NA;bdp138;NA;bfp153
-Speaking German;bap13201;bbp13601;NA;bdp13901;NA;bfp15401
-Writing German;bap13202;bbp13602;NA;bdp13902;NA;bfp15402
-Label;bap13203;bbp13603;NA;bdp13903;NA;bfp15403
-Contracted Weekly Working Time;NA;NA;NA;NA;bep_zaz08;bfp_zaz08
-Actual Weekly Working Hours;NA;NA;NA;NA;bep_zaz10;bfp_zaz10
-Salary/Earnings 2014 Non_Response;NA;NA;NA;NA;bep_zvek01;bfp_zvek01
-Nationality;nation10;nation11;nation12;nation13;nation14;nation15
-Current Gross Labor Income in Euro;labgro10;labgro11;labgro12;labgro13;labgro14;labgro15
-Current Net Labor Income in Euro;labnet10;labnet11;labnet12;labnet13;labnet14;labnet15
-Current Gross Secondary Income in Euro;sndjob10;sndjob11;sndjob12;sndjob13;sndjob14;sndjob15
-Employment Status;emplst10;emplst11;emplst12;emplst13;emplst14;emplst15
-Labor Force Status;lfs10;lfs11;lfs12;lfs13;lfs14;lfs15
-Last Reached Isei Value(International Socio-Economic Index);isei88_10;isei88_11;isei88_12;isei88_13;isei88_14;isei88_15
-Required Training for Job;ausb10;ausb11;ausb12;ausb13;ausb14;ausb15
-Actual Work Time Per Week;batatzeit;bbtatzeit;bctatzeit;bdtatzeit;betatzeit;bftatzeit
-Agreed Upon Work Time Per Week;bavebzeit;bbvebzeit;bcvebzeit;bdvebzeit;bevebzeit;bfvebzeit
-Overtime Per Week;bauebstd;bbuebstd;bcuebstd;bduebstd;beuebstd;bfuebstd
-Size of the company;betr10;betr11;betr12;betr13;betr14;betr15
-Working Experience Full-Time Employment;expft10;expft11;expft12;expft13;expft14;expft15
-Unemployment Experience;expue10;expue11;expue12;expue13;expue14;expue15
-Amount of Education Or Training in Years;babilzeit;bbbilzeit;bcbilzeit;bdbilzeit;bebilzeit;bfbilzeit
-School-Leaving Degree;bapsbil;bbpsbil;bcpsbil;bdpsbil;bepsbil;bfpsbil
-Vocational Degree Received;bapbbil01;bbpbbil01;bcpbbil01;bdpbbil01;bepbbil01;bfpbbil01
-College Degree;bapbbil02;bbpbbil02;bcpbbil02;bdpbbil02;bepbbil02;bfpbbil02
-No Vocational Degree;bapbbil03;bbpbbil03;bcpbbil03;bdpbbil03;bepbbil03;bfpbbil03
-School-Leaving Degree East Germany;bapsbilo;bbpsbilo;bcpsbilo;bdpsbilo;bepsbilo;bfpsbilo
-Vocational Degree Received East Germany;bapbbilo;bbpbbilo;bcpbbilo;bdpbbilo;bepbbilo;bfpbbilo
-School-Leaving Degree Outside Germany;bapsbila;bbpsbila;bcpsbila;bdpsbila;bepsbila;bfpsbila
-Vocational Degree Outside Germany;bapbbila;bbpbbila;bcpbbila;bdpbbila;bepbbila;bfpbbila
-Employed Full-Time in Prev. Yr;bap1a01;bbp1a01;bcp1a01;bdp1a01;bep1a01;bfp1a01
-Employed Full-Time No. Month Prev. Yr;bap1a02;bbp1a02;bcp1a02;bdp1a02;bep1a02;bfp1a02
-Employed Part-Time in Prev. Yr;bap1b01;bbp1b01;bcp1b01;bdp1b01;bep1b01;bfp1b01
-Employed Part-Time No. Months Prev. Yr;bap1b02;bbp1b02;bcp1b02;bdp1b02;bep1b02;bfp1b02
-Officially Unemployed Prev Yr;bap1d01;bbp1d01;bcp1d01;bdp1d01;bep1d01;bfp1d01
-Officially Unemployed Prev Yr No. Month;bap1d02;bbp1d02;bcp1d02;bdp1d02;bep1d02;bfp1d02
-Maternity Benefit in Prev. Yr;bap1f01;bbp1f01;bcp1f01;bdp1f01;bep1f01;bfp1f01
-Maternity Benefit No. Months Prev. Yr;bap1f02;bbp1f02;bcp1f02;bdp1f02;bep1f02;bfp1f02
-In School, College in Prev. Yr;bap1g01;bbp1g01;bcp1g01;bdp1g01;bep1g01;bfp1g01
-In School, College No. Month Prev. Yr;bap1g02;bbp1g02;bcp1g02;bdp1g02;bep1g02;bfp1g02
-On-the-Job Training,Retraining Prev. Yr;bap1m01;bbp1m01;bcp1m01;bdp1m01;bep1m01;bfp1m01
-On-the-Job Training,Retraining No. Month Prev. Yr;bap1m02;bbp1m02;bcp1m02;bdp1m02;bep1m02;bfp1m02
-Mini-Job (up too 400€) Prev. Yr;bap1n01;bbp1n01;bcp1n01;bdp1n01;bep1n01;bfp1n01
-Mini-Job (up too 400€) No. Month Prev. Yr;bap1n02;bbp1n02;bcp1n02;bdp1n02;bep1n02;bfp1n02
+﻿Label;y2010;y2011;y2012;y2013;y2014;y2015;y2016
+never Changing Person ID;persnr;persnr;persnr;persnr;persnr;persnr;persnr
+Year of Birth;bap15002;bbp13202;bcp12803;bdp13403;bep12603;bfpbirthy;bfpbirthy
+Sex;bap15001;bbp13201;bcp12801;bdp13401;bep12601;bfpsex;bfpsex
+Black Economy Work in Personal Environment 2014;NA;NA;NA;NA;NA;bfp08;bfp08
+Black Economy Work Personal Environment Today;NA;NA;NA;NA;NA;bfp09;bfp09
+Hours Weekdays Job, Training;bap0301;bbp0201;bcp0401;bdp1001;bep0501;bfp1001;bfp1001
+Hours Weekdays Running Errands;bap0302;bbp0202;bcp0402;bdp1002;bep0502;bfp1002;bfp1002
+Hours Weekday Housework;bap0303;bbp0203;bcp0403;bdp1003;bep0503;bfp1003;bfp1003
+Hours Weekday Child Care;bap0304;bbp0204;bcp0404;bdp1004;bep0504;bfp1004;bfp1004
+Support Persons in Care, Weekday;bap0305;bbp0205;bcp0405;bdp1005;bep0505;bfp1005;bfp1005
+Hours Weekdays Training, Education;bap0306;bbp0206;bcp0406;bdp1006;bep0506;bfp1006;bfp1006
+Hours Weekday Repairs;bap0307;bbp0207;bcp0407;bdp1007;bep0507;bfp1007;bfp1007
+Hours Weekdays Physical Activities;bap0308;bbp0208;bcp0408;bdp1008;bep0508;bfp1008;bfp1008
+Hours Weekday Leisure, Hobbies;bap0309;bbp0209;bcp0409;bdp1009;bep0509;bfp1009;bfp1009
+Registered Unemployed;bap06;bbp06;bcp08;bdp15;bep09;bfp15;bfp15
+Now Receiving Education, Training;bap07;bbp07;bcp09;bdp16;bep1001;bfp1601;bfp1601
+Now General-Education School;bap0801;bbp0801;bcp1001;bdp1701;bep1101;bfp1701;bfp1701
+Now Specialized College;bap0802;bbp0802;bcp1002;bdp1702;bep1102;bfp1702;bfp1702
+Vocational Training: Further Training/Retraining;bap0804;bbp0804;NA;bdp1706;bep1106;bfp1707;bfp1707
+Now Vocational Training;bap0805;bbp0805;bcp1007;bdp1707;bep1107;bfp1709;bfp1709
+Left Job Since Beginning of Prev Year;bap75;bbp85;bcp73;bdp91;bep78;bfp26;bfp26
+Last Job Ended - Item Nonresponse;bap76;bbp8603;bcp7403;bdp9203;bep7903;bfp2703;bfp2703
+Years Worked on Last Job;bap7701;bbp8701;bcp7501;bdp9301;bep8001;bfp2801;bfp2801
+Why Job Terminated;bap78;bbp88;bcp76;bdp94;bep81;bfp29;bfp29
+Future Job Prospects;bap80;bbp90;bcp78;bdp96;bep83;bfp31;bfp31
+Employment Status;bap09;bbp09;bcp11;bdp18;bep12;bfp32;bfp32
+Monthly Salary at which would take Job;bap1401;bbp1401;bcp1601;bdp2301;bep1701;bfp3701;bfp3701
+Temporary or Contractual Basis;bap35;bbp39;bcp37;bdp48;bep37;bfp60;bfp60
+Duration of Work ;bap36;bbp40;bcp38;bdp49;bep38;bfp61;bfp61
+1-Euro-Job;NA;NA;NA;NA;NA;bfp62;bfp62
+Just Gross Income;NA;NA;NA;NA;NA;bfp67;bfp67
+Just Net Income;NA;NA;NA;NA;NA;bfp69;bfp69
+Difficulty of Finding New Job;bap40;bbp46;bcp41;bdp55;bep40;bfp71;bfp71
+Working Days per Week;NA;bbp5401;bcp4701;bdp6301;NA;bfp8001;bfp8001
+Contracted Working Hours;bap5001;bbp6301;bcp5001;bdp6501;bep4701;bfp8101;bfp8101
+Flexible Hours of Work per Week;bap5002;bbp6302;bcp5002;bdp6502;bep4702;bfp8102;bfp8102
+Hours per Week Actual;bap51;bbp64;bcp51;bdp66;bep48;bfp82;bfp82
+Mini- Job, Midi- Job;bap52;bbp65;bcp52;bdp67;bep49;bfp83;bfp83
+Changes in Labor Intensity;NA;NA;NA;NA;NA;bfp91;bfp91
+Do not Take Paid Breaks;NA;NA;NA;NA;NA;bfp9602;bfp9602
+Work Overtime;bap57;bbp69;bcp55;bdp72;bep52;bfp97;bfp97
+Financial Compensation for Overtime;NA;NA;NA;NA;NA;bfp10101;bfp10101
+Tariff Standard in Earnings;NA;NA;NA;NA;NA;bfp103;bfp103
+Collective Wage Agreement Minimum Wage;NA;NA;NA;NA;NA;bfp10401;bfp10401
+Minimum Wage EUR;NA;NA;NA;NA;NA;bfp10402;bfp10402
+Minimum Wage Cent;NA;NA;NA;NA;NA;bfp10403;bfp10403
+Fixed Minimum Wage Prev. Yr;NA;NA;NA;NA;NA;bfp10501;bfp10501
+Minimum Wage Pr Yr Eur;NA;NA;NA;NA;NA;bfp10502;bfp10502
+Minimum Wage Pr Yr Cents;NA;NA;NA;NA;NA;bfp10503;bfp10503
+Bonus for Work Under Difficult Conditions;bap6203;NA;bcp6003;NA;bep5803;bfp10603;bfp10603
+Additional Regular Payment;bap6204;NA;NA;NA;bep5804;bfp10604;bfp10604
+Tips;bap6205;NA;bcp6005;NA;bep5805;bfp10605;bfp10605
+Benefits from Employers: Meal Stipend;bap6301;NA;bcp6101;NA;bep5901;bfp10701;bfp10701
+Benefits from Employers: Company car;bap6302;NA;bcp6102;NA;bep5902;bfp10702;bfp10702
+Benefits from Employers: Cell Phone;bap6303;NA;bcp6103;NA;bep5903;bfp10703;bfp10703
+Benefits from Employers: Expense Payments;bap6304;NA;bcp6104;NA;bep5904;bfp10704;bfp10704
+Benefits from Employers: Personal Computer;bap6305;NA;bcp6105;NA;bep5905;bfp10705;bfp10705
+Benefits from Employers: Other Benefits;bap6306;NA;bcp6106;NA;bep5906;bfp10706;bfp10706
+Benefits from Employers: None;bap6307;NA;bcp6107;NA;bep5907;bfp10707;bfp10707
+Regular Second Job;bap6402;bbp7402;bcp6202;bdp8002;bep6002;bfp10902;bfp10902
+Second Job, Days Per Month;bap66;bbp76;bcp64;bdp83;bep62;bfp111;bfp111
+Hours Per Week on Second Job;NA;NA;NA;NA;NA;bfp112;bfp112
+Second Job, Gross Income last Month;bap69;bbp79;bcp67;bdp85;bep64;bfp113;bfp113
+Unemployment Benefit Jan-Dec Prev Yr;bap82h01;bbp92h01;bcp80h01;bdp98h01;bep85h01;bfp114h01;bfp114h01
+Unemployment Benefit;bap7005;bbp8005;bcp6805;bdp8605;bep6505;bfp114h01m;bfp114h01m
+Current Health;bap87;bbp97;bcp91;bdp110;bep89;bfp127;bfp127
+Both Parents German Native Language;NA;bbp135;NA;bdp138;NA;bfp153;bfp153
+Speaking German;bap13201;bbp13601;NA;bdp13901;NA;bfp15401;bfp15401
+Writing German;bap13202;bbp13602;NA;bdp13902;NA;bfp15402;bfp15402
+Label;bap13203;bbp13603;NA;bdp13903;NA;bfp15403;bfp15403
+Contracted Weekly Working Time;NA;NA;NA;NA;bep_zaz08;bfp_zaz08;bfp_zaz08
+Actual Weekly Working Hours;NA;NA;NA;NA;bep_zaz10;bfp_zaz10;bfp_zaz10
+Salary/Earnings 2014 Non_Response;NA;NA;NA;NA;bep_zvek01;bfp_zvek01;bfp_zvek01
+Nationality;nation10;nation11;nation12;nation13;nation14;nation15;nation15
+Current Gross Labor Income in Euro;labgro10;labgro11;labgro12;labgro13;labgro14;labgro15;labgro15
+Current Net Labor Income in Euro;labnet10;labnet11;labnet12;labnet13;labnet14;labnet15;labnet15
+Current Gross Secondary Income in Euro;sndjob10;sndjob11;sndjob12;sndjob13;sndjob14;sndjob15;sndjob15
+Employment Status;emplst10;emplst11;emplst12;emplst13;emplst14;emplst15;emplst15
+Labor Force Status;lfs10;lfs11;lfs12;lfs13;lfs14;lfs15;lfs15
+Last Reached Isei Value(International Socio-Economic Index);isei88_10;isei88_11;isei88_12;isei88_13;isei88_14;isei88_15;isei88_15
+Required Training for Job;ausb10;ausb11;ausb12;ausb13;ausb14;ausb15;ausb15
+Actual Work Time Per Week;batatzeit;bbtatzeit;bctatzeit;bdtatzeit;betatzeit;bftatzeit;bftatzeit
+Agreed Upon Work Time Per Week;bavebzeit;bbvebzeit;bcvebzeit;bdvebzeit;bevebzeit;bfvebzeit;bfvebzeit
+Overtime Per Week;bauebstd;bbuebstd;bcuebstd;bduebstd;beuebstd;bfuebstd;bfuebstd
+Size of the company;betr10;betr11;betr12;betr13;betr14;betr15;betr15
+Working Experience Full-Time Employment;expft10;expft11;expft12;expft13;expft14;expft15;expft15
+Unemployment Experience;expue10;expue11;expue12;expue13;expue14;expue15;expue15
+Amount of Education Or Training in Years;babilzeit;bbbilzeit;bcbilzeit;bdbilzeit;bebilzeit;bfbilzeit;bfbilzeit
+School-Leaving Degree;bapsbil;bbpsbil;bcpsbil;bdpsbil;bepsbil;bfpsbil;bfpsbil
+Vocational Degree Received;bapbbil01;bbpbbil01;bcpbbil01;bdpbbil01;bepbbil01;bfpbbil01;bfpbbil01
+College Degree;bapbbil02;bbpbbil02;bcpbbil02;bdpbbil02;bepbbil02;bfpbbil02;bfpbbil02
+No Vocational Degree;bapbbil03;bbpbbil03;bcpbbil03;bdpbbil03;bepbbil03;bfpbbil03;bfpbbil03
+School-Leaving Degree East Germany;bapsbilo;bbpsbilo;bcpsbilo;bdpsbilo;bepsbilo;bfpsbilo;bfpsbilo
+Vocational Degree Received East Germany;bapbbilo;bbpbbilo;bcpbbilo;bdpbbilo;bepbbilo;bfpbbilo;bfpbbilo
+School-Leaving Degree Outside Germany;bapsbila;bbpsbila;bcpsbila;bdpsbila;bepsbila;bfpsbila;bfpsbila
+Vocational Degree Outside Germany;bapbbila;bbpbbila;bcpbbila;bdpbbila;bepbbila;bfpbbila;bfpbbila
+Employed Full-Time in Prev. Yr;bap1a01;bbp1a01;bcp1a01;bdp1a01;bep1a01;bfp1a01;bfp1a01
+Employed Full-Time No. Month Prev. Yr;bap1a02;bbp1a02;bcp1a02;bdp1a02;bep1a02;bfp1a02;bfp1a02
+Employed Part-Time in Prev. Yr;bap1b01;bbp1b01;bcp1b01;bdp1b01;bep1b01;bfp1b01;bfp1b01
+Employed Part-Time No. Months Prev. Yr;bap1b02;bbp1b02;bcp1b02;bdp1b02;bep1b02;bfp1b02;bfp1b02
+Officially Unemployed Prev Yr;bap1d01;bbp1d01;bcp1d01;bdp1d01;bep1d01;bfp1d01;bfp1d01
+Officially Unemployed Prev Yr No. Month;bap1d02;bbp1d02;bcp1d02;bdp1d02;bep1d02;bfp1d02;bfp1d02
+Maternity Benefit in Prev. Yr;bap1f01;bbp1f01;bcp1f01;bdp1f01;bep1f01;bfp1f01;bfp1f01
+Maternity Benefit No. Months Prev. Yr;bap1f02;bbp1f02;bcp1f02;bdp1f02;bep1f02;bfp1f02;bfp1f02
+In School, College in Prev. Yr;bap1g01;bbp1g01;bcp1g01;bdp1g01;bep1g01;bfp1g01;bfp1g01
+In School, College No. Month Prev. Yr;bap1g02;bbp1g02;bcp1g02;bdp1g02;bep1g02;bfp1g02;bfp1g02
+On-the-Job Training,Retraining Prev. Yr;bap1m01;bbp1m01;bcp1m01;bdp1m01;bep1m01;bfp1m01;bfp1m01
+On-the-Job Training,Retraining No. Month Prev. Yr;bap1m02;bbp1m02;bcp1m02;bdp1m02;bep1m02;bfp1m02;bfp1m02
+Mini-Job (up too 400€) Prev. Yr;bap1n01;bbp1n01;bcp1n01;bdp1n01;bep1n01;bfp1n01;bfp1n01
+Mini-Job (up too 400€) No. Month Prev. Yr;bap1n02;bbp1n02;bcp1n02;bdp1n02;bep1n02;bfp1n02;bfp1n02
