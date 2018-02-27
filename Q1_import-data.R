@@ -67,8 +67,8 @@ for (years in list_years) {
     k = k + 1
 }
 
-# Delete the intermediate variables to clean up the workspace - all except merged[year] rm(list = ls()[!ls() %in%
-# list_varnames])
+# Delete the intermediate variables to clean up the workspace - all except merged[year] 
+rm(list = ls()[!ls() %in% list_varnames])
 
 # Delete everything - Cleanup-Command - BE CAREFUL WITH IT!
 # rm(list=ls(all=TRUE))

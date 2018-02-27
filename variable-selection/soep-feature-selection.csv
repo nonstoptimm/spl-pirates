@@ -101,8 +101,8 @@ Employed Part-Time in Prev. Yr;bap1b01;bbp1b01;bcp1b01;bdp1b01;bep1b01;bfp1b01;b
 Employed Part-Time No. Months Prev. Yr;bap1b02;bbp1b02;bcp1b02;bdp1b02;bep1b02;bfp1b02;bgp1b02
 Officially Unemployed Prev Yr;bap1d01;bbp1d01;bcp1d01;bdp1d01;bep1d01;bfp1d01;bgp1d01
 Officially Unemployed Prev Yr No. Month;bap1d02;bbp1d02;bcp1d02;bdp1d02;bep1d02;bfp1d02;bgp1d02
-Maternity Benefit in Prev. Yr;bap1f01;bbp1f01;bcp1f01;bdp1f01;bep1f01;bfp1f01;bgp1g01
-Maternity Benefit No. Months Prev. Yr;bap1f02;bbp1f02;bcp1f02;bdp1f02;bep1f02;bfp1f02;bgp1g02
+Maternity Benefit in Prev. Yr;bap1f01;bbp1f01;bcp1f01;bdp1f01;bep1f01;bfp1f01;bgp1f01
+Maternity Benefit No. Months Prev. Yr;bap1f02;bbp1f02;bcp1f02;bdp1f02;bep1f02;bfp1f02;bgp1f02
 In School, College in Prev. Yr;bap1g01;bbp1g01;bcp1g01;bdp1g01;bep1g01;bfp1g01;bgp1g01
 In School, College No. Month Prev. Yr;bap1g02;bbp1g02;bcp1g02;bdp1g02;bep1g02;bfp1g02;bgp1g02
 On-the-Job Training,Retraining Prev. Yr;bap1m01;bbp1m01;bcp1m01;bdp1m01;bep1m01;bfp1m01;bgp1m01
