@@ -5,13 +5,12 @@ library(foreign)
 library(stringr)
 # Make Sure you check your Working Directory so that the code works flawless!
 getwd()
-# Otherwise Set the Working Directory setwd('/Your/Path/to/Happiness')
+# Otherwise Set the Working Directory -> setwd('/Your/Path/to/Happiness')
 
 ### IMPORT, MERGE AND CLEAN ALL DATA ### We need two control variables: i is to step through the list of years, beginning with
 ### 1 k is always one digit higher as it reads the second column of the feature selection list (the first column is the label)
 i = 1
 k = 2
-success = TRUE
 # List all directories within the input data, non-recursive
 list_dirs = list.dirs(path = "input-data", recursive = FALSE)
 # Extract the year name of the directories, so the last 4 digits
@@ -66,7 +65,6 @@ for (years in list_years) {
     # Update our variables for the next round
     i = i + 1
     k = k + 1
-    success = TRUE   
 }
 
 # Delete the intermediate variables to clean up the workspace - all except merged[year] rm(list = ls()[!ls() %in%
