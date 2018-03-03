@@ -21,3 +21,9 @@ install.packages("formatR")
     }
   }
   
+  
+  
+  # Delete everything - Cleanup-Command - BE CAREFUL WITH IT!
+  # rm(list=ls(all=TRUE))
+  
+  
