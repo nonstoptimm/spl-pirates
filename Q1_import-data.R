@@ -65,5 +65,33 @@ for (years in list_years) {
     k = k + 1
 }
 
-# Delete the intermediate variables to clean up the workspace - all except merged[year] 
-rm(list = ls()[!ls() %in% list_varnames])
+# Merge all data into one dataframe and add a column with the respective year, called "Wave"
+# Create a new dataframe
+merged_all <- data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
+# Name the dataframe using the first column of the csv
+  colnames(merged_all) <- soep_selection[,1]
+# Add "Wave" column to the dataframe
+  merged_all$Wave = numeric(nrow(merged_all))
+# Iterator to step through the years
+  z = 1
+# For loop adding data of every year to the data frame
+  for (years in c(datalist)) {
+    # Get current year for the Wave column
+    current_year = list_years[z]
+    # Get dataset of the current year
+    current_data = get(datalist[z])
+    # Repeat the current year to fill the column "Wave" of the respective year
+    Wave = rep(current_year,nrow(current_data))
+    # Add year-value to the "Wave" column
+    current_data = cbind(Wave, current_data)
+    # Add the data to the merge dataframe
+    merged_all = rbindlist(list(merged_all, current_data), fill = TRUE)
+    # Iterator one up
+    z = z + 1
+  }
+
+# Delete the intermediate variables to clean up the workspace
+rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'Wave', 'years', 'z'))
+
+# REMOVE ALL OBJECTS
+#rm(list=ls())
