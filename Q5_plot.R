@@ -1,5 +1,6 @@
 ### Create Plot Load the library 'ggplot2'
 library(ggplot2)
+function(list_years, datalist){
 # Create Vector for every variable
 p_control1 = c()
 p_control2 = c()
@@ -31,9 +32,13 @@ p_condition = rep(list_years, 5)
 p_data = data.frame(p_type, p_condition, p_values)
 
 # Plot the bar chart
-p_plot = ggplot(p_data, aes(y = p_values, x = p_type, color = p_type, fill = p_type)) + geom_bar(stat = "identity") + facet_wrap(~p_condition) + labs(x = "Variables", 
+#p_plot = 
+  ggplot(p_data, aes(y = p_values, x = p_type, color = p_type, fill = p_type)) + geom_bar(stat = "identity") + facet_wrap(~p_condition) + theme(axis.text.x=element_blank(), panel.background = element_rect(fill = 'white', colour = 'black')) + labs(x = "Variables", 
                                                                                                                                                       y = "No. of Observations") + ggtitle("Number of Observations in Treatment and Control Groups")
 
 # Store plot as png
-ggsave(filename = "plots/p_plot.png", plot = p_plot)
+#ggsave(filename = "plots/p_plot.png", plot = p_plot) 
 
+}
+
+ggsave("plots/p_plot.png")
