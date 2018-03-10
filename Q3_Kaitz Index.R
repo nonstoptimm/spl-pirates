@@ -7,15 +7,10 @@ merged_all$Hourly.earnings = merged_all$Current.Gross.Labor.Income.in.Euro/(4 * 
 summary(merged_all$Hourly.earnings)
 
 
-#Generate a counter, which is helpful later on. Tells us how many of our observations were aggregated in the group by function
-merged_all$Counter = 1
-sum(merged_all$Counter)
-
-
 ###Collapse Dataset by year to dby (data by year)
 `dby` = merged_all %>%
   group_by(Wave) %>%
-  summarise(sum(merged_all$Counter),
+  summarise(n(),
             Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
             AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
             Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE)
@@ -30,7 +25,7 @@ sum(merged_all$Counter)
 ###Collapse Dataset by year and state to dbys (data by year and state)
 `dbys` = merged_all %>%
   group_by(Wave, State.of.Residence) %>%
-  summarise(sum(merged_all$Counter),
+  summarise(n(),
             Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
             AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
             Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE)
