@@ -1,0 +1,65 @@
+###Graphical Analysis for Employment Rates of Treatment and Control States###
+
+
+##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
+
+analyze_tc = Reduced_merged %>%
+  group_by(Wave, State.of.Residence) %>%
+  summarise(Observation =  n(),
+            Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
+            AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
+            Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE),
+            Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
+            Part.Time.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]),
+            Marginal.Employment = length(Employment.Status[as.numeric(Employment.Status) == 10])
+  )
+
+
+# employment rate of full time employment 
+analyze_tc$Employment.Rate = analyze_tc$Full.Employment/analyze_tc$Observation
+# log employment rate of full time employment 
+analyze_tc$log.Employment.Rate = log(analyze_tc$Employment.Rate)
+# % change of full time employment rate 
+analyze_tc$delta.E.R <- c(0, diff(analyze_tc$Employment.Rate))
+# log % change of full time employment rate 
+analyze_tc$log.delta.E.R <- c(0, diff(log(analyze_tc$Employment.Rate)))
+
+# employment rate of part time employment 
+analyze_tc$Employment.Rate2 = analyze_tc$Part.Time.Employment/analyze_tc$Observation
+# log employment rate of part time employment 
+analyze_tc$log.Employment.Rate2 = log(analyze_tc$Employment.Rate2)
+# % change of part time employment rate 
+analyze_tc$delta.E.R2 <- c(0, diff(analyze_tc$Employment.Rate2))
+# log % change of part time employment rate 
+analyze_tc$log.delta.E.R2 <- c(0, diff(log(analyze_tc$Employment.Rate2)))
+
+# employment rate of marginal employment 
+analyze_tc$Employment.Rate3 = analyze_tc$Marginal.Employment/analyze_tc$Observation
+# log employment rate of marginal employment 
+analyze_tc$log.Employment.Rate3 = log(analyze_tc$Employment.Rate3)
+# % change of marginal employment rate 
+analyze_tc$delta.E.R3 <- c(0, diff(analyze_tc$Employment.Rate3))
+# log % change of marginal employment rate 
+analyze_tc$log.delta.E.R3 <- c(0, diff(log(analyze_tc$Employment.Rate3)))
+
+
+#Generate Kaitz Index:
+analyze_tc$Kaitz = 8.5/`analyze_tc`$Hourly_earnings
+
+
+#Add Treatmentvariable 1
+analyze_tc$binary_treatment1 <- dbys2013$binary_treatment1
+
+#Add Treatmentvariable 2
+analyze_tc$binary_treatment2 <- dbys2013$binary_treatment2
+
+
+Treatment.analysis1 = analyze_tc %>%
+  group_by(Wave, binary_treatment1) %>%
+  summarise(Observation =  n(),
+    Employment.Rate = mean(Employment.Rate, na.rm=TRUE)
+  )
+
+
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = binary_treatment1, colour = binary_treatment1)) +
+  geom_line()

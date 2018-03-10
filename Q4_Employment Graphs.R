@@ -1,7 +1,7 @@
 # graph employment over time (full time, part time, marginal)
 
 # shows all observations of Employment status in all waves
-Employment.Status = Reduced_merge %>%
+Employment.Status = Reduced_merged %>%
   group_by(Wave) %>%
   summarise(Observation =  n(),
             Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
