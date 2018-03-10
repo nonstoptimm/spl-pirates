@@ -8,7 +8,7 @@ summary(merged_all$Hourly.earnings)
 
 #Kaitz Index based on Individuals
 merged_all$Kaitz.Individual = 8.5/merged_all$`Hourly.earnings`
-merged_all$Kaitz = 8.5/merged_all$`Hourly.earnings`[merged_all$`Hourly.earnings` > 0 ]
+merged_all$Kaitz.Individual = 8.5/merged_all$`Hourly.earnings`[merged_all$`Hourly.earnings` > 0 ]
 
 ##Browse summaries for understanding
 tapply(merged_all$Actual.Work.Time.Per.Week, merged_all$Wave, summary)
@@ -85,7 +85,7 @@ sum(merged_all$Counter)
 ## Use Kaitz Index above 60% Percentil for Treatment and below 40% percentil for Control
     quantile(dbys2013$Kaitz_alt2, c(.40, .60)) 
     dbys2013$treatment2[dbys2013$Kaitz_alt2 > quantile((`dbys2013`$Kaitz_alt2), c(.60))] = 1
-    dbys2013$treatment2[dbys2013$Kaitz_alt2 < quantile((`dbys2013`$Kaitz_alt2), c(.))] = 0
+    dbys2013$treatment2[dbys2013$Kaitz_alt2 < quantile((`dbys2013`$Kaitz_alt2), c(.40))] = 0
     
 
  
