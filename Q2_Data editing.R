@@ -47,3 +47,15 @@ library(dplyr)
 #Removes Spaces in Variable Names - Necessary for the dplyr package, which is handy for later analysis of our data
 valid_column_names <- make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
 names(merged_all) <- valid_column_names
+
+
+# Drop missing values for variables of interest
+#merged_all[complete.cases(merged_all$X)]
+
+# Drop Current.Gross.Labor.Income.in.Euro and Actual.Work.Time.Per.Week
+# Best way would be to code this dynamic
+Reduced_merged = merged_all[complete.cases(merged_all$Current.Gross.Labor.Income.in.Euro) & complete.cases(merged_all$Actual.Work.Time.Per.Week)]
+
+# Only for better data keeping
+rm (merged2010, merged2011, merged2012, merged2013, merged2014, merged2015, merged2016)
+
