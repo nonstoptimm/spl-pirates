@@ -22,8 +22,8 @@ sum(merged_all$Counter)
   )
 
 
-#Generate Alternative Kaitz Index1:
-`dby`$Kaitz_alt1 = 8.5/`dby`$Hourly_earnings
+#Generate Kaitz Index:
+`dby`$Kaitz = 8.5/`dby`$Hourly_earnings
 
 
 
@@ -37,20 +37,20 @@ sum(merged_all$Counter)
   )
 
 
-#Generate Alternative Kaitz Index1:
-`dbys`$Kaitz_alt1 = 8.5/`dbys`$Hourly_earnings
+#Generate Kaitz Index:
+`dbys`$Kaitz = 8.5/`dbys`$Hourly_earnings
 
 
 ### Process of Generating Treatment Variable
 ## Median of Kaitz Index from year 2013, to avoid anticipation effects
 ## Subset of dbys for 2013
 
-dbys2013 = select(filter(dbys, Wave == 2013), c(Wave, State.of.Residence, Kaitz_alt1))
+dbys2013 = select(filter(dbys, Wave == 2013), c(Wave, State.of.Residence, Kaitz))
 #abc = filter(dbys, Wave == 2013) = subset for all variables
 
 #Generate Treatment Identificator
-median(`dbys2013`$Kaitz_alt1)
-dbys2013$treatment[dbys2013$Kaitz_alt1 > median(`dbys2013`$Kaitz_alt1)] = 1
+median(`dbys2013`$Kaitz)
+dbys2013$treatment[dbys2013$Kaitz > median(`dbys2013`$Kaitz)] = 1
 dbys2013$treatment[is.na(dbys2013$treatment)] = 0
 
 
@@ -59,8 +59,8 @@ dbys2013$treatment[is.na(dbys2013$treatment)] = 0
 
 ###Generate Robust Treatment Identificator
 ## Use Kaitz Index above 60% Percentil for Treatment and below 40% percentil for Control
-quantile(dbys2013$Kaitz_alt1, c(.40, .60)) 
-dbys2013$treatment2[dbys2013$Kaitz_alt1 > quantile((`dbys2013`$Kaitz_alt1), c(.60))] = 1
-dbys2013$treatment2[dbys2013$Kaitz_alt1 < quantile((`dbys2013`$Kaitz_alt1), c(.40))] = 0
+quantile(dbys2013$Kaitz, c(.40, .60)) 
+dbys2013$treatment2[dbys2013$Kaitz > quantile((`dbys2013`$Kaitz), c(.60))] = 1
+dbys2013$treatment2[dbys2013$Kaitz < quantile((`dbys2013`$Kaitz), c(.40))] = 0
 
 
