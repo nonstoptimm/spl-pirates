@@ -26,13 +26,24 @@ nums <- sapply(merged_all, is.numeric)
 factors <- sapply(merged_all, is.factor)
 #Numeric variables
 print(nums)
-merged2010[merged2010 == -1] = NA
-merged2010[merged2010 == -2] = NA
-merged2010[merged2010 == -3] = NA
-merged2010[merged2010 == -4] = NA
-merged2010[merged2010 == -5] = NA
-merged2010[merged2010 == -6] = NA
-merged2010[merged2010 == -8] = NA
+merged_all[merged_all == -1] = NA
+merged_all[merged_all == -2] = NA
+merged_all[merged_all == -3] = NA
+merged_all[merged_all == -4] = NA
+merged_all[merged_all == -5] = NA
+merged_all[merged_all == -6] = NA
+merged_all[merged_all == -8] = NA
 
 #Factor variables
-print(levels(merged2010$`Required Training for Job`))
+###Still have to figure out how to adjust the factor variables in a nice way
+
+
+
+### Timm Code
+#install.packages("dplyr")
+library(dplyr)
+
+
+#Removes Spaces in Variable Names - Necessary for the dplyr package, which is handy for later analysis of our data
+valid_column_names <- make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
+names(merged_all) <- valid_column_names
