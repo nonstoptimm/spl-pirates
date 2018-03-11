@@ -91,8 +91,16 @@ merged_all <- data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
     z = z + 1
   }
 
+#Removes Spaces in Variable Names - Necessary for the dplyr package, which is handy for later analysis of our data
+  valid_column_names <- make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
+  names(merged_all) <- valid_column_names  
+  
 # Delete the intermediate variables to clean up the workspace
 rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'Wave', 'years', 'z'))
+
+# Delete
+rm (merged2010, merged2011, merged2012, merged2013, merged2014, merged2015, merged2016)
+
 
 # REMOVE ALL OBJECTS
 #rm(list=ls())
