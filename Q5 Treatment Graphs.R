@@ -63,3 +63,10 @@ Treatment.analysis1 = analyze_tc %>%
 
 ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = binary_treatment1, colour = binary_treatment1)) +
   geom_line()
+
+
+Treatment.analysis2 = analyze_tc %>%
+  group_by(Wave, binary_treatment2) %>%
+  summarise(Observation =  n(),
+            Employment.Rate = mean(Employment.Rate, na.rm=TRUE)
+  )
