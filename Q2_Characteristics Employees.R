@@ -168,9 +168,13 @@ Means = sumsub2013 %>%
 
 
 ###Output
+## Output Table of Means
 install.packages("starganzer")
 library(stargazer)
 t(Means)
 stargazer(t(Means), title="Descriptive statistics", type = "text", 
           dep.var.labels = c("Employment Status","Full Time", "Part Time", "Marginal", "Unemployed"),
           covariate.labels = c("n()", "mean age", "mean sex", "mean qualification", "mean hourly earning", "mean monthly earning"))
+
+## Show Kernel Density of the Variables in Means Output
+# Need to code these with the sumsub2013 dataset
