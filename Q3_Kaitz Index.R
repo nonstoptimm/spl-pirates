@@ -64,4 +64,3 @@ dbys2013$binary_treatment2[dbys2013$Kaitz < quantile((`dbys2013`$Kaitz), c(.40))
 
 
 
-

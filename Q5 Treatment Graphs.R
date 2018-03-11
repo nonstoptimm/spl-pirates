@@ -1,5 +1,6 @@
 ###Graphical Analysis for Employment Rates of Treatment and Control States###
-
+install.packages("ggplot2")
+library(ggplot2)
 
 ##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
 
@@ -57,16 +58,61 @@ analyze_tc$binary_treatment2 <- dbys2013$binary_treatment2
 Treatment.analysis1 = analyze_tc %>%
   group_by(Wave, binary_treatment1) %>%
   summarise(Observation =  n(),
-    Employment.Rate = mean(Employment.Rate, na.rm=TRUE)
+    Employment.Rate = mean(Employment.Rate, na.rm=TRUE),
+    Growth.Rate = mean(delta.E.R, na.rm = TRUE)
   )
 
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Employment Rate of binary Treatmentgroups",
+       y = "Employment Rate",
+       x = "Years") +
+  geom_vline(xintercept = 6, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                   labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7))
 
-ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = binary_treatment1, colour = binary_treatment1)) +
-  geom_line()
-
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Growth.Rate, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Growth Rate of Employment of binary Treatmentgroups",
+       y = "Growth Rate",
+       x = "Years") +
+  geom_vline(xintercept = 6, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.04,0.04))
 
 Treatment.analysis2 = analyze_tc %>%
   group_by(Wave, binary_treatment2) %>%
   summarise(Observation =  n(),
-            Employment.Rate = mean(Employment.Rate, na.rm=TRUE)
+            Employment.Rate = mean(Employment.Rate, na.rm=TRUE),
+            Growth.Rate = mean(delta.E.R, na.rm = TRUE)
   )
+
+ggplot(data = Treatment.analysis2, aes(x=Wave, y = Employment.Rate, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Employment Rate of binary Treatmentgroups",
+       y = "Employment Rate",
+       x = "Years") +
+  geom_vline(xintercept = 6, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7))
+
+ggplot(data = complete.cases(Treatment.analysis2), aes(x=Wave, y = Growth.Rate, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Growth Rate of Employment of binary Treatmentgroups",
+       y = "Growth Rate",
+       x = "Years") +
+  geom_vline(xintercept = 6, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.04,0.04))

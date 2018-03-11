@@ -12,6 +12,7 @@ ggplot(data = dbys, aes(x= Wave, y = Kaitz, color = State.of.Residence, group = 
        x = "Years") +
   geom_vline(xintercept = 6, color = "red") +
   theme_classic() +
+  coord_cartesian(xlim = c(1.6,7)) +
   scale_colour_hue(name = "States",
                       labels = c("Schleswig-Holstein", 
                                  "Hamburg", 
