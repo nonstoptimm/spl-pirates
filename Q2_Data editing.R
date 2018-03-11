@@ -26,13 +26,13 @@ nums <- sapply(merged_all, is.numeric)
 factors <- sapply(merged_all, is.factor)
 #Numeric variables
 print(nums)
-merged_all[merged_all == -1] = NA
-merged_all[merged_all == -2] = NA
-merged_all[merged_all == -3] = NA
-merged_all[merged_all == -4] = NA
-merged_all[merged_all == -5] = NA
-merged_all[merged_all == -6] = NA
-merged_all[merged_all == -8] = NA
+# merged_all[merged_all <= -1] = NA
+# merged_all[merged_all == -2] = NA
+# merged_all[merged_all == -3] = NA
+# merged_all[merged_all == -4] = NA
+# merged_all[merged_all == -5] = NA
+# merged_all[merged_all == -6] = NA
+# merged_all[merged_all == -8] = NA
 
 #Factor variables
 ###Still have to figure out how to adjust the factor variables in a nice way
@@ -51,6 +51,8 @@ names(merged_all) <- valid_column_names
 
 # Drop missing values for variables of interest
 #merged_all[complete.cases(merged_all$X)]
+
+summary(merged_all$Current.Gross.Labor.Income.in.Euro)
 
 # Drop Current.Gross.Labor.Income.in.Euro and Actual.Work.Time.Per.Week
 # Best way would be to code this dynamic

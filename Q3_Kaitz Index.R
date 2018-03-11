@@ -3,7 +3,7 @@
 # We want to compute that for every Bundesland and for every year of our dataset
 
 #Compute Variable of hourly earnings
-Reduced_merged$Hourly.earnings = Reduced_merged$Current.Gross.Labor.Income.in.Euro/(4 * Reduced_merged$Actual.Work.Time.Per.Week)
+Reduced_merged$Hourly.earnings = Reduced_merged$Current.Gross.Labor.Income.in.Euro/(4.3 * Reduced_merged$Actual.Work.Time.Per.Week)
 summary(Reduced_merged$Hourly.earnings)
 
 
