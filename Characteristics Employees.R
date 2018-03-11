@@ -28,7 +28,7 @@ sub2013$LaborForce_num[sub2013$LaborForce_num == 8] = NA
 ### Age
 sub2013$Age = 2013 - sub2013$Year.of.Birth
 summary(sub2013$Age)              
-
+sub2013$Age[sub2013$Age > 100] = NA
 
 ## Sex
 table(sub2013$Sex)
@@ -107,8 +107,10 @@ sub2013$Current.Gross.Labor.Income.in.Euro[(sub2013$Current.Gross.Labor.Income.i
 summary(sub2013$Actual.Work.Time.Per.Week)
 #Set -3 to NA -> Implausible Answer
 #Set -2 to 0 -> No working time
+#Set -1 to NA -> Dont know working time
 sub2013$Actual.Work.Time.Per.Week[(sub2013$Actual.Work.Time.Per.Week) == -3] = NA
 sub2013$Actual.Work.Time.Per.Week[(sub2013$Actual.Work.Time.Per.Week) == -2] = 0
+sub2013$Actual.Work.Time.Per.Week[(sub2013$Actual.Work.Time.Per.Week) == -1] = NA
 
 
 # Drop NAs
@@ -124,6 +126,13 @@ sumsub2013 = select(filter(sub2013noNA), c(State.of.Residence, qualification,
                                          Sexnum, Age, Actual.Work.Time.Per.Week, 
                                          Current.Gross.Labor.Income.in.Euro))
 
+#Calculate Hourly Earnings
+sumsub2013$Hourly.earnings = NA
+sumsub2013$Hourly.earnings[sumsub2013$Actual.Work.Time.Per.Week > 0 ] = sumsub2013$Current.Gross.Labor.Income.in.Euro[sumsub2013$Actual.Work.Time.Per.Week > 0 ]/(4.3 * sumsub2013$Actual.Work.Time.Per.Week[sumsub2013$Actual.Work.Time.Per.Week > 0 ])
+
+
+summary(sumsub2013$Hourly.earnings)
+
 table(sumsub2013$Labor.Force.Status)
 table(sumsub2013$Employment.Status)
 
@@ -131,5 +140,23 @@ summary(sumsub2013)
 #Table for each variable
 table(sumsub2013$Sexnum)
 summary(sumsub2013$Age)
+
+summary(sumsub2013$Sexnum)
+## 53.48% Women
+
+table(sumsub2013$Employment.Status)
+
+Means = sumsub2013 %>%
+  group_by(Employment.Status) %>%
+  summarise(n(),
+            avg_Age = mean(Age, na.rm=TRUE), 
+            avg_Sex = mean(Sexnum, na.rm=TRUE),
+            avg_Qualification = mean(qualification, na.rm=TRUE),
+            avg_Hourly.earnings = mean(Hourly.earnings),
+            avg_monthly.earnings = mean(Current.Gross.Labor.Income.in.Euro, na.rm = TRUE)
+  )
+
+summary()
+
 
 ###Output
