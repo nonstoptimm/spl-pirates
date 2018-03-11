@@ -71,7 +71,7 @@ ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = fact
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                    labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(2,7))
+  coord_cartesian(xlim = c(1.6,7))
 
 Treatment.analysis2 = analyze_tc %>%
   group_by(Wave, binary_treatment2) %>%
