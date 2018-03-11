@@ -168,3 +168,9 @@ Means = sumsub2013 %>%
 
 
 ###Output
+install.packages("starganzer")
+library(stargazer)
+t(Means)
+stargazer(t(Means), title="Descriptive statistics", type = "text", 
+          dep.var.labels = c("Employment Status","Full Time", "Part Time", "Marginal", "Unemployed"),
+          covariate.labels = c("n()", "mean age", "mean sex", "mean qualification", "mean hourly earning", "mean monthly earning"))
