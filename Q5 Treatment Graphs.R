@@ -61,9 +61,17 @@ Treatment.analysis1 = analyze_tc %>%
   )
 
 
-ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = binary_treatment1, colour = binary_treatment1)) +
-  geom_line()
-
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Employment.Rate, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Employment Rate of binary Treatmentgroups",
+       y = "Employment Rate",
+       x = "Years") +
+  geom_vline(xintercept = 6, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                   labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(2,7))
 
 Treatment.analysis2 = analyze_tc %>%
   group_by(Wave, binary_treatment2) %>%
