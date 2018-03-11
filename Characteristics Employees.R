@@ -146,6 +146,14 @@ summary(sumsub2013$Sexnum)
 
 table(sumsub2013$Employment.Status)
 
+## Dummy for Affected by Minimum Wage
+# 1 if hourly earnings < 8.50
+sumsub2013$Subject.to.minwage = NA
+sumsub2013$Subject.to.minwage[sumsub2013$Hourly.earnings < 8.5] = 1
+sumsub2013$Subject.to.minwage[is.na(sumsub2013$Subject.to.minwage)] = 0
+
+
+
 Means = sumsub2013 %>%
   group_by(Employment.Status) %>%
   summarise(n(),
@@ -156,7 +164,6 @@ Means = sumsub2013 %>%
             avg_monthly.earnings = mean(Current.Gross.Labor.Income.in.Euro, na.rm = TRUE)
   )
 
-summary()
 
 
 ###Output
