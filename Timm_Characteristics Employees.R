@@ -31,13 +31,13 @@ adj_labor_force = function(x) {
 # Apply Labor Force Status to the sub2013 Dataset
 sub2013 = adj_labor_force(sub2013)
 
-#testunique = unique(sub2013$never.Changing.Person.ID)
 
 ### Age
 age_calculator = function(x, y) {
   x$Age = y - x$Year.of.Birth
-  # summary(x$Age)              
-  x$Age[x$Age > 100] = NA
+  # summary(x$Age)  
+  # Implausible Value for Age
+  x$Age[x$Age > 2013] = NA
   return(x)
 }
 
@@ -116,7 +116,7 @@ rearrange_qualification = function(x) {
   return(x)
 }
 
-# Apply the Qualification Function to sub 2013
+#Apply the Qualification Function to sub 2013
 sub2013 = rearrange_qualification(sub2013)
 
 #Qualification
@@ -169,20 +169,6 @@ sumsub2013$Hourly.earnings = NA
 sumsub2013$Hourly.earnings[sumsub2013$Actual.Work.Time.Per.Week > 0 ] = sumsub2013$Current.Gross.Labor.Income.in.Euro[sumsub2013$Actual.Work.Time.Per.Week > 0 ]/(4.3 * sumsub2013$Actual.Work.Time.Per.Week[sumsub2013$Actual.Work.Time.Per.Week > 0 ])
 
 
-summary(sumsub2013$Hourly.earnings)
-
-table(sumsub2013$Labor.Force.Status)
-table(sumsub2013$Employment.Status)
-
-summary(sumsub2013)
-#Table for each variable
-table(sumsub2013$Sexnum)
-summary(sumsub2013$Age)
-summary(sumsub2013$Sexnum)
-## 53.48% Women
-
-table(sumsub2013$Employment.Status)
-
 ## Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
 # Function to make it reusable
@@ -214,3 +200,12 @@ means_calculator = function(x) {
 Means = means_calculator(sumsub2013)
 
 ###Output
+install.packages("stargazer")
+library(stargazer)
+t(Means)
+stargazer(t(Means), title="Descriptive statistics", type = "text", 
+          dep.var.labels = c("Employment Status","Full Time", "Part Time", "Marginal", "Unemployed"),
+          covariate.labels = c("n()", "mean age", "mean sex", "mean qualification", "mean hourly earning", "mean monthly earning"))
+
+## Show Kernel Density of the Variables in Means Output
+# Need to code these with the sumsub2013 dataset
