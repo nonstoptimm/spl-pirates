@@ -2,6 +2,16 @@
 install.packages("ggplot2")
 library(ggplot2)
 
+#Compute Variable of hourly earnings
+Reduced_merged$Hourly.earnings = Reduced_merged$Current.Gross.Labor.Income.in.Euro/(4.3 * Reduced_merged$Actual.Work.Time.Per.Week)
+summary(Reduced_merged$Hourly.earnings)
+
+#For more exact analyzes drop observations from first and last percentil of hourly earnings
+Reduced_merged$Hourly.earnings[Reduced_merged$Hourly.earnings > quantile((Reduced_merged$Hourly.earnings), c(.99)) | Reduced_merged$Hourly.earnings < quantile((Reduced_merged$Hourly.earnings), c(.01))] = NA
+Reduced_merged = Reduced_merged[complete.cases(Reduced_merged$Hourly.earnings)]
+
+
+
 ##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
 
 analyze_tc = Reduced_merged %>%
