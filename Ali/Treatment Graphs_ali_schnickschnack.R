@@ -12,6 +12,31 @@ Reduced_merged = Reduced_merged[complete.cases(Reduced_merged$Hourly.earnings)]
 
 
 
+
+### Process of Generating Binary Treatment Variable
+## Median of Kaitz Index from year 2013, to avoid anticipation effects
+## Subset of dbys for 2013
+
+dbys2013 = select(filter(dbys, Wave == 2013), c(Wave, State.of.Residence, Kaitz))
+#abc = filter(dbys, Wave == 2013) = subset for all variables
+
+#Generate Binary Treatment Identificator1
+median(`dbys2013`$Kaitz)
+dbys2013$binary_treatment1[dbys2013$Kaitz > median(`dbys2013`$Kaitz)] = 1
+dbys2013$binary_treatment1[is.na(dbys2013$binary_treatment1)] = 0
+
+
+###Generate Robust Binary Treatment Identificator2
+## Use Kaitz Index above 60% Percentil for Treatment and below 40% percentil for Control
+quantile(dbys2013$Kaitz, c(.40, .60)) 
+dbys2013$binary_treatment2[dbys2013$Kaitz > quantile((`dbys2013`$Kaitz), c(.60))] = 1
+dbys2013$binary_treatment2[dbys2013$Kaitz < quantile((`dbys2013`$Kaitz), c(.40))] = 0
+
+
+
+
+
+
 ##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
 
 analyze_tc = Reduced_merged %>%
