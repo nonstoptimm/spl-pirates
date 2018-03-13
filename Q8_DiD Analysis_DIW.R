@@ -1,6 +1,6 @@
+# Quantlet 8
 # D&D Analysis by DIW(2017)
 # Identification estimation:
-#
 
 ## Data Pre Processing for DiD estimation
 # Create sub-dataframe with only variables of interest
@@ -10,7 +10,6 @@ data_selector = function(analyze_tc) {
 }
 # Apply the Function
 DiD_DIW = data_selector(analyze_tc)
-
 
 #Generate numeric variable for years, thus convert the variable wave
 DiD_DIW$year = as.numeric(as.character(DiD_DIW$Wave))
@@ -53,7 +52,6 @@ summary(did_1.2.3)
 did_1.2.4 = lm(Log.Full.Employment ~ (Fraction*year15.dummy) + Log.Population + year13.dummy + year12.dummy, data = DiD_DIW)
 summary(did_1.2.4)
 
-
 ## Regression 2: We regress on Part Employment
 # Regression 2.1.1 (baseline): Using Kaitz Index
 did_2.1.1 = lm(Log.Part.Employment ~ (Kaitz*year15.dummy), data = DiD_DIW)
@@ -80,7 +78,6 @@ summary(did_2.2.3)
 # Regression 2.2.4: Kaitz, Control: Population, Year2013, Year2012
 did_2.2.4 = lm(Log.Part.Employment ~ (Fraction*year15.dummy) + Log.Population + year13.dummy + year12.dummy, data = DiD_DIW)
 summary(did_2.2.4)
-
 
 ## Regression 3: We regress on Marginal Employment
 # Regression 3.1.1 (baseline): Using Kaitz Index

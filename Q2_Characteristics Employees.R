@@ -1,23 +1,24 @@
+# Quantlet 2
 # Load Packages used in Q2
 library(stargazer)
 
-### Descriptive Analysis of Data in 2013 ###
-## Data Cleaning, Summary Statistics, Output
+# Descriptive Analysis of Data in 2013
+# Code can be applied for any year as it's created as functions
+# Data Cleaning, Summary Statistics, Output
 
+# Definition of Data Selector Function
 data_selector = function(input, wave) {
   select(filter(input, Wave == wave), c(Wave, never.Changing.Person.ID, State.of.Residence, Sex, Year.of.Birth,
                                                        Registered.Unemployed, Employment.Status,Labor.Force.Status,
                                                        Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro, 
                                                        School.Leaving.Degree, No.Vocational.Degree, Vocational.Degree.Received, College.Degree))
-  }
+}
 
-# Create for 2013 by inserting the 2013 wave
+# Apply data_selector function to subset the dataset of 2013, using merged_all from Q1
 sub2013 = data_selector(merged_all, 2013)
 
-##Data Cleaning
-
-## Adjust Labor Force Variable
-##Sort out people not in working force anymore
+## Data Cleaning
+# Function to check the table and levels of Labor Force Variable to sort out people not in working force anymore
 check_labor_force = function(x) { 
   view = c()
   view = c(view, table(x$Labor.Force.Status))
@@ -25,25 +26,25 @@ check_labor_force = function(x) {
   return(view)
 }
 
-# Check Labor Force to find out the values
+# Apply check_labor_force for 2013 to find out the values, using the check_labor_force function
 check_labor_force(sub2013)
 
+# Function to change the values checked above
 set_labor_force = function(x, y, z) {
   x$LaborForce_num = NA
   x$LaborForce_num = as.numeric(x$Labor.Force.Status)
   summary(x$LaborForce_num)
-  ## Just in case there would be missing values
+  # Just in case there would be missing values
   x$LaborForce_num[x$LaborForce_num <= y] = NA
-  ##Too old -> 4720 NA
+  # Too old -> 4720 NA
   x$LaborForce_num[x$LaborForce_num == z] = NA
   return(x)
 }
 
-# Apply Labor Force Status to the sub2013 Dataset
+# Apply set_labor_force to the sub2013 Dataset
 sub2013 = set_labor_force(sub2013, 6, 8)
 
-
-### Age
+# Function to calculate the actual age of the people, as there are only years
 age_calculator = function(x, year) {
   x$Age = year - x$Year.of.Birth
   # Implausible Value for Age
@@ -51,10 +52,10 @@ age_calculator = function(x, year) {
   return(x)
 }
 
-#Apply the age function to the subset
+# Apply the age_calculator function to the 2013 subset
 sub2013 = age_calculator(sub2013, 2013)
 
-## Sex
+# Function to view the table and levels of genders
 check_gender = function(x) {
   view = c()
   view = c(view, table(x$Sex))
@@ -62,7 +63,7 @@ check_gender = function(x) {
   return(view)
 }
 
-# Apply Check Gender function on 2013
+# Apply check_gender function on 2013
 check_gender(sub2013)
 
 # Function to correct Sex values
@@ -76,15 +77,15 @@ check_gender(sub2013)
       return(x)
 }
 
-# Apply Gender Correction function on sub2013
+# Apply gender_correction function on sub2013
 sub2013 = gender_correction(sub2013)
 
-## Registered Unemployed
+## Function to return a table of the Registered Unemployed variable
 check_unemployment = function(x) {
   return(table(x$Registered.Unemployed))
 }
 
-# Apply Check Unemployment function on sub2013
+# Apply check_unemployment function on sub2013
 check_unemployment(sub2013)
 
 ## Employment Status
@@ -97,10 +98,10 @@ check_employment_status = function(x) {
   return(view)
 }
 
-# Apply Check Employment Status function on sub2013
+# Apply check_employment_status function on sub2013
 check_employment_status(sub2013)
 
-## Create function to kick individuals not affected by Minimum Wage
+## Create function to remove individuals not affected by Minimum Wage
 set_na_not_affected = function(x) {
   x$Employment.Status_num = NA
   x$Employment.Status_num = as.numeric(x$Employment.Status)
@@ -114,14 +115,13 @@ set_na_not_affected = function(x) {
   return(x)
 }
 
-## Apply the function to the sub2013 subset
+## Apply the set_na_not_affected function to the sub2013 subset
 sub2013 = set_na_not_affected(sub2013)
 
 ## Qualification
 # High if college degree, middle if vocational degree, low if school degree, non if no school degree
 # High = 3, Middle = 2, Low = 1, Non = 0
 # Create a function for it
-
 check_qualification = function(x) {
   view = c()
   view = c(view, "SCHOOL LEAVING DEGREE")
@@ -152,10 +152,10 @@ check_qualification = function(x) {
   return(view)
 }
 
-## Apply the Check Qualification function to the sub2013 subset
+## Apply the check_qualification function to the sub2013 subset
 check_qualification(sub2013)
 
-
+## Change the values of the qualification variable to build groups
 rearrange_qualification = function(x) {
     x$qualification = NA
     # School degree
@@ -170,10 +170,10 @@ rearrange_qualification = function(x) {
     return(x)
 }
 
-#Apply the Qualification Function to sub 2013
+#Apply the rearrange_qualification Function to sub 2013
 sub2013 = rearrange_qualification(sub2013)
 
-##Income
+## Income
 # Set Values of -2 to 0 -> People that have no Monthly Income
 # Create a function for it
 set_income = function(x) {
@@ -181,7 +181,7 @@ set_income = function(x) {
   return(x)
 }
 
-#Apply the income function
+# Apply the set_income function to the 2013 dataset
 sub2013 = set_income(sub2013)
 
 ##Working Time
@@ -196,29 +196,29 @@ set_working_time = function(x) {
   return(x)
 }
 
-#Apply the function to the 2013 Dataset
+#Apply the set_working_time function to the 2013 dataset
 sub2013 = set_working_time(sub2013)
 
 # Create a function to drop all observations having at least 1 "NA", so only keep complete cases
 drop_sub_na = function(x) { x[complete.cases(x), ] }
-# Apply this function to a dataset
+# Apply the drop_sub_na function to a dataset
 sub2013noNA = drop_sub_na(sub2013)
 
-### Summary Satistics of Important Variables
+### Summary Statistics of Important Variables
 # Variables of Interest: Sex, Age, Registered Unemployed, Employment Status, Qualification, Income, Working Time
 filter_complete_cases = function(x) { x %>% select(State.of.Residence, qualification, Employment.Status, Registered.Unemployed, Employment.Status_num, Labor.Force.Status, LaborForce_num, Sexnum, Age, Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro) }
 
-# Apply Filter Complete Cases Function to a dataset (without NAs)
+# Apply filter_complete_cases Function to the 2013 dataset (without NAs)
 sumsub2013 = filter_complete_cases(sub2013noNA)
 
-#Calculate Hourly Earnings
+# Function to calculate Hourly Earnings
 calc_hourly_earnings = function(x) {
   x$Hourly.earnings = NA
   x$Hourly.earnings[x$Actual.Work.Time.Per.Week > 0 ] = x$Current.Gross.Labor.Income.in.Euro[x$Actual.Work.Time.Per.Week > 0 ]/(4.3 * x$Actual.Work.Time.Per.Week[sumsub2013$Actual.Work.Time.Per.Week > 0 ])
   return(x)
 }
 
-# Apply Calc Hourly Earnings Function to a dataset
+# Apply calc_hourly_earnings Function to the 2013 dataset
 sumsub2013 = calc_hourly_earnings(sumsub2013)
 
 ## Dummy for Affected by Minimum Wage
@@ -231,10 +231,10 @@ dummy_minimum_wage <- function(x) {
   return(x)
 }
 
-# Apply the function to sumsub2013 and assign it to the same variable
+# Apply the dummy_minimum_wage function to sumsub2013
 sumsub2013 = dummy_minimum_wage(sumsub2013)
 
-### Function for Means Calculation
+### Function for Means Calculation of multiple variables
 calc_means = function(x) { 
   x %>%
   group_by(Employment.Status) %>%
@@ -248,10 +248,10 @@ calc_means = function(x) {
   )
   }
 
-# Apply the Mean Function to the sumsub2013 dataset
+# Apply the calc_means Function to the sumsub2013 dataset
 Means2013 = calc_means(sumsub2013)
 
-### Output
+### Create output table with a function
 print_means = function(x) {
   stargazer(t(x), title="Descriptive statistics", type = "text", 
           dep.var.labels = c("Employment Status","Full Time", "Part Time", "Marginal", "Unemployed"),
@@ -262,67 +262,73 @@ print_means = function(x) {
 print_means(Means2013)
 
 ## Show Kernel Density of the Variables in Means Output
-xlabel, xlim1, xlim2, xlim3, xlim4
-plot_density = function(input, mode) {
-  if(mode == "Age") {
-    x =   
-  } else if(mode == "hourly earnings")
-    
-  }
-  ggplot(data = input,aes(x = Age ,group = Employment.Status, color = Employment.Status)) +
-  geom_line(stat = "density") +
-  theme_classic() +
-  labs(title = "density of the age seperated by employment status ",
-       y = "Density",
-       x = "Age") +
-  scale_colour_hue(name = "Employment Status",
-                   labels = c("Full time","Part Time", "Marginal", "Unemployed"))
-  }
 
-plot_density(sumsub2013, "Age")
+# Plots
+# Densityplot-Function for Age
+plot_density_age = function(x) {
+  ggplot(data = x,aes(x = Age,group = Employment.Status, color = Employment.Status )) +
+    geom_line(stat = "density") +
+    theme_classic() +
+    labs(title = "density of the age seperated by employment status ",
+         y = "Density",
+         x = "Age") +
+    scale_colour_hue(name = "Employment Status",
+                     labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+}
 
-# Densityplot for Age
-ggplot(data = sumsub2013,aes(x = Age, group = Employment.Status, color = Employment.Status )) +
-  geom_line(stat = "density") +
-  theme_classic() +
-  labs(title = "density of the age seperated by employment status ",
-       y = "Density",
-       x = "Age") +
-  scale_colour_hue(name = "Employment Status",
-                   labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+# Plot plot_density_age with 2013 dataset
+plot_density_age(sumsub2013)
 
+# Densityplot-Function for Hourly Earnings
+plot_density_earnings = function(x) {
+  ggplot(data = x,aes(x = Hourly.earnings,group = Employment.Status, color = Employment.Status )) +
+    geom_line(stat = "density") +
+    coord_cartesian(xlim = c(0,100),) +
+    theme_classic() +
+    labs(title = "density of the hourly earnings seperated by employment status ",
+         y = "Density",
+         x = "hourly earnings") +
+    scale_colour_hue(name = "Employment Status",
+                     labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+}
 
-# Densityplot for Hourly Earnings
-ggplot(data = sumsub2013,aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status )) +
-  geom_line(stat = "density") +
-  coord_cartesian(xlim = c(0,100),) +
-  theme_classic() +
-  labs(title = "density of the hourly earnings seperated by employment status ",
-       y = "Density",
-       x = "hourly earnings") +
-  scale_colour_hue(name = "Employment Status",
-                   labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+# Plot plot_density_earnings with 2013 dataset
+plot_density_earnings(sumsub2013)
 
+# Densityplot-Function for monthly earning
+plot_density_monthly_earnings = function(x) {
+  ggplot(data = x,aes(x = Current.Gross.Labor.Income.in.Euro ,group = Employment.Status, color = Employment.Status )) +
+    geom_line(stat = "density") +
+    coord_cartesian(xlim = c(190,4000),ylim = c(0,0.0035)) +
+    theme_classic() +
+    labs(title = "density of the monthly earnings seperated by employment status",
+         y = "Density",
+         x = "monthly earnings") +
+    scale_colour_hue(name = "Employment Status",
+                     labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+}
 
-#Densityplot for monthly earning
-ggplot(data = sumsub2013,aes(x = Current.Gross.Labor.Income.in.Euro ,group = Employment.Status, color = Employment.Status )) +
-  geom_line(stat = "density") +
-  coord_cartesian(xlim = c(190,4000),ylim = c(0,0.0035)) +
-  theme_classic() +
-  labs(title = "density of the monthly earnings seperated by employment status ",
-       y = "Density",
-       x = "monthly earnings") +
-  scale_colour_hue(name = "Employment Status",
-                   labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+# Plot plot_density_monthly_earnings with 2013 dataset
+plot_density_monthly_earnings(sumsub2013)
 
 #Densityplot for Actual Worktime (per week)
-ggplot(data = sumsub2013,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
-  geom_line(stat = "density") +
-  coord_cartesian(xlim = c(4.5,80),ylim = c(0,0.15)) 
+plot_density_actual_work = function(x) {
+  ggplot(data = x,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
+    geom_line(stat = "density") +
+    coord_cartesian(xlim = c(4.5,80),ylim = c(0,0.15)) 
+}
+
+# Plot plot_density_actual_work with 2013 dataset
+plot_density_actual_work(sumsub2013)
 
 # Plot for Gender of every emloyment status
-ggplot(data = sumsub2013, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
-  theme_classic() +
-  labs(title = "Gender for every emloyment status",
-       y = "Count",
-       x = "Employment Status", fill = "Sex") 
+plot_gender_employment = function(x) {
+  ggplot(data = x, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
+    theme_classic() +
+    labs(title = "Gender for every emloyment status",
+         y = "Count",
+         x = "Employment Status", fill = "Sex")
+}
+
+# Plot plot_gender_employment with 2013 dataset
+plot_gender_employment(sumsub2013)

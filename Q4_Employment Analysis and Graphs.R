@@ -2,14 +2,14 @@
 ## This Quantlet produces output of differenst employment measures ##
 
 ## We look at people in our dataset that are either full time employed, part time employed, marginal employed or not employed.
-# Data pre-processing for analysis
+# Data pre-processing for analysis by defining a function
 data_selector = function(merged_all) {
   select(filter(merged_all), c(Wave, never.Changing.Person.ID, State.of.Residence, Employment.Status,Labor.Force.Status,
                                              Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro 
                                              ))
 }
 
-# Create for dataframe with only variables of interest
+# Create for dataframe with only variables of interest by using the data_selector function on merged_all
 Reduced_merged = data_selector(merged_all)
 
 ## Adjust Labor Force Variable
@@ -27,7 +27,7 @@ adj_labor_force = function(x) {
   return(x)
 }
 
-# Apply Labor Force Status to the sub2013 Dataset
+# Apply adj_labor_force to the sub2013 dataset
 Reduced_merged = adj_labor_force(Reduced_merged)
 
 # Adjust Work Time Variable
@@ -38,7 +38,7 @@ set_working_time = function(x) {
   return(x)
 }
 
-#Apply the function to the 2013 Dataset
+# Apply the set_working_time function to the 2013 dataset
 Reduced_merged = set_working_time(Reduced_merged)
 
 # Adjust Data Income
@@ -46,11 +46,12 @@ set_income_2 = function(x) {
   x$Current.Gross.Labor.Income.in.Euro[(x$Current.Gross.Labor.Income.in.Euro) <= -3] = NA
   return(x)
 }
-
+# Apply set_income_2 to the dataset used above
 Reduced_merged = set_income_2(Reduced_merged)
 
-# Drop NAs
+# Define a function to drop NAs
 drop_sub_na = function(x) { x[complete.cases(x), ] }
+# Apply it to the reduced_merged dataset
 Reduced_merged_noNA = drop_sub_na(Reduced_merged)
 
 ## We focus our analysis to three different employment statuses (full time, part time, marginal) and the non employeed
@@ -77,7 +78,7 @@ yearly_employment_state = function(x) { x %>%
     )
 }
 
-# Apply it to the dataset
+# Apply yearly_employment_state to the dataset used above
 Employment.yearly.state = yearly_employment_state(Reduced_merged)
 
 ## Generate different employment measures, Log Employment and % change of Log Employment and Employment Rates
@@ -119,7 +120,7 @@ calc_employment_variables = function(input, type) {
   return(input)
 }
 
-# 
+# Apply the calc_employment_variables function to Employment.yearly and .state dataset, using different employment types
 Employment.yearly = calc_employment_variables(Employment.yearly, "Full")
 Employment.yearly = calc_employment_variables(Employment.yearly, "Part")
 Employment.yearly = calc_employment_variables(Employment.yearly, "Marginal")
@@ -129,12 +130,16 @@ Employment.yearly.state = calc_employment_variables(Employment.yearly.state, "Pa
 Employment.yearly.state = calc_employment_variables(Employment.yearly.state, "Marginal")
 Employment.yearly.state = calc_employment_variables(Employment.yearly.state, "Not")
 
-### Create Periods 
-  list_years = as.numeric(list_years)
-  list_years_up = list_years + 1
-  Employment.yearly$Period = paste(list_years, list_years_up, sep = "/")
-  Employment.yearly.state$Period = Employment.yearly$Period
-
+### Create Function to set periods for the years in list_years (+1 each)
+  create_periods = function(list_years) {
+    list_years_up = list_years + 1
+    list = paste(list_years, list_years_up, sep = "/")
+    return(list)
+  }
+# Apply create_periods to the objects used above  
+  Employment.yearly$Period = create_periods(list_years)
+  Employment.yearly.state$Period = create_periods(list_years)
+  
 ### Output Graphs by year ###
 # illustrate Log Employment of all three groups
 plot_graphs_year = function(input, mode, title, y) {
@@ -169,6 +174,7 @@ plot_graphs_year = function(input, mode, title, y) {
     geom_vline(xintercept = 5, color = "red") 
 }
 
+# Apply plot_graphs_year to Employment.yearly using different mode
 # illustrate Log Employment of all three groups
 plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Employment")
 # illustrate % change of Log Employment of all three groups
@@ -178,7 +184,7 @@ plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time",
 
 
 #### OUTPUT Graphs for each state of the employment variables over time #####
-
+# Define a function with different employment modes
 plot_graphs_growth = function(input, mode, title) {
   if(mode == "Full") {
     v1 = input$Full.Employment.Rate
@@ -200,7 +206,8 @@ plot_graphs_growth = function(input, mode, title) {
   coord_cartesian(xlim = c(1.6,7)) 
 }
 
-# Full time employment growth rate
+# Apply plot_graphs_growth to Employment.yearly.state using different employment types
+# Full time employment growth rate 
 plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
 # Part time employment growth rate
 plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
