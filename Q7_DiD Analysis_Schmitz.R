@@ -5,49 +5,38 @@
 #install.packages("plm")
 #library(plm)
 
-DiD_estimation1 = analyze_tc
+## Data Pre Processing for DiD estimation
+# Create sub-dataframe with only variables of interest
+data_selector = function(analyze_tc) {
+  select(filter(analyze_tc), c(Wave, State.of.Residence, Observations, Fraction, Kaitz, Delta.Log.Full.Employment, Delta.Log.Part.Employment, Delta.Log.Marginal.Employment, binary_treatment1, binary_treatment2
+  ))
+}
 
-# Estimation1
-str(analyze_tc)
-# Generate numeric variable for years, thus convert the variable wave
-analyze_tc$year = as.numeric(as.character(analyze_tc$Wave))
+DiD_Schmitz = data_selector(analyze_tc)
 
-# Creat dummy for year for indicator when minimum wage was introduced
-analyze_tc$year.dummy = ifelse(analyze_tc$year >= 2015, 1, 0)
+#Generate numeric variable for years, thus convert the variable wave
+DiD_Schmitz$year = as.numeric(as.character(DiD_DIW$Wave))
 
-# Generate numeric variable for States
-analyze_tc$States.Num = as.numeric(analyze_tc$State.of.Residence)
-
-
-### Regression1 ###
-# We regress on the following variables: Log.Full.Employment, Log.Part.Employment, Log.Marginal.Employment and
-# Delta.Log.Full.Employment, Delta.Log.Part.Employment, Delta.Log.Marginal.Employment
-
-# Regression1.1 (Baseline): Only Kaitz on Emplyoment Rate
-did1.1 = lm(Marginal.Employment.Rate ~ (Kaitz*year.dummy), data = analyze_tc)
-summary(did1.1)
-
-## Regression 1.2: Kaitz with Control for and Year ##
-did1.2 = lm(Marginal.Employment.Rate ~ (Kaitz*year.dummy) + Kaitz*year, data = analyze_tc)
-summary(did1.2)
+#Generate dummy for year for indicator when minimum wage was introduced
+DiD_Schmitz$year15.dummy = ifelse(DiD_DIW$year >= 2015, 1, 0)
 
 
-# Estimation2
-# Generate dummy for year for indicator when minimum wage was introduced
-analyze_tc$year.dummy = ifelse(analyze_tc$year >= 2015, 1, 0)
+### Regression
+## Regression 1: We regress on Regular Employment
+# Regression 1.1.1 (baseline): Using Kaitz Index
+did_1.1.1 = lm(Delta.Log.Full.Employment ~ (Kaitz*year15.dummy), data = DiD_Schmitz)
+summary(did1.1.1)
+# Regression 1.2.1: Kaitz and Control Population
 
-# DiD Variable
-analyze_tc$did1 = analyze_tc$year.dummy * analyze_tc$binary_treatment1
 
-### Regression1 ###
-##Regression with Standart Treatment Dummy
-did2.1 = lm(Marginal.Employment.Rate ~ binary_treatment1 + year.dummy + did, data = analyze_tc)
-summary(did2.1)
+## Regression 2: We regress on Part Employment
+# Regression 2.1.1 (baseline): Using Kaitz Index
+did_2.1.1 = lm(Delta.Log.Part.Employment ~ (Kaitz*year15.dummy), data = DiD_Schmitz)
+summary(did_2.1.1)
 
 
 
-# Estimation3
-# DiD Variable
-analyze_tc$did2 = analyze_tc$year.dummy * analyze_tc$binary_treatment2
-did3.1 = lm(Marginal.Employment.Rate ~ binary_treatment2 + year.dummy + did, data = analyze_tc)
-summary(did3.1)
+## Regression 3: We regress on Marginal Employment
+# Regression 3.1.1 (baseline): Using Kaitz Index
+did_3.1.1 = lm(Delta.Log.Marginal.Employment ~ (Kaitz*year15.dummy), data = DiD_Schmitz)
+summary(did_3.1.1)
