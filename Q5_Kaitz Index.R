@@ -60,6 +60,7 @@ summary(Reduced_merged_noNA$Hourly.earnings)
 Reduced_merged_noNA$Hourly.earnings[Reduced_merged_noNA$Hourly.earnings > quantile((Reduced_merged_noNA$Hourly.earnings), c(.99)) | Reduced_merged_noNA$Hourly.earnings < quantile((Reduced_merged_noNA$Hourly.earnings), c(.01))] = NA
 Reduced_merged_noNA = Reduced_merged_noNA[complete.cases(Reduced_merged_noNA$Hourly.earnings), ]
 
+
 ## Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
 # Function to make it reusable
