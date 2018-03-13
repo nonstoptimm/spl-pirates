@@ -19,7 +19,7 @@ data_selector = function(analyze_tc, wave) {
 analyze_2013 = data_selector(analyze_tc, 2013)
 
 
-  #Add Treatmentvariable 1
+  #Add Treatmentvariable 1 - Schmitz
   analyze_2013$binary_treatment1 = NA
   analyze_2013$binary_treatment1[analyze_2013$Kaitz > median(analyze_2013$Kaitz)] = 1
   analyze_2013$binary_treatment1[is.na(analyze_2013$binary_treatment1)] = 0 
@@ -30,7 +30,7 @@ analyze_2013 = data_selector(analyze_tc, 2013)
         #}else{ analyze_2013$binary_treatment1 == 0
         #}
   
-  #Add Treatmentvariable 2
+  #Add Treatmentvariable 2 - Schmitz
   analyze_tc$binary_treatment2 = NA
   analyze_2013$binary_treatment2[analyze_2013$Kaitz > quantile(analyze_2013$Kaitz, c(0.6))] = 1
   analyze_2013$binary_treatment2[analyze_2013$Kaitz < quantile(analyze_2013$Kaitz, c(0.4))] = 0 
@@ -41,7 +41,7 @@ analyze_tc$binary_treatment2 = analyze_2013$binary_treatment2
 
 
 
-## Aggregate into standard Treatment and Control group
+## Aggregate into standard Treatment and Control group using binary_treatment1
 Treatment.analysis1 = analyze_tc %>%
   group_by(Wave, binary_treatment1) %>%
   summarise(Observation =  n(),
@@ -57,7 +57,7 @@ Treatment.analysis1 = analyze_tc %>%
   )
 
 
-## Agregate into robust Treatment and control group
+## Agregate into robust Treatment and control group using binary_treatment2
 Treatment.analysis2 = analyze_tc %>%
   group_by(Wave, binary_treatment2) %>%
   summarise(Observation =  n(),
@@ -79,7 +79,7 @@ Treatment.analysis2 = analyze_tc %>%
 ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
   geom_line() +
   geom_point() +
-  labs(title = "Log Employment of binary Treatmentgroups",
+  labs(title = "Log Employment of binary Treatmentgroups for Full Employment",
        y = "Log Employment level",
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +
@@ -89,6 +89,32 @@ ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, grou
   coord_cartesian(xlim = c(1.6,7))
 
 
+
+
+### Treatment.analysis2 ###
+## Plot: 
+ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Employment Rate of binary Treatmentgroups for full time employment",
+       y = "Employment Rate",
+       x = "Years") +
+  geom_vline(xintercept = 5, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7))
+
+
+
+
+
+
+
+
+
+
+########## NOT USED
 ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
   geom_line() +
   geom_point() +
@@ -103,21 +129,8 @@ ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Delta.Log.Full.Employment
 
 
 
-### Treatment.analysis2 ###
-## Plot: 
-ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Employment Rate of binary Treatmentgroups",
-       y = "Employment Rate",
-       x = "Years") +
-  geom_vline(xintercept = 5, color = "red") +
-  theme_classic() +
-  scale_colour_discrete(name = "Treatment",
-                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(1.6,7))
 
-###Treatment.analysis2###
+
 ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
