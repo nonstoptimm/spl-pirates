@@ -298,7 +298,14 @@ ggplot(data = sumsub2013,aes(x = Current.Gross.Labor.Income.in.Euro ,group = Emp
                    labels = c("Full time","Part Time", "Marginal", "Unemployed"))
 
 
-#Densityplot für Actual Worktime (per week)
+#Densityplot for Actual Worktime (per week)
 ggplot(data = sumsub2013,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
   geom_line(stat = "density") +
   coord_cartesian(xlim = c(4.5,80),ylim = c(0,0.15)) 
+
+# Plot for Gender of every emloyment status
+ggplot(data = sumsub2013, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
+  theme_classic() +
+  labs(title = "Gender for every emloyment status",
+       y = "Count",
+       x = "Employment Status", fill = "Sex") 

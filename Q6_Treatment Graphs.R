@@ -4,7 +4,7 @@ library(ggplot2)
 
 ### Combine Information of Q4 and Q5
 # We use the averaged data from Q4 for the employment rates and add the Fraction and Keitz Index from Q5
-analyze_tc = merge(dbys, Employment.yearly.state)
+analyze_tc = merge(Employment.yearly.state, dbys)
 
 
 ###Treatment Identification with Keitz Index
@@ -71,11 +71,13 @@ Treatment.analysis2 = analyze_tc %>%
             Avg.Part.Employment.Rate = mean(Part.Employment.Rate, na.rm=TRUE),
             Avg.Marginal.Employment.Rate = mean(Marginal.Employment.Rate, na.rm=TRUE)
   )
-
+drop_sub_na = function(x) { x[complete.cases(x), ] }
+Treatment.analysis2_noNA = drop_sub_na(Treatment.analysis2)
 
 ### GRAPHS ###
 
 ### Treatment.analysis1###
+## for full time employment
 ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
   geom_line() +
   geom_point() +
@@ -88,12 +90,39 @@ ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, grou
                    labels = c("lower Kaitz than median", "higher Kaitz than median")) +
   coord_cartesian(xlim = c(1.6,7))
 
+# for part time employment
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Part.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Log Employment of binary Treatmentgroups for Part Employment",
+       y = "Log Employment level",
+       x = "Years") +
+  geom_vline(xintercept = 5, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7))
+
+#for marginal employment
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Marginal.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Log Employment of binary Treatmentgroups for Marginal Employment",
+       y = "Log Employment level",
+       x = "Years") +
+  geom_vline(xintercept = 5, color = "red") +
+  theme_classic() +
+  scale_colour_discrete(name = "Treatment",
+                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  coord_cartesian(xlim = c(1.6,7))
+
 
 
 
 ### Treatment.analysis2 ###
 ## Plot: 
-ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+#for full time employment
+ggplot(data = Treatment.analysis2_noNA, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
   labs(title = "Employment Rate of binary Treatmentgroups for full time employment",
@@ -105,40 +134,29 @@ ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Log.Full.Employment, grou
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
   coord_cartesian(xlim = c(1.6,7))
 
-
-
-
-
-
-
-
-
-
-########## NOT USED
-ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+#for part time employment
+ggplot(data = Treatment.analysis2_noNA, aes(x=Wave, y = Avg.Log.Part.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
-  labs(title = "Growth Rate of Employment of binary Treatmentgroups",
-       y = "Growth Rate",
+  labs(title = "Employment Rate of binary Treatmentgroups for part time employment",
+       y = "Employment Rate",
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.50,0.50))
+  coord_cartesian(xlim = c(1.6,7))
 
-
-
-
-
-ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+#for marginal employment 
+ggplot(data = Treatment.analysis2_noNA, aes(x=Wave, y = Avg.Log.Marginal.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
-  labs(title = "Growth Rate of Employment of binary Treatmentgroups",
-       y = "Growth Rate",
+  labs(title = "Employment Rate of binary Treatmentgroups for marginal employment",
+       y = "Employment Rate",
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.51,1.62))
+  coord_cartesian(xlim = c(1.6,7)) 
+  
