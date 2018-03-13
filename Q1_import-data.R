@@ -92,12 +92,12 @@ for (years in c(datalist)) {
 }
 
 #Removes Spaces in Variable Names - Necessary for the dplyr package, which is handy for later analysis of our data
-valid_column_names <- make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
-names(merged_all) <- valid_column_names  
+valid_column_names = make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
+names(merged_all) = valid_column_names  
 
 # Delete the intermediate variables to clean up the workspace
 rm(list=datalist)
 rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'Wave', 'years', 'z'))
 
 # REMOVE ALL OBJECTS
-#rm(list=ls())
+# rm(list=ls())
