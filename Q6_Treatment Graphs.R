@@ -25,10 +25,10 @@ analyze_2013 = data_selector(analyze_tc, 2013)
   analyze_2013$binary_treatment1[is.na(analyze_2013$binary_treatment1)] = 0 
   
       ## Better code for it
-      if(analyze_2013$Kaitz > median(analyze_2013$Kaitz)){
-        analyze_2013$binary_treatment1 == 1
-        }else{ analyze_2013$binary_treatment1 == 0
-        }
+      #if(analyze_2013$Kaitz > median(analyze_2013$Kaitz)){
+       # analyze_2013$binary_treatment1 == 1
+        #}else{ analyze_2013$binary_treatment1 == 0
+        #}
   
   #Add Treatmentvariable 2
   analyze_tc$binary_treatment2 = NA
@@ -50,8 +50,12 @@ Treatment.analysis1 = analyze_tc %>%
     Avg.Log.Marginal.Employment = mean(Log.Marginal.Employment, na.rm=TRUE),
     Avg.Delta.Log.Full.Employment = mean(Delta.Log.Full.Employment, na.rm=TRUE),
     Avg.Delta.Log.Part.Employment = mean(Delta.Log.Part.Employment, na.rm=TRUE),
-    Avg.Delta.Log.Marginal.Employment = mean(Delta.Log.Marginal.Employment, na.rm=TRUE)
+    Avg.Delta.Log.Marginal.Employment = mean(Delta.Log.Marginal.Employment, na.rm=TRUE),
+    Avg.Full.Employment.Rate = mean(Full.Employment.Rate, na.rm=TRUE),
+    Avg.Part.Employment.Rate = mean(Part.Employment.Rate, na.rm=TRUE),
+    Avg.Marginal.Employment.Rate = mean(Marginal.Employment.Rate, na.rm=TRUE)
   )
+
 
 ## Agregate into robust Treatment and control group
 Treatment.analysis2 = analyze_tc %>%
@@ -62,10 +66,16 @@ Treatment.analysis2 = analyze_tc %>%
             Avg.Log.Marginal.Employment = mean(Log.Marginal.Employment, na.rm=TRUE),
             Avg.Delta.Log.Full.Employment = mean(Delta.Log.Full.Employment, na.rm=TRUE),
             Avg.Delta.Log.Part.Employment = mean(Delta.Log.Part.Employment, na.rm=TRUE),
-            Avg.Delta.Log.Marginal.Employment = mean(Delta.Log.Marginal.Employment, na.rm=TRUE)
+            Avg.Delta.Log.Marginal.Employment = mean(Delta.Log.Marginal.Employment, na.rm=TRUE),
+            Avg.Full.Employment.Rate = mean(Full.Employment.Rate, na.rm=TRUE),
+            Avg.Part.Employment.Rate = mean(Part.Employment.Rate, na.rm=TRUE),
+            Avg.Marginal.Employment.Rate = mean(Marginal.Employment.Rate, na.rm=TRUE)
   )
 
 
+### GRAPHS ###
+
+### Treatment.analysis1###
 ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
   geom_line() +
   geom_point() +
@@ -79,45 +89,43 @@ ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Log.Full.Employment, grou
   coord_cartesian(xlim = c(1.6,7))
 
 
-ggplot(data = Treatment.analysis1, aes(x=Wave, y = Growth.Rate, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
+ggplot(data = Treatment.analysis1, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment1), colour = factor(binary_treatment1))) +
   geom_line() +
   geom_point() +
   labs(title = "Growth Rate of Employment of binary Treatmentgroups",
        y = "Growth Rate",
        x = "Years") +
-  geom_vline(xintercept = 6, color = "red") +
+  geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.04,0.04))
+  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.50,0.50))
 
-Treatment.analysis2 = analyze_tc %>%
-  group_by(Wave, binary_treatment2) %>%
-  summarise(Observation =  n(),
-            Employment.Rate = mean(Employment.Rate, na.rm=TRUE),
-            Growth.Rate = mean(delta.E.R, na.rm = TRUE)
-  )
 
-ggplot(data = Treatment.analysis2, aes(x=Wave, y = Employment.Rate, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+
+### Treatment.analysis2 ###
+## Plot: 
+ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
   labs(title = "Employment Rate of binary Treatmentgroups",
        y = "Employment Rate",
        x = "Years") +
-  geom_vline(xintercept = 6, color = "red") +
+  geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
   coord_cartesian(xlim = c(1.6,7))
 
-ggplot(data = complete.cases(Treatment.analysis2), aes(x=Wave, y = Growth.Rate, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
+###Treatment.analysis2###
+ggplot(data = Treatment.analysis2, aes(x=Wave, y = Avg.Delta.Log.Full.Employment, group = factor(binary_treatment2), colour = factor(binary_treatment2))) +
   geom_line() +
   geom_point() +
   labs(title = "Growth Rate of Employment of binary Treatmentgroups",
        y = "Growth Rate",
        x = "Years") +
-  geom_vline(xintercept = 6, color = "red") +
+  geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
   scale_colour_discrete(name = "Treatment",
                         labels = c("lower Kaitz than median", "higher Kaitz than median")) +
-  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.04,0.04))
+  coord_cartesian(xlim = c(1.6,7), ylim = c(-0.51,1.62))
