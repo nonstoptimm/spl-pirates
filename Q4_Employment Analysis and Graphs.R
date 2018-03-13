@@ -109,7 +109,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_line(aes(y = Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Log.Marginal.Employment, color ="Marginal Employment")) + 
-  geom_line(aes(y = Log.Not.Employment, color ="Marginal Employment")) +
+  geom_line(aes(y = Log.Not.Employment, color ="Not Employment")) +
   theme_classic() +
   labs(title = "Log Employment over time",
        y = "Log Employment",
@@ -122,7 +122,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_line(aes(y = Delta.Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Delta.Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Delta.Log.Marginal.Employment, color ="Marginal Employment")) + 
-  geom_line(aes(y = Delta.Log.Not.Employment, color ="Marginal Employment")) +
+  geom_line(aes(y = Delta.Log.Not.Employment, color ="Not Employment")) +
   theme_classic() +
   labs(title = "Growth rate of employment over time",
        y = "percentage change of employment growth rate",
@@ -136,7 +136,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_line(aes(y = Full.Employment.Rate, color = "Full time Employment")) +
   geom_line(aes(y = Part.Employment.Rate, color ="Part time Employment")) +
   geom_line(aes(y = Marginal.Employment.Rate, color ="Marginal Employment")) +
-  geom_line(aes(y = Not.Employment.Rate, color ="Marginal Employment")) +
+  geom_line(aes(y = Not.Employment.Rate, color ="Not Employment")) +
   theme_classic() +
   labs(title = "Employment rates over time",
        y = "Employment rate",
@@ -150,7 +150,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
 
 ### Employment Rates by year and state
 Employment.yearly.state = Reduced_merged %>%
-  group_by(Wave, State.of.Residence) %>%
+  group_by(State.of.Residence, Wave) %>%
   summarise(Observations =  n(),
             Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
             Part.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]),
