@@ -1,4 +1,4 @@
-# ##### Bites #####
+# ##### Bites ##### Q5
 # This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Keitz Index for each German State each year
 # The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
 # Kaitz Index is ration between the minimum legal wage and the average wage
@@ -77,7 +77,7 @@ Reduced_merged_noNA = dummy_minimum_wage(Reduced_merged_noNA)
 
 ###Collapse Dataset by year and state to dbys (data by year and state)
 `dbys` = Reduced_merged_noNA %>%
-  group_by(Wave, State.of.Residence) %>%
+  group_by(State.of.Residence, Wave) %>%
   summarise(n(),
             Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
             AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
@@ -86,24 +86,59 @@ Reduced_merged_noNA = dummy_minimum_wage(Reduced_merged_noNA)
   )
 
 ## Generate Change of Fraction Index
-#dbys$Delta.Fraction <- c(0, diff(dbys$Fraction))
-#How?
+dbys$Delta.Fraction <- c(0, diff(dbys$Fraction))
 
-#Generate Kaitz Index for each state and year:
+#Generate Kaitz Index for each state and year
 `dbys`$Kaitz = 8.5/`dbys`$Hourly_earnings
-#Generate Change of Kaitz Index
-#dbys$Delta.Kaitz 
-#How?
 
 ## Generate a correlation variable of bites
-
 Correlation.Bites.yearly = dbys %>%
   group_by(Wave) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
+# table
+Correlation.Bites.yearly$Period = c("2010/2011", "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", "2016/2017") 
+
+ggplot(data = Correlation.Bites.yearly, aes(x = Period, group = Correlation.Fraction.Kaitz))+
+  geom_bar(aes(y = Correlation.Fraction.Kaitz), stat = "identity") + 
+  theme_classic() +
+  labs(title = "Correlation of Bites",
+       y = "Correlation",
+       x = "Years") +
+  coord_cartesian(ylim = c(0.83,1)) 
+
 
 Correlation.Bites.State = dbys %>%
   group_by(State.of.Residence) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
+# table 
+ggplot(data = Correlation.Bites.State, aes(x = State.of.Residence, group = Correlation.Fraction.Kaitz, fill = State.of.Residence))+
+  geom_bar(aes(y = Correlation.Fraction.Kaitz), stat = "identity" ) + 
+  theme_classic() +
+  labs(title = "Correlation of Bites",
+       y = "Correlation",
+       x = "State") +
+  coord_cartesian(ylim = c(0.3,1)) +
+  theme(axis.text.x = element_text(color="white"))+
+  scale_fill_hue(name = "States",
+                 labels = c("Schleswig-Holstein", 
+                            "Hamburg", 
+                            "Lower Saxony", 
+                            "Bremen", 
+                            "North-RhineWestfalia", 
+                            "Hessen", 
+                            "Rheinland-Pfalz", 
+                            "Baden-Wuerttemberg", 
+                            "Bavaria", 
+                            "Saarland", 
+                            "Berlin", 
+                            "Brandenburg", 
+                            "Mecklemburg-Vorpommern", 
+                            "Saxony", 
+                            "Saxony-Anhalt", 
+                            "Thuringia")) 
+
+
+
 
 ### OUTPUT FRACTION and KEITZ  ###
 
@@ -118,7 +153,7 @@ ggplot(data = dbys, aes(x = Fraction, group = Wave, color = Wave )) +
   coord_cartesian(xlim = c(0.1,0.6))
 
 #Test normality assumption
-shapiro.test(dbys$Fraction[dbys$Wave==2015])  ## for each year and table this
+shapiro.test(dbys$Fraction[dbys$Wave==2015])  ## for each year and table this loop 
 
 ##Fraction Indexes over time with aggregated Data
 ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
@@ -161,7 +196,7 @@ ggplot(data = dbys, aes(x = Kaitz, group = Wave, color = Wave )) +
 
 ## Test normality assumption ## Not working yet
 for (Wave in dbys) {
-shapiro.test(dbys$Kaitz)
+  shapiro.test(dbys$Kaitz)
 }
 
 ##Kaitz Indexes over time with aggregated Data

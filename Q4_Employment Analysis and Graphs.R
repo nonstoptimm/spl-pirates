@@ -5,8 +5,8 @@
 # Data pre-processing for analysis
 data_selector = function(merged_all) {
   select(filter(merged_all), c(Wave, never.Changing.Person.ID, State.of.Residence, Employment.Status,Labor.Force.Status,
-                                             Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro 
-                                             ))
+                               Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro 
+  ))
 }
 
 # Create for dataframe with only variables of interest
@@ -201,14 +201,31 @@ Employment.yearly.state$Period = c("2010/2011", "2011/2012", "2012/2013", "2013/
 
 # Full time employment growth rate
 ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
-geom_line(aes(y = Full.Employment.Rate)) +
+  geom_line(aes(y = Full.Employment.Rate)) +
   theme_classic() +
   labs(title = "Growth Rate Full Time Employment",
        y = "growth rate",
        x = "Years") +
-  scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
-  coord_cartesian(xlim = c(1.6,7)) 
+  coord_cartesian(xlim = c(1.6,7)) +
+  theme(axis.text.x = element_text(size = 8))+
+  scale_colour_hue(name = "States",
+                   labels = c("Schleswig-Holstein", 
+                              "Hamburg", 
+                              "Lower Saxony", 
+                              "Bremen", 
+                              "North-RhineWestfalia", 
+                              "Hessen", 
+                              "Rheinland-Pfalz", 
+                              "Baden-Wuerttemberg", 
+                              "Bavaria", 
+                              "Saarland", 
+                              "Berlin", 
+                              "Brandenburg", 
+                              "Mecklemburg-Vorpommern", 
+                              "Saxony", 
+                              "Saxony-Anhalt", 
+                              "Thuringia")) 
 
 # Part time employment growth rate
 ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
@@ -217,9 +234,26 @@ ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residenc
   labs(title = "Growth Rate Part Time Employment",
        y = "growth rate",
        x = "Years") +
-  scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
-  coord_cartesian(xlim = c(1.6,7)) 
+  coord_cartesian(xlim = c(1.6,7)) +
+  theme(axis.text.x = element_text(size = 8))+
+  scale_colour_hue(name = "States",
+                   labels = c("Schleswig-Holstein", 
+                              "Hamburg", 
+                              "Lower Saxony", 
+                              "Bremen", 
+                              "North-RhineWestfalia", 
+                              "Hessen", 
+                              "Rheinland-Pfalz", 
+                              "Baden-Wuerttemberg", 
+                              "Bavaria", 
+                              "Saarland", 
+                              "Berlin", 
+                              "Brandenburg", 
+                              "Mecklemburg-Vorpommern", 
+                              "Saxony", 
+                              "Saxony-Anhalt", 
+                              "Thuringia")) 
 
 # Marginal employment growth rate
 ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
@@ -228,9 +262,26 @@ ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residenc
   labs(title = "Growth Rate Marginal Employment",
        y = "growth rate",
        x = "Years") +
-  scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
-  coord_cartesian(xlim = c(1.6,7)) 
+  coord_cartesian(xlim = c(1.6,7)) +
+  theme(axis.text.x = element_text(size = 8))+
+  scale_colour_hue(name = "States",
+                   labels = c("Schleswig-Holstein", 
+                              "Hamburg", 
+                              "Lower Saxony", 
+                              "Bremen", 
+                              "North-RhineWestfalia", 
+                              "Hessen", 
+                              "Rheinland-Pfalz", 
+                              "Baden-Wuerttemberg", 
+                              "Bavaria", 
+                              "Saarland", 
+                              "Berlin", 
+                              "Brandenburg", 
+                              "Mecklemburg-Vorpommern", 
+                              "Saxony", 
+                              "Saxony-Anhalt", 
+                              "Thuringia")) 
 
 # Not employed growth rate
 ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
@@ -239,7 +290,25 @@ ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residenc
   labs(title = "Growth Rate Not Employed",
        y = "growth rate",
        x = "Years") +
-  scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
-  coord_cartesian(xlim = c(1.6,7)) 
+  coord_cartesian(xlim = c(1.6,7)) +
+  theme(axis.text.x = element_text(size = 8))+
+  scale_colour_hue(name = "States",
+                   labels = c("Schleswig-Holstein", 
+                              "Hamburg", 
+                              "Lower Saxony", 
+                              "Bremen", 
+                              "North-RhineWestfalia", 
+                              "Hessen", 
+                              "Rheinland-Pfalz", 
+                              "Baden-Wuerttemberg", 
+                              "Bavaria", 
+                              "Saarland", 
+                              "Berlin", 
+                              "Brandenburg", 
+                              "Mecklemburg-Vorpommern", 
+                              "Saxony", 
+                              "Saxony-Anhalt", 
+                              "Thuringia")) 
+
 
