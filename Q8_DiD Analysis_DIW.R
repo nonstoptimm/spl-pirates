@@ -8,7 +8,7 @@ data_selector = function(analyze_tc) {
   select(filter(analyze_tc), c(Wave, State.of.Residence, Observations, Fraction, Kaitz, Log.Full.Employment, Log.Part.Employment, Log.Marginal.Employment, binary_treatment1
   ))
 }
-
+# Apply the Function
 DiD_DIW = data_selector(analyze_tc)
 
 
@@ -24,7 +24,6 @@ DiD_DIW$year13.dummy = ifelse(DiD_DIW$year >= 2013, 1, 0)
 DiD_DIW$year12.dummy = ifelse(DiD_DIW$year >= 2012, 1, 0)
 # Population in log
 DiD_DIW$Log.Population = log(DiD_DIW$Observations)
-
 
 ### Regression
 ## Regression 1: We regress on Regular Employment

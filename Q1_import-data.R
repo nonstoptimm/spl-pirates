@@ -91,9 +91,11 @@ for (years in c(datalist)) {
   z = z + 1
 }
 
-#Removes Spaces in Variable Names - Necessary for the dplyr package, which is handy for later analysis of our data
+# Removes Spaces in Variable Names and substitues with a . - Necessary for the dplyr package, which is handy for later analysis of our data
 valid_column_names = make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
-names(merged_all) = valid_column_names  
+names(merged_all) = valid_column_names
+# Make Year-List numeric for later use
+list_years = as.numeric(list_years)
 
 # Delete the intermediate variables to clean up the workspace
 rm(list=datalist)

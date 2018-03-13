@@ -262,9 +262,27 @@ print_means = function(x) {
 print_means(Means2013)
 
 ## Show Kernel Density of the Variables in Means Output
+xlabel, xlim1, xlim2, xlim3, xlim4
+plot_density = function(input, mode) {
+  if(mode == "Age") {
+    x =   
+  } else if(mode == "hourly earnings")
+    
+  }
+  ggplot(data = input,aes(x = Age ,group = Employment.Status, color = Employment.Status)) +
+  geom_line(stat = "density") +
+  theme_classic() +
+  labs(title = "density of the age seperated by employment status ",
+       y = "Density",
+       x = "Age") +
+  scale_colour_hue(name = "Employment Status",
+                   labels = c("Full time","Part Time", "Marginal", "Unemployed"))
+  }
 
-#Densityplot for Age
-ggplot(data = sumsub2013,aes(x = Age ,group = Employment.Status, color = Employment.Status )) +
+plot_density(sumsub2013, "Age")
+
+# Densityplot for Age
+ggplot(data = sumsub2013,aes(x = Age, group = Employment.Status, color = Employment.Status )) +
   geom_line(stat = "density") +
   theme_classic() +
   labs(title = "density of the age seperated by employment status ",
@@ -274,8 +292,8 @@ ggplot(data = sumsub2013,aes(x = Age ,group = Employment.Status, color = Employm
                    labels = c("Full time","Part Time", "Marginal", "Unemployed"))
 
 
-#Densityplot for Hourly Earnings
-ggplot(data = sumsub2013,aes(x = Hourly.earnings,group = Employment.Status, color = Employment.Status )) +
+# Densityplot for Hourly Earnings
+ggplot(data = sumsub2013,aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status )) +
   geom_line(stat = "density") +
   coord_cartesian(xlim = c(0,100),) +
   theme_classic() +
@@ -296,7 +314,6 @@ ggplot(data = sumsub2013,aes(x = Current.Gross.Labor.Income.in.Euro ,group = Emp
        x = "monthly earnings") +
   scale_colour_hue(name = "Employment Status",
                    labels = c("Full time","Part Time", "Marginal", "Unemployed"))
-
 
 #Densityplot for Actual Worktime (per week)
 ggplot(data = sumsub2013,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +

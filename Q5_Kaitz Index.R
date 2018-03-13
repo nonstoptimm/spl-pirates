@@ -21,7 +21,7 @@ data_selector = function(merged_all) {
   ))
 }
 
-# Create dataset with only variables of interest
+# Create dataset only with variables of interest by applying the data_selector-Function
 Reduced_merged = data_selector(merged_all)
 
 ## Adjust Labor Force Variable
@@ -40,26 +40,33 @@ adj_labor_force = function(x) {
 }
 
 # Apply Labor Force Status to the Reduced_merged Dataset
-Reduced_merged = adj_labor_force(Reduced_merged)
+reduced_merged = adj_labor_force(reduced_merged)
 
-#We only keep observations in our data that work, hence have an income above 0 and worktime above 0 
-Reduced_merged$Current.Gross.Labor.Income.in.Euro[merged_all$Current.Gross.Labor.Income.in.Euro <= 0] = NA
-Reduced_merged$Actual.Work.Time.Per.Week[merged_all$Actual.Work.Time.Per.Week <= 0] = NA
+# We only keep observations in our data that work, hence have an income above 0 and worktime above 0 
+# Create a function for it
+set_working_time_income = function(x) {
+  x$Current.Gross.Labor.Income.in.Euro[x$Current.Gross.Labor.Income.in.Euro <= 0] = NA
+  x$Actual.Work.Time.Per.Week[x$Actual.Work.Time.Per.Week <= 0] = NA
+  return(x)
+}
+
+# Apply the function to a dataset
+reduced_merged = set_working_time_income(reduced_merged)
 
 # Drop NAs
 drop_sub_na = function(x) { x[complete.cases(x), ] }
-Reduced_merged_noNA = drop_sub_na(Reduced_merged)
+reduced_merged_noNA = drop_sub_na(reduced_merged)
 
-
-#Compute Variable of hourly earnings
-Reduced_merged_noNA$Hourly.earnings = Reduced_merged_noNA$Current.Gross.Labor.Income.in.Euro/(4.3 * Reduced_merged_noNA$Actual.Work.Time.Per.Week)
-summary(Reduced_merged_noNA$Hourly.earnings)
-
-
+# Create Function for computing hourly earnings
 #For more exact analyzes drop observations from first and last percentil of hourly earnings
-Reduced_merged_noNA$Hourly.earnings[Reduced_merged_noNA$Hourly.earnings > quantile((Reduced_merged_noNA$Hourly.earnings), c(.99)) | Reduced_merged_noNA$Hourly.earnings < quantile((Reduced_merged_noNA$Hourly.earnings), c(.01))] = NA
-Reduced_merged_noNA = Reduced_merged_noNA[complete.cases(Reduced_merged_noNA$Hourly.earnings), ]
-
+create_hourly_earnings = function(x) {
+  x$Hourly.earnings = x$Current.Gross.Labor.Income.in.Euro/(4.3 * x$Actual.Work.Time.Per.Week)
+  x$Hourly.earnings[x$Hourly.earnings > quantile((x$Hourly.earnings), c(.99)) | x$Hourly.earnings < quantile((x$Hourly.earnings), c(.01))] = NA
+  x = x[complete.cases(x$Hourly.earnings), ]
+  return(x)
+}
+# Apply it to a dataset
+Reduced_merged_noNA = create_hourly_earnings(Reduced_merged_noNA)
 
 ## Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
@@ -74,29 +81,45 @@ dummy_minimum_wage <- function(x) {
 # Apply the function to Reduced_merged and assign it to the same variable
 Reduced_merged_noNA = dummy_minimum_wage(Reduced_merged_noNA)
 
-
 ###Collapse Dataset by year and state to dbys (data by year and state)
-`dbys` = Reduced_merged_noNA %>%
-  group_by(State.of.Residence, Wave) %>%
-  summarise(n(),
-            Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
-            AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
-            Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE),
-            Fraction = mean(Subject.to.minwage)
-  )
+collapse_dataset = function(x) { x %>%
+    group_by(State.of.Residence, Wave) %>%
+    summarise(n(),
+              Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
+              AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
+              Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE),
+              Fraction = mean(Subject.to.minwage)
+    )
+}
 
-## Generate Change of Fraction Index
-dbys$Delta.Fraction <- c(0, diff(dbys$Fraction))
+Reduced_merged_noNA = collapse_dataset(Reduced_merged_noNA)
 
-#Generate Kaitz Index for each state and year
-`dbys`$Kaitz = 8.5/`dbys`$Hourly_earnings
+# Generate Index 
+generate_index = function(x) {
+  ## Generate Change of Fraction Index
+  x$Delta.Fraction <- c(0, diff(dbys$Fraction))
+  # Generate Kaitz Index for each state and year
+  x$Kaitz = 8.5/x$Hourly_earnings
+  return(x)
+}
+
+# Apple the Generate_Index Function
+dbys = generate_index(Reduced_merged_noNA)
+
 
 ## Generate a correlation variable of bites
-Correlation.Bites.yearly = dbys %>%
+generate_correlation = function(x) {
+  dbys %>%
   group_by(Wave) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
-# table
-Correlation.Bites.yearly$Period = c("2010/2011", "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", "2016/2017") 
+}
+
+Correlation.Bites.yearly = generate_correlation(dbys)
+
+# Create Year Periods
+list_years_up = list_years + 1
+Correlation.Bites.yearly$Period = paste(list_years, list_years_up, sep = "/")
+
 
 ggplot(data = Correlation.Bites.yearly, aes(x = Period, group = Correlation.Fraction.Kaitz))+
   geom_bar(aes(y = Correlation.Fraction.Kaitz), stat = "identity") + 
@@ -153,8 +176,19 @@ ggplot(data = dbys, aes(x = Fraction, group = Wave, color = Wave )) +
   coord_cartesian(xlim = c(0.1,0.6))
 
 #Test normality assumption
-shapiro.test(dbys$Fraction[dbys$Wave==2015])  ## for each year and table this loop 
+shapiro_test = function(input, list_years) {
+  i = 1
+  for(years in list_years) {
+  test = shapiro.test(input$Fraction[input$Wave==list_years[i]])  ## for each year and table this loop
+  print(list_years[i])
+  print(test)
+  i = i + 1
+  }
+}
 
+shapiro_test(dbys, list_years)
+  
+sapply(list_years, )
 ##Fraction Indexes over time with aggregated Data
 ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +
