@@ -10,40 +10,46 @@ Reduced_merged = merged_all[complete.cases(merged_all$Current.Gross.Labor.Income
 ## We focus our analysis to three different employment statuses (full time, part time, marginal)
 
 # shows all observations of Employment status for each year
-Employment.Status = Reduced_merged %>%
+Employment.yearly = Reduced_merged %>%
   group_by(Wave) %>%
-  summarise(Observation =  n(),
+  summarise(Observations =  n(),
             Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
             Part.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]),
             Marginal.Employment = length(Employment.Status[as.numeric(Employment.Status) == 10])
   )
 
-## Generate different employment measures, note that 1 = FullEmployment, 2 = Part.Time.Employment, 3 = Marginal.Employment
+## Generate different employment measures, Log Employment and % change of Log Employment and Employment Rates
 
 #Log Values of full time employment
-Employment.Status$Log.Full.Employment = log(Employment.Status$Full.Employment)
+Employment.yearly$Log.Full.Employment = log(Employment.yearly$Full.Employment)
 # % change of log full time employment
-Employment.Status$Delta.Log.Full.Employment <- c(0, diff(Employment.Status$Log.Full.Employment))
+Employment.yearly$Delta.Log.Full.Employment <- c(0, diff(Employment.yearly$Log.Full.Employment))
+#Employment Rate of full time employment
+Employment.yearly$Full.Employment.Rate = Employment.yearly$Full.Employment / Employment.yearly$Observations
+
 
 
 #Log Values of part time employment
-Employment.Status$Log.Part.Employment = log(Employment.Status$Part.Employment)
+Employment.yearly$Log.Part.Employment = log(Employment.yearly$Part.Employment)
 # % change of log part time employment
-Employment.Status$Delta.Log.Part.Employment <- c(0, diff(Employment.Status$Log.Part.Employment))
+Employment.yearly$Delta.Log.Part.Employment <- c(0, diff(Employment.yearly$Log.Part.Employment))
+#Employment Rate of part time employment
+Employment.yearly$Part.Employment.Rate = Employment.yearly$Part.Employment / Employment.yearly$Observations
 
 
 #Log Values of marginal employment
-Employment.Status$Log.Marginal.Employment = log(Employment.Status$Marginal.Employment)
+Employment.yearly$Log.Marginal.Employment = log(Employment.yearly$Marginal.Employment)
 # % change of log marginal employment
-Employment.Status$Delta.Log.Marginal.Employment <- c(0, diff(Employment.Status$Log.Marginal.Employment))
+Employment.yearly$Delta.Log.Marginal.Employment <- c(0, diff(Employment.yearly$Log.Marginal.Employment))
+#Employment Rate of marginal employment
+Employment.yearly$Marginal.Employment.Rate = Employment.yearly$Marginal.Employment / Employment.yearly$Observations
 
 
 
-
-### Output Graphs ###
+### Output Graphs by year ###
 
 # illustrate Log Employment of all three groups
-ggplot(data = Employment.Status, aes(x = Wave, group = 1 )) +
+ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_line(aes(y = Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Log.Marginal.Employment, color ="Marginal Employment")) + 
@@ -55,7 +61,7 @@ ggplot(data = Employment.Status, aes(x = Wave, group = 1 )) +
   geom_vline(xintercept = 5, color = "red") 
 
 # illustrate % change of Log Employment of all three groups
-ggplot(data = Employment.Status, aes(x = Wave, group = 1 )) +
+ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_line(aes(y = Delta.Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Delta.Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Delta.Log.Marginal.Employment, color ="Marginal Employment")) + 
@@ -65,5 +71,31 @@ ggplot(data = Employment.Status, aes(x = Wave, group = 1 )) +
        x = "Years") +
   scale_colour_hue(name = "Status group") +
   geom_vline(xintercept = 5, color = "red") 
+
+
+# illustrate Emplyoment Rates of all three groups
+ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
+  geom_line(aes(y = Full.Employment.Rate, color = "Full time Employment")) +
+  geom_line(aes(y = Part.Employment.Rate, color ="Part time Employment")) +
+  geom_line(aes(y = Marginal.Employment.Rate, color ="Marginal Employment")) + 
+  theme_classic() +
+  labs(title = "Employment rates over time",
+       y = "Employment rate",
+       x = "Years") +
+  scale_colour_hue(name = "Status group") +
+  geom_vline(xintercept = 5, color = "red") 
+
+
+
+
+
+### Employment Rates by year and state
+Employment.yearly.state = Reduced_merged %>%
+  group_by(Wave, State.of.Residence) %>%
+  summarise(Observations =  n(),
+            Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
+            Part.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]),
+            Marginal.Employment = length(Employment.Status[as.numeric(Employment.Status) == 10])
+  )
 
 

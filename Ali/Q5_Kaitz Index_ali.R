@@ -1,7 +1,7 @@
 # ##### Bites #####
-# This file is about the estimation and graphical analysis of different bites, namely the Keitz Index and Fraction Index for each German State each year
+# This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Keitz Index for each German State each year
+# The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
 # Kaitz Index is ration between the minimum legal wage and the average wage
-# The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50??? per hour.
 
 #We only keep observations in our data that work, hence have an income above 0 and worktime above 0 
 #Note Legend according to SOEP Info:
@@ -49,16 +49,66 @@ Reduced_merged = dummy_minimum_wage(Reduced_merged)
             Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
             AvgInc = mean(Current.Gross.Labor.Income.in.Euro, na.rm=TRUE),
             Avg.Weekly.Working.Time = mean(Actual.Work.Time.Per.Week, na.rm=TRUE),
-            Avg.subject.minwage = mean(Subject.to.minwage)
+            Fraction = mean(Subject.to.minwage)
   )
 
+## Generate Change of Fraction Index
+#dbys$Delta.Fraction <- c(0, diff(dbys$Fraction))
+#How?
 
 #Generate Kaitz Index for each state and year:
 `dbys`$Kaitz = 8.5/`dbys`$Hourly_earnings
+#Generate Change of Kaitz Index
+#dbys$Delta.Kaitz 
+#How?
+
+## Generate a correlation variable of bites
+Correlation.Bites = cor(dbys$Fraction, dbys$Kaitz, use="all.obs", method="pearson") ## Maybe also Correlation in each year
 
 
+### OUTPUT FRACTION and KEITZ  ###
 
-### OUTPUT KAITZ ###
+##Density Plots of Fraction Index with aggreagted Data
+ggplot(data = dbys, aes(x = Fraction, group = Wave, color = Wave )) +
+  geom_line(stat = "density") + 
+  theme_classic() +
+  scale_colour_hue(name = "Years") +
+  labs(title = "Density of the Fraction Index of States seperated by Years ",
+       y = "Density",
+       x = "Fraction") +
+  coord_cartesian(xlim = c(0.1,0.6))
+
+#Test normality assumption
+shapiro.test(dbys$Fraction[dbys$Wave==2015])  ## for each year and table this
+
+##Fraction Indexes over time with aggregated Data
+
+ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
+  geom_line() +
+  theme(panel.background = element_rect(fill = "white")) +
+  labs(title = "Fraction Index over Years",
+       y = "Fraction-Index",
+       x = "Years") +
+  geom_vline(xintercept = 5, color = "red") +
+  theme_classic() +
+  coord_cartesian(xlim = c(1.6,7)) +
+  scale_colour_hue(name = "States",
+                   labels = c("Schleswig-Holstein", 
+                              "Hamburg", 
+                              "Lower Saxony", 
+                              "Bremen", 
+                              "North-RhineWestfalia", 
+                              "Hessen", 
+                              "Rheinland-Pfalz", 
+                              "Baden-Wuerttemberg", 
+                              "Bavaria", 
+                              "Saarland", 
+                              "Berlin", 
+                              "Brandenburg", 
+                              "Mecklemburg-Vorpommern", 
+                              "Saxony", 
+                              "Saxony-Anhalt", 
+                              "Thuringia")) 
 
 
 ##Density Plots of Kaitz Index with aggreagted Data
@@ -71,6 +121,8 @@ ggplot(data = dbys, aes(x = Kaitz, group = Wave, color = Wave )) +
        x = "Kaitz") +
   coord_cartesian(xlim = c(0.43,0.7))
 
+## Test normality assumption
+shapiro.test(dbys$Kaitz[dbys$Wave==2016])  ## for each year and table this
 
 ##Kaitz Indexes over time with aggregated Data
 
@@ -102,6 +154,5 @@ ggplot(data = dbys, aes(x= Wave, y = Kaitz, color = State.of.Residence, group = 
                               "Thuringia")) 
 
 
-
-
+### Correlations between Bites
 
