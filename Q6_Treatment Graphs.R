@@ -1,9 +1,15 @@
-###Graphical Analysis for Employment Rates of Treatment and Control States###
+###Graphical Analysis for Employment Rates of Treatment and Control Groups###
 install.packages("ggplot2")
 library(ggplot2)
 
-##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
+### Combine Information of Q4 and Q5
+# We use the averaged data from Q4 for the employment rates and add the Fraction and Keitz Index from Q5
 
+Analysis = merge(Employment.yearly.state, dbys)
+
+
+
+##Collapse Dataframe by year and State for Employment Variables as well as Wage Variables
 analyze_tc = Reduced_merged %>%
   group_by(Wave, State.of.Residence) %>%
   summarise(Observation =  n(),

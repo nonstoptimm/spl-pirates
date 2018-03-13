@@ -34,7 +34,7 @@ Affected.by.minwage$Neo.Employment.Effect5 = 1 - (8.5 / Affected.by.minwage$avg_
 Affected.by.minwage$NewWage = NA
 Affected.by.minwage$NewWage =  Affected.by.minwage$avg_Hourly.earnings*(1+0.5*0.2)
 
-Affected.by.minwage$NewWage < Affected.by.minwage$avg_Hourly.earnings
+Affected.by.minwage$NewWage > 8.50
 ## Use First formula 
 Affected.by.minwage$Mon.Employment.Effect1 = 1 - (8.5 / Affected.by.minwage$NewWage)^(-1 * -0.2)
 Affected.by.minwage$Mon.Employment.Effect2 = 1 - (8.5 / Affected.by.minwage$NewWage)^(-1 * -0.5)
