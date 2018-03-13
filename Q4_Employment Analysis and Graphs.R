@@ -103,9 +103,10 @@ Employment.yearly$Not.Employment.Rate = Employment.yearly$Not.Employment / Emplo
 
 
 ### Output Graphs by year ###
+Employment.yearly$Period = c("2010/2011", "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", "2016/2017") 
 
 # illustrate Log Employment of all three groups
-ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
+ggplot(data = Employment.yearly, aes(x = Period, group = 1 )) +
   geom_line(aes(y = Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Log.Marginal.Employment, color ="Marginal Employment")) + 
@@ -118,7 +119,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
   geom_vline(xintercept = 5, color = "red") 
 
 # illustrate % change of Log Employment of all three groups
-ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
+ggplot(data = Employment.yearly, aes(x = Period, group = 1 )) +
   geom_line(aes(y = Delta.Log.Full.Employment, color = "Full time Employment")) +
   geom_line(aes(y = Delta.Log.Part.Employment, color ="Part time Employment")) +
   geom_line(aes(y = Delta.Log.Marginal.Employment, color ="Marginal Employment")) + 
@@ -132,7 +133,7 @@ ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
 
 
 # illustrate Emplyoment Rates of all three groups
-ggplot(data = Employment.yearly, aes(x = Wave, group = 1 )) +
+ggplot(data = Employment.yearly, aes(x = Period, group = 1 )) +
   geom_line(aes(y = Full.Employment.Rate, color = "Full time Employment")) +
   geom_line(aes(y = Part.Employment.Rate, color ="Part time Employment")) +
   geom_line(aes(y = Marginal.Employment.Rate, color ="Marginal Employment")) +
@@ -196,3 +197,49 @@ Employment.yearly.state$Not.Employment.Rate = Employment.yearly.state$Not.Employ
 
 
 #### OUTPUT Graphs for each state of the employment variables over time #####
+Employment.yearly.state$Period = c("2010/2011", "2011/2012", "2012/2013", "2013/2014", "2014/2015", "2015/2016", "2016/2017") 
+
+# Full time employment growth rate
+ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
+geom_line(aes(y = Full.Employment.Rate)) +
+  theme_classic() +
+  labs(title = "Growth Rate Full Time Employment",
+       y = "growth rate",
+       x = "Years") +
+  scale_colour_hue(name = "state") +
+  geom_vline(xintercept = 5, color = "red") +
+  coord_cartesian(xlim = c(1.6,7)) 
+
+# Part time employment growth rate
+ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
+  geom_line(aes(y = Part.Employment.Rate)) +
+  theme_classic() +
+  labs(title = "Growth Rate Part Time Employment",
+       y = "growth rate",
+       x = "Years") +
+  scale_colour_hue(name = "state") +
+  geom_vline(xintercept = 5, color = "red") +
+  coord_cartesian(xlim = c(1.6,7)) 
+
+# Marginal employment growth rate
+ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
+  geom_line(aes(y = Marginal.Employment.Rate)) +
+  theme_classic() +
+  labs(title = "Growth Rate Marginal Employment",
+       y = "growth rate",
+       x = "Years") +
+  scale_colour_hue(name = "state") +
+  geom_vline(xintercept = 5, color = "red") +
+  coord_cartesian(xlim = c(1.6,7)) 
+
+# Not employed growth rate
+ggplot(data = Employment.yearly.state, aes(x = Period, group = State.of.Residence, color = State.of.Residence))+
+  geom_line(aes(y = Not.Employment.Rate)) +
+  theme_classic() +
+  labs(title = "Growth Rate Not Employed",
+       y = "growth rate",
+       x = "Years") +
+  scale_colour_hue(name = "state") +
+  geom_vline(xintercept = 5, color = "red") +
+  coord_cartesian(xlim = c(1.6,7)) 
+
