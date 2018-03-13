@@ -47,17 +47,21 @@ Affected.by.minwage = employ_effect(Labor.Demand.Elasticity, Affected.by.minwage
 employ_effect_monopsonic <- function(x, y) {
   i = 1
   k = 1
+  effect_matrix = matrix(, nrow = 0, ncol = length(x))
   y$NewWage = NA
   y$NewWage = y$avg_Hourly.earnings*(1 + 0.5*0.2)
+  # CREATE FORMULAS
+  var1 = function(x) { 1 - (8.5 / y$NewWage[k])^(-1 * x[i]) }
+  var2 = function(x) { ((current_New_Wage - y$avg_Hourly.earnings[k]) / (0.5*0.2 * y$avg_Hourly.earnings[k])) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x[i])) }
   
-    var1 = function(x) { 1 - (8.5 / y$NewWage[k])^(-1 * x[i]) }
-    var2 = function(x) { ((current_New_Wage - y$avg_Hourly.earnings[k]) / (0.5*0.2 * y$avg_Hourly.earnings[k])) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x[i])) }
   if(y$NewWage[k] > 8.50) {
-    sapply(x, var1)
+    curr_rows = sapply(x, var1)
+    rbind(effect_matrix, curr_rows)
   } else {
     sapply(x, var2)
-  }  
+  }
     sapply(x, var2)
+    
       new_cols = paste("Mon.Employment.Effect", 1:length(x), sep="")
   y[new_cols] = NA
   
