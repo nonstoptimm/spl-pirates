@@ -1,5 +1,7 @@
 # Quantlet 2
 # Load Packages used in Q2
+library(dplyr)
+library(ggplot2)
 library(stargazer)
 
 # Descriptive Analysis of Data in 2013
@@ -327,14 +329,8 @@ plot_gender_employment = function(x) {
     theme_classic() +
     labs(title = "Gender for every emloyment status",
          y = "Count",
-         x = "Employment Status", fill = "Sex") +   
-    scale_fill_hue(name = "Gender", labels = c("men","women")) +
-    scale_x_discrete (
-                     labels=c("full time", "part time", "marginal", "not employed"))
-    
-    
+         x = "Employment Status", fill = "Sex")
 }
 
 # Plot plot_gender_employment with 2013 dataset
 plot_gender_employment(sumsub2013)
-

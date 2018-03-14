@@ -14,7 +14,7 @@ analyze_tc = analyze_tc %>% group_by(Wave, State.of.Residence) %>% arrange(Wave)
 #2.Robust treatment: If Kaitz higher than 60% - Percetil will be treatment, if under 40% 
 
 data_selector = function(analyze_tc, wave) {
-  select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz))
+  select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz, Fraction))
 }
 # Create subset for 2013
 analyze_2013 = data_selector(analyze_tc, 2013)
