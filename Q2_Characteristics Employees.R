@@ -327,8 +327,14 @@ plot_gender_employment = function(x) {
     theme_classic() +
     labs(title = "Gender for every emloyment status",
          y = "Count",
-         x = "Employment Status", fill = "Sex")
+         x = "Employment Status", fill = "Sex") +   
+    scale_fill_hue(name = "Gender", labels = c("men","women")) +
+    scale_x_discrete (
+                     labels=c("full time", "part time", "marginal", "not employed"))
+    
+    
 }
 
 # Plot plot_gender_employment with 2013 dataset
 plot_gender_employment(sumsub2013)
+
