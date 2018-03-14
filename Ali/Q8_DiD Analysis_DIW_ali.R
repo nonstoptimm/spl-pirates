@@ -29,32 +29,7 @@ DiD_DIW$year12.dummy = ifelse(DiD_DIW$year >= 2012, 1, 0)
 DiD_DIW$Log.Population = log(DiD_DIW$Observations)
 
 
-## Test whether Fixed Effects or Random Effects: Hausman test
-d = plm(Log.Full.Employment ~ (DiD.estimator) + Log.Population , data = DiD_DIW, index=c("State.of.Residence", "Wave"), model = "within")
-summary(d)
-e = plm(Log.Full.Employment ~ (DiD.estimator) + Log.Population , data = DiD_DIW, index=c("State.of.Residence", "Wave"), model = "random")
-summary(e)
-phtest(d, e)
 
-### Homo. vs Heteroskedasticity
-#Plot Residuals
-DiD_DIW$predicted = predict(d)   # Save the predicted values
-DiD_DIW$residuals = residuals(d)
-
-DiD_DIW %>% select(Log.Full.Employment, predicted, residuals) %>% head()
-
-
-
-plot(d$residuals)
-
-par(mfrow = c(2, 2))
-plot(d)
-
-## Breusch-Pagan LM test of independence: testing for cross-sectional dependence
-pcdtest(d, test = c("lm"))
-#Imply Heteroskedasticity
-#Use robust estimation
-coeftest(d)
 
 
 ### Regression
