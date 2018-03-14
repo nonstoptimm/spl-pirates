@@ -85,35 +85,44 @@ Employment.yearly.state = yearly_employment_state(Reduced_merged)
 # 1. Log Values of full/part/marginal/not employment
 # 2. % change of log full/part/marginal/not employment
 # 3. Employment Rate of full/part/marginal/not employment in %
+# 4. Log Employment Rate of full/part/marginal/not employment
 calc_employment_variables = function(input, type) {
   if(type == "Full") {
     input$v1 = log(input$Full.Employment)
     input$v2 = c(0, diff(input$v1))
     input$v3 = (input$Full.Employment / input$Observations) *100
+    input$v4 = log(input$v3)
     colnames(input)[colnames(input)=="v1"] <- "Log.Full.Employment"
     colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Full.Employment"
     colnames(input)[colnames(input)=="v3"] <- "Full.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] <- "Log.Full.Employment.Rate"
   } else if(type == "Part") {
     input$v1 = log(input$Part.Employment)
     input$v2 = c(0, diff(input$v1))
-    input$v3 = input$Part.Employment / input$Observations
+    input$v3 = (input$Part.Employment / input$Observations) *100
+    input$v4 = log(input$v3)
     colnames(input)[colnames(input)=="v1"] <- "Log.Part.Employment"
     colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Part.Employment"
     colnames(input)[colnames(input)=="v3"] <- "Part.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] <- "Log.Part.Employment.Rate"
   } else if(type == "Marginal") {
     input$v1 = log(input$Marginal.Employment)
     input$v2 = c(0, diff(input$v1))
-    input$v3 = input$Marginal.Employment / input$Observations
+    input$v3 = (input$Marginal.Employment / input$Observations) *100
+    input$v4 = log(input$v3)
     colnames(input)[colnames(input)=="v1"] <- "Log.Marginal.Employment"
     colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Marginal.Employment"
     colnames(input)[colnames(input)=="v3"] <- "Marginal.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] <- "Log.Marginal.Employment.Rate"
   } else if(type == "Not") {
     input$v1 = log(input$Not.Employment)
     input$v2 = c(0, diff(input$v1))
-    input$v3 = input$Not.Employment / input$Observations
+    input$v3 = (input$Not.Employment / input$Observations) *100
+    input$v4 = log(input$v3)
     colnames(input)[colnames(input)=="v1"] <- "Log.Not.Employment"
     colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Not.Employment"
     colnames(input)[colnames(input)=="v3"] <- "Not.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] <- "Log.Not.Employment.Rate"
   } else {
     print("Error! Input must either be Full, Part, Marginal or Not")
   }
@@ -158,8 +167,13 @@ plot_graphs_year = function(input, mode, title, y) {
     v2 = input$Part.Employment.Rate
     v3 = input$Marginal.Employment.Rate
     v4 = input$Not.Employment.Rate
+  } else if(mode == "LogEmployRates") {
+    v1 = input$Log.Full.Employment.Rate
+    v2 = input$Log.Part.Employment.Rate
+    v3 = input$Log.Marginal.Employment.Rate
+    v4 = input$Log.Not.Employment.Rate
   } else {
-    print("Input must be either Log, ChangeLog or EmployRates")
+    print("Input must be either Log, ChangeLog, EmployRates or LogEmployRates")
   }
   ggplot(data = input, aes(x = Period, group = 1 )) +
     geom_line(aes(y = v1, color = "Full time Employment")) +
@@ -181,6 +195,8 @@ plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Empl
 plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "percentage change of employment growth rate")
 # illustrate Emplyoment Rates of all three groups
 plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate")
+# illustrate Log Employment Rates of all three groups
+plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
 
 
 #### OUTPUT Graphs for each state of the employment variables over time #####
@@ -215,3 +231,4 @@ plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Emplo
 plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
 # Not employed growth rate
 plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
+

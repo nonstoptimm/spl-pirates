@@ -69,7 +69,7 @@ Employment.yearly = yearly_employment(Reduced_merged_noNA)
 
 ### Employment Rates by year and state
 yearly_employment_state = function(x) { x %>%
-    group_by(Wave, State.of.Residence) %>%
+    group_by(State.of.Residence, Wave) %>%
     summarise(Observations =  n(),
               Full.Employment = length(Employment.Status[as.numeric(Employment.Status) == 7]),
               Part.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]),
@@ -168,10 +168,10 @@ plot_graphs_year = function(input, mode, title, y) {
     v3 = input$Marginal.Employment.Rate
     v4 = input$Not.Employment.Rate
   } else if(mode == "LogEmployRates") {
-    v1 = input$Full.Employment.Rate
-    v2 = input$Part.Employment.Rate
-    v3 = input$Marginal.Employment.Rate
-    v4 = input$Not.Employment.Rate
+    v1 = input$Log.Full.Employment.Rate
+    v2 = input$Log.Part.Employment.Rate
+    v3 = input$Log.Marginal.Employment.Rate
+    v4 = input$Log.Not.Employment.Rate
   } else {
     print("Input must be either Log, ChangeLog, EmployRates or LogEmployRates")
   }
@@ -196,7 +196,7 @@ plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over
 # illustrate Emplyoment Rates of all three groups
 plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate")
 # illustrate Log Employment Rates of all three groups
-plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Employment rate")
+plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
 
 
 #### OUTPUT Graphs for each state of the employment variables over time #####

@@ -40,7 +40,7 @@ adj_labor_force = function(x) {
 }
 
 # Apply Labor Force Status to the Reduced_merged Dataset
-reduced_merged = adj_labor_force(reduced_merged)
+Reduced_merged = adj_labor_force(Reduced_merged)
 
 # We only keep observations in our data that work, hence have an income above 0 and worktime above 0 
 # Create a function for it
@@ -51,11 +51,11 @@ set_working_time_income = function(x) {
 }
 
 # Apply the function to a dataset
-reduced_merged = set_working_time_income(reduced_merged)
+Reduced_merged = set_working_time_income(Reduced_merged)
 
 # Drop NAs
 drop_sub_na = function(x) { x[complete.cases(x), ] }
-reduced_merged_noNA = drop_sub_na(reduced_merged)
+Reduced_merged_noNA = drop_sub_na(Reduced_merged)
 
 # Create Function for computing hourly earnings
 #For more exact analyzes drop observations from first and last percentil of hourly earnings
@@ -92,19 +92,21 @@ collapse_dataset = function(x) { x %>%
     )
 }
 
-Reduced_merged_noNA = collapse_dataset(Reduced_merged_noNA)
+dbys = collapse_dataset(Reduced_merged_noNA)
 
 # Generate Index 
 generate_index = function(x) {
   ## Generate Change of Fraction Index
-  x$Delta.Fraction <- c(0, diff(dbys$Fraction))
+  x$Delta.Fraction <- c(0, diff(x$Fraction))
   # Generate Kaitz Index for each state and year
   x$Kaitz = 8.5/x$Hourly_earnings
+  # Generate Change of Kaitz Index
+  x$Delta.Kaitz <- c(0, diff(x$Kaitz))
   return(x)
 }
 
 # Apple the Generate_Index Function
-dbys = generate_index(Reduced_merged_noNA)
+dbys = generate_index(dbys)
 
 
 ## Generate a correlation variable of bites
@@ -127,7 +129,7 @@ ggplot(data = Correlation.Bites.yearly, aes(x = Period, group = Correlation.Frac
   labs(title = "Correlation of Bites",
        y = "Correlation",
        x = "Years") +
-  coord_cartesian(ylim = c(0.83,1)) 
+  coord_cartesian(ylim = c(0.00,1)) 
 
 
 Correlation.Bites.State = dbys %>%
@@ -140,7 +142,7 @@ ggplot(data = Correlation.Bites.State, aes(x = State.of.Residence, group = Corre
   labs(title = "Correlation of Bites",
        y = "Correlation",
        x = "State") +
-  coord_cartesian(ylim = c(0.3,1)) +
+  coord_cartesian(ylim = c(0.0,1)) +
   theme(axis.text.x = element_text(color="white"))+
   scale_fill_hue(name = "States",
                  labels = c("Schleswig-Holstein", 
@@ -175,7 +177,7 @@ ggplot(data = dbys, aes(x = Fraction, group = Wave, color = Wave )) +
        x = "Fraction") +
   coord_cartesian(xlim = c(0.1,0.6))
 
-#Test normality assumption
+#Test normality assumption of Fraction
 shapiro_test = function(input, list_years) {
   i = 1
   for(years in list_years) {
@@ -188,7 +190,7 @@ shapiro_test = function(input, list_years) {
 
 shapiro_test(dbys, list_years)
   
-sapply(list_years, )
+
 ##Fraction Indexes over time with aggregated Data
 ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +
@@ -228,10 +230,18 @@ ggplot(data = dbys, aes(x = Kaitz, group = Wave, color = Wave )) +
        x = "Kaitz") +
   coord_cartesian(xlim = c(0.43,0.7))
 
-## Test normality assumption ## Not working yet
-for (Wave in dbys) {
-  shapiro.test(dbys$Kaitz)
+#Test normality assumption of Kaitz
+shapiro_test = function(input, list_years) {
+  i = 1
+  for(years in list_years) {
+    test = shapiro.test(input$Kaitz[input$Wave==list_years[i]])  ## for each year and table this loop
+    print(list_years[i])
+    print(test)
+    i = i + 1
+  }
 }
+
+shapiro_test(dbys, list_years)
 
 ##Kaitz Indexes over time with aggregated Data
 ggplot(data = dbys, aes(x= Wave, y = Kaitz, color = State.of.Residence, group = State.of.Residence)) +

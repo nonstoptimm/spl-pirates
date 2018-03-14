@@ -129,7 +129,7 @@ ggplot(data = Correlation.Bites.yearly, aes(x = Period, group = Correlation.Frac
   labs(title = "Correlation of Bites",
        y = "Correlation",
        x = "Years") +
-  coord_cartesian(ylim = c(0.83,1)) 
+  coord_cartesian(ylim = c(0.00,1)) 
 
 
 Correlation.Bites.State = dbys %>%
@@ -142,7 +142,7 @@ ggplot(data = Correlation.Bites.State, aes(x = State.of.Residence, group = Corre
   labs(title = "Correlation of Bites",
        y = "Correlation",
        x = "State") +
-  coord_cartesian(ylim = c(0.3,1)) +
+  coord_cartesian(ylim = c(0.0,1)) +
   theme(axis.text.x = element_text(color="white"))+
   scale_fill_hue(name = "States",
                  labels = c("Schleswig-Holstein", 
@@ -190,7 +190,7 @@ shapiro_test = function(input, list_years) {
 
 shapiro_test(dbys, list_years)
   
-sapply(list_years, )
+
 ##Fraction Indexes over time with aggregated Data
 ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +

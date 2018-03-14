@@ -5,6 +5,7 @@ library(ggplot2)
 ### Combine Information of Q4 and Q5
 # We use the averaged data from Q4 for the employment rates and add the Fraction and Keitz Index from Q5
 analyze_tc = merge(Employment.yearly.state, dbys)
+analyze_tc = analyze_tc %>% group_by(Wave, State.of.Residence) %>% arrange(Wave)
 
 
 ###Treatment Identification with Keitz Index
