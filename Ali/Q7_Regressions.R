@@ -149,3 +149,21 @@ summary(did_6.2)
 # Regression 6.3: Using Kaitz2013 and robust binary treatment
 did_6.3 = plm(Delta.Log.Marginal.Employment ~ binary_treatment2 + year15.dummy + (binary_treatment2*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_6.3)
+
+
+##### Output ####
+
+stargazer(did_1.1.1, did_1.1.2, did_1.1.3, did_1.1.4, title="Results", type="text", align=TRUE, 
+          no.space=TRUE, 
+          keep.stat= c("n","adj.rsq","rsq"), 
+          dep.var.labels = ("Panel A: Regular Employment"), 
+          covariate.labels=c("Bite", "D2015", "Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite x D2015"))
+
+
+stargazer(did_1.1.1, did_1.1.2, did_1.1.3, did_1.1.4, title="Results", type="text", align=TRUE, 
+          no.space=TRUE, 
+          keep.stat= c("n","adj.rsq","rsq"), 
+          dep.var.labels = ("Panel A: Full Time Employment"), 
+          covariate.labels=c("Bite.K", "D2015", "Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite x D2015"))
+
+
