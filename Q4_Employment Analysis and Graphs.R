@@ -231,4 +231,3 @@ plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Emplo
 plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
 # Not employed growth rate
 plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
-

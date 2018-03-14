@@ -283,9 +283,9 @@ plot_density_age(sumsub2013)
 
 # Densityplot-Function for Hourly Earnings
 plot_density_earnings = function(x) {
-  ggplot(data = x,aes(x = Hourly.earnings,group = Employment.Status, color = Employment.Status )) +
+  ggplot(data = x,aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status)) +
     geom_line(stat = "density") +
-    coord_cartesian(xlim = c(0,100),) +
+    coord_cartesian(xlim = c(0,100)) +
     theme_classic() +
     labs(title = "density of the hourly earnings seperated by employment status ",
          y = "Density",
@@ -313,7 +313,7 @@ plot_density_monthly_earnings = function(x) {
 # Plot plot_density_monthly_earnings with 2013 dataset
 plot_density_monthly_earnings(sumsub2013)
 
-#Densityplot for Actual Worktime (per week)
+# Densityplot for Actual Worktime (per week)
 plot_density_actual_work = function(x) {
   ggplot(data = x,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
     geom_line(stat = "density") +
