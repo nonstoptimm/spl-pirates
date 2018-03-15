@@ -206,34 +206,27 @@ createMapdata = function(input_map, input) {
 final_map = createMapdata(map, analyze_2013)
 
 # PLOT Functions
-# Function to plot the Kaitz Index. The dataset created with createMapdata has to be used for this
-plot_result_kaitz = function(input) {
+# Function to plot the Kaitz or Fraction Index. The dataset created with createMapdata has to be used for this
+plot_result_index = function(input, mode, highcolor) {
+  if(mode == "Fraction") {
+    input$mode = input$Fraction
+  } else if(mode == "Kaitz") {
+    input$mode = input$Kaitz
+  } else {
+    print("Input must be Fraction or Kaitz!")
+  }
   ggplot(input, aes(x=long, y = lat, group = group)) + 
-    geom_polygon(data = final_map, aes(fill=Kaitz), alpha=0.8, color = "black") + 
-    scale_fill_gradient(low = "white", high = "blue") + 
+    geom_polygon(data = input, aes(fill=mode), alpha=0.8, color = "black") + 
+    scale_fill_gradient(low = "white", high = highcolor) + 
     coord_map() +
     theme(legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line=element_blank(),axis.text.x=element_blank(),
           axis.text.y=element_blank(),axis.ticks=element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),
-          plot.title = element_text(hjust = 0.5)) +
-    labs(title = "Kaitz-Index")
-}
-
-# Function to plot the Fraction Index. The dataset created with createMapdata has to be used for this
-plot_result_fraction = function(input) {
-  ggplot(input, aes(x=long, y = lat, group = group)) + 
-    geom_polygon(data = final_map, aes(fill=Fraction), alpha=0.8, color = "black") + 
-    scale_fill_gradient(low = "white", high = "red") + 
-    coord_map() +
-    theme(legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-          panel.background = element_blank(), axis.line=element_blank(),axis.text.x=element_blank(),
-          axis.text.y=element_blank(),axis.ticks=element_blank(),
-          axis.title.x=element_blank(),
-          axis.title.y=element_blank(),
-          plot.title = element_text(hjust = 0.5)) +
-    labs(title = "Fraction-Index")
+          plot.title = element_text(hjust = 0.5),
+          legend.title = element_blank()) +
+    labs(title = paste(mode, "Index", sep="-"))
 }
 
 # Function to plot the Factors. The dataset created with createMapdata has to be used for this
@@ -242,27 +235,25 @@ plot_result_factor = function(x) {
   ggplot(x) + 
     aes(x=long, y = lat, group = group, fill=Treatment) + 
     geom_polygon(color = "black") +
-    #geom_polygon(data = x, aes(fill=binary_treatment1, alpha=0.8, color = "black")) + 
     coord_map() +
-    #coord_equal() +
     scale_fill_manual(values = c("white", "blue")) + 
     geom_path(color="black") +
-    #scale_fill_manual("legend", values = c(0 = "black", 1 = "orange")) +
     theme(legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line=element_blank(),axis.text.x=element_blank(),
           axis.text.y=element_blank(),axis.ticks=element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),
-          plot.title = element_text(hjust = 0.5)) +
+          plot.title = element_text(hjust = 0.5),
+          legend.title = element_blank()) +
     labs(title = "Binary")
 }
 
 # APPLY Plot Functions
-plot_result_kaitz <- plot_result_kaitz(final_map)
-plot_result_fraction <- plot_result_fraction(final_map)
 plot_result_binary <- plot_result_factor(final_map)
+plot_result_kaitz <- plot_result_index(final_map, "Kaitz", "blue")
+plot_result_fraction <- plot_result_index(final_map, "Fraction", "red")
 
-# Save the Plots
+# SAVE the Plots
 ggsave("plots/plot-kaitz.png", plot_result_kaitz)
 ggsave("plots/plot-fraction.png", plot_result_fraction)
-ggsave("plots/plot-factor.png", plot_result_binary)
+ggsave("plots/plot-factor.png", plot_result_kaitz)
