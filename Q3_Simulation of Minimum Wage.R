@@ -56,8 +56,6 @@ employ_effect_monopsonic <- function(x, y) {
   effect_matrix = as.data.frame(matrix(ncol = length(x)))
   # Empty the data frame
   effect_matrix = effect_matrix[FALSE,]
-  # Create new column "New Wage" as NA
-  y$NewWage = NA
   # Calculate based on Average Hourly Earning
   y$NewWage = y$avg_Hourly.earnings*(1 + 0.5*0.2)
   for(lines in 1:nrow(y)) {
