@@ -62,9 +62,9 @@ employ_effect_monopsonic <- function(x, y) {
   y$NewWage = NA
   # Calculate based on Average Hourly Earning
   y$NewWage = y$avg_Hourly.earnings*(1 + 0.5*0.2)
-  for(lines in 1:nrow(y)) {
-  curr_wage = y$NewWage[lines]
-  curr_earning = y$avg_Hourly.earnings[lines]
+  for(lines in nrow(y)) {
+  curr_wage = y$NewWage[k]
+  curr_earning = y$avg_Hourly.earnings[k]
   # Creating the formulas mentioned above as functions
   #var1 = function(x) { 1 - (8.5 / curr_wage)^(-1 * x) }
   #var2 = function(x) { ((curr_wage - curr_earning) / (0.5*0.2 * curr_earning)) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x)) }
@@ -75,9 +75,9 @@ employ_effect_monopsonic <- function(x, y) {
     curr_row = sapply(x, function(x) { 1 - (8.5 / y$NewWage[lines])^(-1 * x) })
     effect_matrix = rbind(effect_matrix, curr_row)
   } else {
-    #var2 = function(x, curr_wage, curr_earning) { ((curr_wage - curr_earning) / (0.5*0.2 * curr_earning)) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x)) }
-    #curr_row = sapply(x, var2, curr_wage = curr_wage, curr_earning = curr_earning)
-    curr_row = sapply(x, function(x) { ((y$NewWage[lines] - y$avg_Hourly.earnings[lines]) / (0.5*0.2 * y$avg_Hourly.earnings[lines])) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x)) })
+    var2 = function(x, curr_wage, curr_earning) { ((curr_wage - curr_earning) / (0.5*0.2 * curr_earning)) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x)) }
+    curr_row = sapply(x, var2, curr_wage = curr_wage, curr_earning = curr_earning)
+    #curr_row = sapply(x, function(x) { ((y$NewWage[lines] - y$avg_Hourly.earnings[lines]) / (0.5*0.2 * y$avg_Hourly.earnings[lines])) * (1 -((1 + 0.5) /(1 + 0.2))^(-1 * x)) })
     effect_matrix = rbind(effect_matrix, curr_row)
   }
   k = k + 1

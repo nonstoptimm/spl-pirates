@@ -51,7 +51,7 @@ Reduced_merged = set_income_2(Reduced_merged)
 
 # Define a function to drop NAs
 drop_sub_na = function(x) { x[complete.cases(x), ] }
-# Apply it to the reduced_merged dataset
+# Apply drop_sub_na to the reduced_merged dataset
 Reduced_merged_noNA = drop_sub_na(Reduced_merged)
 
 ## We focus our analysis to three different employment statuses (full time, part time, marginal) and the non employeed
@@ -65,6 +65,7 @@ yearly_employment = function(x) { x %>%
             Not.Employment = length(Employment.Status[as.numeric(Employment.Status) == 15])
   )
 }
+# Apply yearly_employment to the reduced_merged dataset without NAs
 Employment.yearly = yearly_employment(Reduced_merged_noNA)
 
 ### Employment Rates by year and state
@@ -145,7 +146,7 @@ Employment.yearly.state = calc_employment_variables(Employment.yearly.state, "No
     list = paste(list_years, list_years_up, sep = "/")
     return(list)
   }
-# Apply create_periods to the objects used above  
+# Apply create_periods to both objects used above  
   Employment.yearly$Period = create_periods(list_years)
   Employment.yearly.state$Period = create_periods(list_years)
   

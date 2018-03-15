@@ -2,7 +2,7 @@ library(sp)
 library(ggplot2)
 # Read Map File for Germany
 map <- readRDS("geodata/DEU_adm1.rds")
-#q6
+
 # Unify the States
 substituteState <- function(x) {
   x <- as.character(x)

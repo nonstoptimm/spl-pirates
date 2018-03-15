@@ -241,6 +241,7 @@ shapiro_test = function(input, list_years) {
   }
 }
 
+# Apply Shapiro Test to dbys using shapiro_test and the list of years
 shapiro_test(dbys, list_years)
 
 ##Kaitz Indexes over time with aggregated Data
