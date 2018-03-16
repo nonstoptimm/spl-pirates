@@ -38,31 +38,7 @@ add_treatment = function(x) {
 # Apply add_treatment with analyze_2013 dataset
 analyze_2013 = add_treatment(analyze_2013)
 
-
-###### AB HIER PRÜFEN OB MAN LÖSCHEN KANN WEIL ES DURCH add_treatment FUNKTION ERSETZT WURDE
-
-  #Add Treatmentvariable 1 - Schmitz
-  #analyze_2013$binary_treatment1 = NA
-  #analyze_2013$binary_treatment1[analyze_2013$Kaitz > median(analyze_2013$Kaitz)] = 1
-  #analyze_2013$binary_treatment1[is.na(analyze_2013$binary_treatment1)] = 0 
-  
-  ## Better code for it
-  #if(analyze_2013$Kaitz > median(analyze_2013$Kaitz)){
-  # analyze_2013$binary_treatment1 == 1
-  #}else{ analyze_2013$binary_treatment1 == 0
-  #}
-  
-  #Add Treatmentvariable 2 - Schmitz
-  #analyze_tc$binary_treatment2 = NA
-  #analyze_2013$binary_treatment2[analyze_2013$Kaitz > quantile(analyze_2013$Kaitz, c(0.6))] = 1
-  #analyze_2013$binary_treatment2[analyze_2013$Kaitz < quantile(analyze_2013$Kaitz, c(0.4))] = 0 
-
-###### BIS HIER PRÜFEN OB MAN LÖSCHEN KANN WEIL ES DURCH add_treatment FUNKTION ERSETZT WURDE
-# Warum arbeiten wir zuerst mit analyze_tc$binary_treatment2 = NA und bei den unteren mit analyze 2013
-# bei Add Treatmentvariable 2 - Schmitz ? Soll beides eigentlich analyze_2013 sein?
-
-#Warum setzen wir diese Variable jetzt und nicht gleich oben drüber in analyze_tc :)?
-#Merge Treatment Identifiers back to main data  
+#Set Treatment Identifiers to the same column in the main data  
 analyze_tc$binary_treatment1 = analyze_2013$binary_treatment1
 analyze_tc$binary_treatment2 = analyze_2013$binary_treatment2
 
@@ -249,11 +225,14 @@ plot_result_factor = function(x) {
 }
 
 # APPLY Plot Functions
+# Plot Binary Treatment Variable
 plot_result_binary <- plot_result_factor(final_map)
+# Plot Kaitz Index
 plot_result_kaitz <- plot_result_index(final_map, "Kaitz", "blue")
+# Plot Fraction Index
 plot_result_fraction <- plot_result_index(final_map, "Fraction", "red")
 
 # SAVE the Plots
-ggsave("plots/plot-kaitz.png", plot_result_kaitz)
-ggsave("plots/plot-fraction.png", plot_result_fraction)
-ggsave("plots/plot-factor.png", plot_result_kaitz)
+# ggsave("plots/plot-kaitz.png", plot_result_kaitz)
+# ggsave("plots/plot-fraction.png", plot_result_fraction)
+# ggsave("plots/plot-factor.png", plot_result_kaitz)

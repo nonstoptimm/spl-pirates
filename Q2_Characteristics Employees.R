@@ -279,7 +279,9 @@ plot_density_age = function(x) {
 }
 
 # Plot plot_density_age with 2013 dataset
-plot_density_age(sumsub2013)
+plot_output_density_age = plot_density_age(sumsub2013)
+# Save the plot created above into a png-file
+#ggsave("plots/plot_output_density_age.png", plot_output_density_age)
 
 # Densityplot-Function for Hourly Earnings
 plot_density_earnings = function(x) {
@@ -295,7 +297,9 @@ plot_density_earnings = function(x) {
 }
 
 # Plot plot_density_earnings with 2013 dataset
-plot_density_earnings(sumsub2013)
+plot_output_density_earnings = plot_density_earnings(sumsub2013)
+# Save the plot created above into a png-file
+#ggsave("plots/plot_output_density_earnings.png", plot_output_density_earnings)
 
 # Densityplot-Function for monthly earning
 plot_density_monthly_earnings = function(x) {
@@ -311,9 +315,11 @@ plot_density_monthly_earnings = function(x) {
 }
 
 # Plot plot_density_monthly_earnings with 2013 dataset
-plot_density_monthly_earnings(sumsub2013)
+plot_output_density_monthly_earnings = plot_density_monthly_earnings(sumsub2013)
+# Save the plot created above into a png-file
+#ggsave("plots/plot_output_density_monthly_earnings.png", plot_output_density_monthly_earnings)
 
-# Densityplot for Actual Worktime (per week)
+# Densityplot-Function for Actual Worktime (per week)
 plot_density_actual_work = function(x) {
   ggplot(data = x,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
     geom_line(stat = "density") +
@@ -321,9 +327,11 @@ plot_density_actual_work = function(x) {
 }
 
 # Plot plot_density_actual_work with 2013 dataset
-plot_density_actual_work(sumsub2013)
+plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
+# Save the plot created above into a png-file
+#ggsave("plots/plot_ouput_density_actual_work.png", plot_ouput_density_actual_work)
 
-# Plot for Gender of every emloyment status
+# Plot-Function for Gender of every emloyment status
 plot_gender_employment = function(x) {
   ggplot(data = x, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
     theme_classic() +
@@ -333,4 +341,6 @@ plot_gender_employment = function(x) {
 }
 
 # Plot plot_gender_employment with 2013 dataset
-plot_gender_employment(sumsub2013)
+plot_ouput_gender_employment = plot_gender_employment(sumsub2013)
+# Save the plot created above into a png-file
+#ggsave("plots/plot_ouput_gender_employment.png", plot_ouput_gender_employment)

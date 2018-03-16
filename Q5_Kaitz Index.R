@@ -65,7 +65,7 @@ create_hourly_earnings = function(x) {
   x = x[complete.cases(x$Hourly.earnings), ]
   return(x)
 }
-# Apply it to a dataset
+# Apply create_hourly_earnings to a dataset
 Reduced_merged_noNA = create_hourly_earnings(Reduced_merged_noNA)
 
 ## Dummy for Affected by Minimum Wage
@@ -78,10 +78,10 @@ dummy_minimum_wage <- function(x) {
   return(x)
 }
 
-# Apply the function to Reduced_merged and assign it to the same variable
+# Apply the dummy_minimum_wage function to Reduced_merged and assign it to the same variable
 Reduced_merged_noNA = dummy_minimum_wage(Reduced_merged_noNA)
 
-###Collapse Dataset by year and state to dbys (data by year and state)
+###Function to collapse dataset by year and state to dbys (data by year and state)
 collapse_dataset = function(x) { x %>%
     group_by(State.of.Residence, Wave) %>%
     summarise(n(),
@@ -92,9 +92,10 @@ collapse_dataset = function(x) { x %>%
     )
 }
 
+# Apply collapse_dataset to Reduced_merged_noNA dataset
 dbys = collapse_dataset(Reduced_merged_noNA)
 
-# Generate Index 
+# Function to generate Index 
 generate_index = function(x) {
   ## Generate Change of Fraction Index
   x$Delta.Fraction <- c(0, diff(x$Fraction))
@@ -105,21 +106,22 @@ generate_index = function(x) {
   return(x)
 }
 
-# Apple the Generate_Index Function
+# Apple the generate_index Function to dbys dataset
 dbys = generate_index(dbys)
 
-
-## Generate a correlation variable of bites
+## Generate a correlation variable of bites 
 generate_correlation = function(x) {
   dbys %>%
   group_by(Wave) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
 }
 
+# Apply generate_correlation to dbys dataset
 Correlation.Bites.yearly = generate_correlation(dbys)
 
-# Create Year Periods
+# Count list_years 1 up each
 list_years_up = list_years + 1
+# Create Year Periods by pasting list_years and list_years_up together with a "/"-separator and assign it to Correlation.Bites.yearly$Period
 Correlation.Bites.yearly$Period = paste(list_years, list_years_up, sep = "/")
 
 
@@ -135,6 +137,8 @@ ggplot(data = Correlation.Bites.yearly, aes(x = Period, group = Correlation.Frac
 Correlation.Bites.State = dbys %>%
   group_by(State.of.Residence) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
+
+
 # table 
 ggplot(data = Correlation.Bites.State, aes(x = State.of.Residence, group = Correlation.Fraction.Kaitz, fill = State.of.Residence))+
   geom_bar(aes(y = Correlation.Fraction.Kaitz), stat = "identity" ) + 
@@ -163,8 +167,6 @@ ggplot(data = Correlation.Bites.State, aes(x = State.of.Residence, group = Corre
                             "Thuringia")) 
 
 
-
-
 ### OUTPUT FRACTION and KEITZ  ###
 
 ##Density Plots of Fraction Index with aggreagted Data
@@ -177,21 +179,19 @@ ggplot(data = dbys, aes(x = Fraction, group = Wave, color = Wave )) +
        x = "Fraction") +
   coord_cartesian(xlim = c(0.1,0.6))
 
-#Test normality assumption of Fraction
+# Function to test normality assumption of fraction
 shapiro_test = function(input, list_years) {
-  i = 1
-  for(years in list_years) {
-  test = shapiro.test(input$Fraction[input$Wave==list_years[i]])  ## for each year and table this loop
-  print(list_years[i])
+  for(years in 1:length(list_years)) {
+  test = shapiro.test(input$Fraction[input$Wave==list_years[years]])  ## for each year and table this loop
+  print(list_years[years])
   print(test)
-  i = i + 1
   }
 }
 
+# Apply shapiro_test-function to dbys using the years in list_years
 shapiro_test(dbys, list_years)
   
-
-##Fraction Indexes over time with aggregated Data
+##Fraction Indexes over time with aggregated data
 ggplot(data = dbys, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +
   theme(panel.background = element_rect(fill = "white")) +

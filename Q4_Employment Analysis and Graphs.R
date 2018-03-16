@@ -191,13 +191,17 @@ plot_graphs_year = function(input, mode, title, y) {
 
 # Apply plot_graphs_year to Employment.yearly using different mode
 # illustrate Log Employment of all three groups
-plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Employment")
+plot_graphs_year_log = plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Employment")
+#ggsave("plots/plot_graphs_year_log.png", plot_graphs_year_log)
 # illustrate % change of Log Employment of all three groups
-plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "percentage change of employment growth rate")
+plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "percentage change of employment growth rate")
+#ggsave("plots/plot_graphs_year_changelog.png", plot_graphs_year_changelog)
 # illustrate Emplyoment Rates of all three groups
-plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate")
+plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate")
+#ggsave("plots/plot_graphs_year_employrates.png", plot_graphs_year_employrates)
 # illustrate Log Employment Rates of all three groups
-plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
+plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
+#ggsave("plots/plot_graphs_year_logemployrates.png", plot_graphs_year_logemployrates)
 
 
 #### OUTPUT Graphs for each state of the employment variables over time #####
@@ -225,10 +229,14 @@ plot_graphs_growth = function(input, mode, title) {
 
 # Apply plot_graphs_growth to Employment.yearly.state using different employment types
 # Full time employment growth rate 
-plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
+plot_graphs_growth_full = plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
+#ggsave("plots/plot_graphs_growth_full.png", plot_graphs_growth_full)
 # Part time employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
+plot_graphs_growth_part = plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
+#ggsave("plots/plot_graphs_growth_part.png", plot_graphs_growth_part)
 # Marginal employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
+plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
+#ggsave("plots/plot_graphs_growth_marginal.png", plot_graphs_growth_marginal)
 # Not employed growth rate
-plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
+plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
+#ggsave("plots/plot_graphs_growth_not.png", plot_graphs_growth_not)
