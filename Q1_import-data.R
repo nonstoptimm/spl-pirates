@@ -18,7 +18,6 @@ list_years = str_sub(list_dirs, -4)
 list_varnames = paste("merged", list_years, sep = "")
 # Load the variable list we cleaned manually in Excel as CSV
 soep_selection = read.table("variable-selection/soep-var-selection.csv", header = TRUE, sep = ";", check.names = FALSE)
-#close(soep_selection)
 # Get all Labels, unfiltered
 labels = soep_selection[, 1]
 # Create a vector to put object names of all years in it
@@ -36,19 +35,14 @@ for (years in list_years) {
   colnames(data_merged) = gsub("\\.x|\\.y", "", colnames(data_merged))
   # Get the variable list of the current year
   current_list = sort(soep_selection[, k])
-  # Delete all columns where no data exists (as the surveys differed every year) -> not needed as import function excludes
-  # missing values shortlist = na.omit(current_list)
-  
   # ONLY take the data shortlisted for the current year
   cleaned = data_merged[, which(names(data_merged) %in% current_list == TRUE)]
-  
   # Select the Label Column and the Variable Column of the current Year
   soep_subcrit = c(1, k)
   # Subset the Variable list so that only the label and the current year exist
   soep_selection_sub = soep_selection[soep_subcrit]
   # Delete NA-Values from the list
   soep_selection_sub = na.omit(soep_selection_sub)
-  
   # Create a subset of the clean labels, where all codenames match, to make sure that the labels are correct
   clean_labels = subset(soep_selection_sub, sort(soep_selection_sub[, 2]) == sort(names(cleaned)))
   # Order Dataframe alphabetically
@@ -89,7 +83,7 @@ for (years in c(datalist)) {
   merged_all = rbindlist(list(merged_all, current_data), fill = TRUE)
   # Iterator one up
   z = z + 1
-}
+} # END OF FOR-LOOP
 
 # Removes Spaces in Variable Names and substitues with a . - Necessary for the dplyr package, which is handy for later analysis of our data
 valid_column_names = make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
