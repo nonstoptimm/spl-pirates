@@ -12,8 +12,8 @@ i = 1 # iterator to step through the list of years
 k = 2 # iterator to step through the columns in variable list
 # List all directories within the input data, non-recursive
 list_dirs = list.dirs(path = "input-data", recursive = FALSE)
-# Extract the year name of the directories, so the last 4 digits
-list_years = str_sub(list_dirs, -4)
+# Extract the year name of the directories, so the last 4 digits and make it numeric
+list_years = as.numeric(str_sub(list_dirs, -4))
 # Create Variable names for every merged year based on the style merged[year]
 list_varnames = paste("merged", list_years, sep = "")
 # Load the variable list we cleaned manually in Excel as CSV
@@ -88,8 +88,6 @@ for (years in c(datalist)) {
 # Removes Spaces in Variable Names and substitues with a . - Necessary for the dplyr package, which is handy for later analysis of our data
 valid_column_names = make.names(names=names(merged_all), unique=TRUE, allow_ = TRUE)
 names(merged_all) = valid_column_names
-# Make Year-List numeric for later use
-list_years = as.numeric(list_years)
 
 # Delete the intermediate variables to clean up the workspace
 rm(list=datalist)
