@@ -116,18 +116,23 @@ plot_treatment = function(x, yaxis, treatment, title) {
 
 # Apply the function to different treatment analysis datasets
 # For Full Time Employment, T1
-plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of binary Treatmentgroups for Full Employment")
+plot_treatment_t1full = plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of binary Treatmentgroups for Full Employment")
+#ggsave("plots/plot_treatment_t1full.png", plot_treatment_t1full)
 # For Part Time Employment, T1
-plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of binary Treatmentgroups for Part Employment")
+plot_treatment_t1part = plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of binary Treatmentgroups for Part Employment")
+#ggsave("plots/plot_treatment_t1part.png", plot_treatment_t1part)
 # For Marginal Time Employment, T1
-plot_treatment(Treatment.analysis1, "Marginal", 1,"Log Employment of binary Treatmentgroups for Marginal Employment")
+plot_treatment_ta1marginal = plot_treatment(Treatment.analysis1, "Marginal", 1,"Log Employment of binary Treatmentgroups for Marginal Employment")
+#ggsave("plots/plot_treatment_ta1marginal.png", plot_treatment_ta1marginal)
 # For Full Time Employment, T2
-plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of binary Treatmentgroups for Full Employment")
+plot_treatment_ta2full = plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of binary Treatmentgroups for Full Employment")
+#ggsave("plots/plot_treatment_ta2full.png", plot_treatment_ta2full)
 # For Part Time Employment, T2
-plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of binary Treatmentgroups for Part Employment")
+plot_treatment_ta2part = plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of binary Treatmentgroups for Part Employment")
+#ggsave("plots/plot_treatment_ta2part.png", plot_treatment_ta2part)
 # For Marginal Time Employment, T2
-plot <- plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of binary Treatmentgroups for Marginal Employment")
-
+plot_treatment_ta2marginal = plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of binary Treatmentgroups for Marginal Employment")
+#ggsave("plots/plot_treatment_ta2marginal.png", plot_treatment_ta2marginal)
 
 # MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states
 # Read Map File for Germany

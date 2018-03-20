@@ -14,7 +14,7 @@ k = 2 # iterator to step through the columns in variable list
 # List all directories within the input data, non-recursive
 list_dirs = list.dirs(path = "input-data", recursive = FALSE)
 # Extract the year name of the directories, so the last 4 digits and make it numeric
-list_years = as.numeric(str_sub(list_dirs, -4))
+list_years = str_sub(list_dirs, -4)
 # Create Variable names for every merged year based on the style merged[year]
 list_varnames = paste("merged", list_years, sep = "")
 # Load the variable list we cleaned manually in Excel as CSV

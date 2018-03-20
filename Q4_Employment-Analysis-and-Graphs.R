@@ -147,10 +147,11 @@ Employment.yearly.state = calc_employment_variables(Employment.yearly.state, "No
 
 ### Create Function to set periods for the years in list_years (+1 each)
   create_periods = function(list_years) {
-    list_years_up = list_years + 1
+    list_years_up = as.numeric(list_years) + 1
     list = paste(list_years, list_years_up, sep = "/")
     return(list)
   }
+  
 # Apply create_periods to both objects used above  
   Employment.yearly$Period = create_periods(list_years)
   Employment.yearly.state$Period = create_periods(list_years)

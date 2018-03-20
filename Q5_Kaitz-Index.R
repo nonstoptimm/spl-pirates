@@ -121,8 +121,18 @@ generate_correlation = function(x) {
 # Apply generate_correlation to dbys dataset
 Correlation.Bites.yearly = generate_correlation(dbys)
 
+### Create Function to set periods for the years in list_years (+1 each)
+create_periods = function(list_years) {
+  list_years_up = as.numeric(list_years) + 1
+  list = paste(list_years, list_years_up, sep = "/")
+  return(list)
+}
+
+# Apply create_periods to add it to Correlation.Bites.yearly
+Correlation.Bites.yearly$Period = create_periods(list_years)
+
 # Count list_years 1 up each
-list_years_up = list_years + 1
+list_years_up = as.numeric(list_years) + 1
 # Create Year Periods by pasting list_years and list_years_up together with a "/"-separator and assign it to Correlation.Bites.yearly$Period
 Correlation.Bites.yearly$Period = paste(list_years, list_years_up, sep = "/")
 
@@ -285,8 +295,3 @@ plot_density_aggr_kaitz = plot_density_aggregated(dbys, "Kaitz", c(0.43,0.7))
 
 # Apply Shapiro Test to dbys using shapiro_test and the list of years for kaitz index
 shapiro_test(dbys, "Kaitz", list_years)
-
-# Apply the plot_aggregated_data for Kaitz index
-plot_aggregated_data_kaitz = plot_aggregated_data(dbys, "Kaitz")
-# Save the plot_aggregated_data_kaitz
-# ggsave("plots/plot_aggregated_data_kaitz.png", plot_aggregated_data_kaitz)
