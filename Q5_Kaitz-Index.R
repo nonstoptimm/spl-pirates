@@ -113,7 +113,7 @@ dbys = generate_index(dbys)
 
 ## Generate a correlation variable of bites 
 generate_correlation = function(x) {
-  dbys %>%
+  x %>%
   group_by(Wave) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson" ))
 }
@@ -144,7 +144,7 @@ plot_output_correlation_bites_yearly = plot_correlation_bites_yearly(Correlation
 
 # Create function to summarize correlation between Fraction and Kaitz
 summarize_corr_fk = function(x) {
-Correlation.Bites.State = x %>%
+  x %>%
   group_by(State.of.Residence) %>%
   summarise(Correlation.Fraction.Kaitz = cor(Fraction, Kaitz, use ="all.obs", method="pearson"))
 }
@@ -240,10 +240,10 @@ plot_aggregated_data = function(input, index) {
   } else {
     print("Index must be either Kaitz or Fraction!")
   }
-  ggplot(data = input, aes(x= Wave, y = Fraction, color = State.of.Residence, group = State.of.Residence)) +
+  ggplot(data = input, aes(x= Wave, y = y, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +
   theme(panel.background = element_rect(fill = "white")) +
-  labs(title = "Fraction Index over Years",
+  labs(title = "Index over Years",
        y = paste(index, "Index", sep="-"),
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +

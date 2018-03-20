@@ -227,9 +227,26 @@ plot_graphs_growth = function(input, mode, title) {
   labs(title = title,
        y = "growth rate",
        x = "Years") +
-  scale_colour_hue(name = "state") +
+  #scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
-  coord_cartesian(xlim = c(1.6,7)) 
+  coord_cartesian(xlim = c(1.6,7)) +
+    scale_colour_hue(name = "States",
+                     labels = c("Schleswig-Holstein", 
+                                "Hamburg", 
+                                "Lower Saxony", 
+                                "Bremen", 
+                                "North-RhineWestfalia", 
+                                "Hessen", 
+                                "Rheinland-Pfalz", 
+                                "Baden-Wuerttemberg", 
+                                "Bavaria", 
+                                "Saarland", 
+                                "Berlin", 
+                                "Brandenburg", 
+                                "Mecklemburg-Vorpommern", 
+                                "Saxony", 
+                                "Saxony-Anhalt", 
+                                "Thuringia"))
 }
 
 # Apply plot_graphs_growth to Employment.yearly.state using different employment types

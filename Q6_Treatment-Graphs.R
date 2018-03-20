@@ -126,7 +126,7 @@ plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of binary Treatme
 # For Part Time Employment, T2
 plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of binary Treatmentgroups for Part Employment")
 # For Marginal Time Employment, T2
-plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of binary Treatmentgroups for Marginal Employment")
+plot <- plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of binary Treatmentgroups for Marginal Employment")
 
 
 # MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states
