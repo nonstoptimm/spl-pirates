@@ -1,0 +1,19 @@
+Name of Quantlet: Import_Prepare_SOEPdata.R
+
+Published in: Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: MUST NOT BE EMPTY!
+
+Keywords: MUST NOT BE EMPTY!
+
+Authors: Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: variable-selection/soep-var-selection.csv, input-data/  for your data sets - delete if not used
+
+Input: (optional - delete if not used)
+
+Output:  (optional - delete if not used)
+
+Example: for your plots, graphs, results etc. - delete if not used
