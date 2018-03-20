@@ -1,3 +1,8 @@
+# Quantlet 4
+# Load Packages used in Q4
+library(dplyr)
+library(ggplot2)
+
 ##### Employment Graphs #####
 ## This Quantlet produces output of differenst employment measures ##
 

@@ -1,4 +1,7 @@
-# ##### Bites ##### Q5
+# Quantlet 5
+# Load Packages used in Q5
+library(dplyr)
+# ##### Bites #####
 # This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Keitz Index for each German State each year
 # The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
 # Kaitz Index is ration between the minimum legal wage and the average wage
@@ -287,6 +290,3 @@ shapiro_test(dbys, "Kaitz", list_years)
 plot_aggregated_data_kaitz = plot_aggregated_data(dbys, "Kaitz")
 # Save the plot_aggregated_data_kaitz
 # ggsave("plots/plot_aggregated_data_kaitz.png", plot_aggregated_data_kaitz)
-
-### Correlations between Bites
-

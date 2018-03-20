@@ -1,4 +1,5 @@
-### IMPORT DATA SKRIPT ### Load required libraries. They are preinstalled.
+# Quantlet 1 - IMPORT DATA SKRIPT
+# Load Packages used in Q1
 library(foreign)
 library(stringr)
 library(data.table)

@@ -47,6 +47,9 @@ Affected.by.minwage = employ_effect(Labor.Demand.Elasticity, Affected.by.minwage
 # Two alternative formulas, depend on average wage "w" and market power "m"
 # If w^min > w(1+0.5m) use: 1 - (w^min / w(1 +m))^(-x)
 # If w^min <= w(1+0.5m) use: (w^min - w / 0.5m * w) * ( 1 - (1+0.5 / (1+m))^-x)
+# x = Labor.Demand.Elasticity Vector
+# y = input data
+# m = Market Power
 # Create Function employ_effect_monopsonic for it
 employ_effect_monopsonic = function(x, y, m) {
   # Create numerated colnames for Mon.Employment.Effect
@@ -60,10 +63,10 @@ employ_effect_monopsonic = function(x, y, m) {
   for(lines in 1:nrow(y)) {
   # Assign the values
   if(8.50 > y$NewWage[lines]) {
-    curr_row = (1 - (8.5 / y$avg_Hourly.earnings[lines]*(1 + m))^(-x))
+    curr_row = 1 - (8.5 / (y$avg_Hourly.earnings[lines]*(1 + m)))^(-x)
     effect_matrix = rbind(effect_matrix, curr_row)
   } else {
-    curr_row = ((8.5 - y$avg_Hourly.earnings[lines]) / (0.5* m * y$avg_Hourly.earnings[lines])) * (1 -((1 + 0.5) /(1 + y$avg_Hourly.earnings[lines]))^(-1 * x))
+    curr_row = ((8.5 - y$avg_Hourly.earnings[lines]) / (0.5* m * y$avg_Hourly.earnings[lines])) * (1 -((1 + 0.5*m) /(1 + y$avg_Hourly.earnings[lines]))^(-x[5]))
     effect_matrix = rbind(effect_matrix, curr_row)
   }
   }

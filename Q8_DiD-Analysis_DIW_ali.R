@@ -1,4 +1,6 @@
 # Quantlet 8
+# Load Packages used in Q8
+library(dplyr)
 # D&D Analysis by DIW(2017)
 # Identification estimation:
 
@@ -24,21 +26,13 @@ generate_dummy = function(input, year) {
   return(input)
 }
 
-#Generate numeric variable for years, thus convert the variable wave
-#DiD_DIW$year = as.numeric(as.character(DiD_DIW$Wave))
-
 #Generate dummy for year for indicator when minimum wage was introduced
-#DiD_DIW$year15.dummy = ifelse(DiD_DIW$year >= 2015, 1, 0)
 DiD_DIW = generate_dummy(DiD_DIW, 2015)
 
 ##Generate Control Variables
 # Control for years:
-#DiD_DIW$year13.dummy = ifelse(DiD_DIW$year >= 2013, 1, 0)
 DiD_DIW = generate_dummy(DiD_DIW, 2013)
-#DiD_DIW$year12.dummy = ifelse(DiD_DIW$year >= 2012, 1, 0)
 DiD_DIW = generate_dummy(DiD_DIW, 2012)
-# Population in log, AUSKOMMENTIERT DA IN data_did_processor FUNKTION SIEHE OBEN 
-#DiD_DIW$Log.Population = log(DiD_DIW$Observations)
 
 ### Regression
 ## Regression 1: We regress on Regular Employment
