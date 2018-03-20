@@ -75,13 +75,13 @@ estimation = pre_processing_estimation(estimation)
 did_1.1.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_1.1.1)
 # Regression 1.1.2: Using Kaitz Index and Control Variables
-did_1.1.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_1.1.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + (year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_1.1.2)
 # Regression 1.2.1 (baseline): Using Fraction Index
 did_1.2.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_1.2.1)
 # Regression 1.2.2: Using Fraction Index and Control Variables
-did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_1.2.2)
 
 ## Regression 2: We regress on Log Part Time Employment Rate
@@ -89,13 +89,13 @@ summary(did_1.2.2)
 did_2.1.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_2.1.1)
 # Regression 2.1.2: Using Kaitz Index and Control Variables
-did_2.1.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_2.1.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population +(year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_2.1.2)
 # Regression 2.2.1 (baseline): Using Fraction Index
 did_2.2.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_2.2.1)
 # Regression 2.2.2: Using Fraction Index and Control Variables
-did_2.2.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_2.2.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_2.2.2)
 
 
@@ -104,13 +104,13 @@ summary(did_2.2.2)
 did_3.1.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_3.1.1)
 # Regression 3.1.2: Using Kaitz Index and Control Variables
-did_3.1.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_3.1.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + (year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_3.1.2)
 # Regression 3.2.1 (baseline): Using Fraction Index
 did_3.2.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_3.2.1)
 # Regression 3.2.2: Using Fraction Index and Control Variables
-did_3.2.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_3.2.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 summary(did_3.2.2)
 
 
@@ -152,18 +152,3 @@ summary(did_6.3)
 
 
 ##### Output ####
-
-stargazer(did_1.1.1, did_1.1.2, did_1.1.3, did_1.1.4, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
-          keep.stat= c("n","adj.rsq","rsq"), 
-          dep.var.labels = ("Panel A: Regular Employment"), 
-          covariate.labels=c("Bite", "D2015", "Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite x D2015"))
-
-
-stargazer(did_1.1.1, did_1.1.2, did_1.1.3, did_1.1.4, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
-          keep.stat= c("n","adj.rsq","rsq"), 
-          dep.var.labels = ("Panel A: Full Time Employment"), 
-          covariate.labels=c("Bite.K", "D2015", "Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite x D2015"))
-
-
