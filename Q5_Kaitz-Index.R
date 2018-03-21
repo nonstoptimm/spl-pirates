@@ -213,9 +213,9 @@ plot_density_aggregated = function(input, index) {
     geom_line(stat = "density") + 
     theme_classic() +
     scale_colour_hue(name = "Years") +
-    labs(title = paste(index, "Index-Density of States seperated by Years", sep="-"),
+    labs(title = paste(index, "Index: Density of States seperated by Years", sep="-"),
          y = "Density",
-         x = index)
+         x = "Index Value")
 }
 
 # Apply plot_density_aggregated to create density plot for Fraction
@@ -254,8 +254,8 @@ plot_aggregated_data = function(input, index) {
   ggplot(data = input, aes(x= Wave, y = y, color = State.of.Residence, group = State.of.Residence)) +
   geom_line() +
   theme(panel.background = element_rect(fill = "white")) +
-  labs(title = "Index over Years",
-       y = paste(index, "Index", sep="-"),
+  labs(title = paste(index, "Index over Years", sep=" "),
+       y = paste(index, "Value", sep=" "),
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +
   theme_classic() +

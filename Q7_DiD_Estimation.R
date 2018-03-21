@@ -50,6 +50,13 @@ pre_processing_estimation = function(x) {
     x$year14.dummy = ifelse(x$year >= 2014, 1, 0)
     x$year13.dummy = ifelse(x$year >= 2013, 1, 0)
     x$year12.dummy = ifelse(x$year >= 2012, 1, 0)
+    # Interaction Variables:
+    x$Interaction_Kaitz_y14 = (x$Kaitz.14 * x$year14.dummy)
+    x$Interaction_Kaitz_y13 = (x$Kaitz.14 * x$year13.dummy)
+    x$Interaction_Kaitz_y12 = (x$Kaitz.14 * x$year12.dummy)
+    x$Interaction_Fraction_y14 = (x$Fraction.14 * x$year14.dummy)
+    x$Interaction_Fraction_y13 = (x$Fraction.14 * x$year13.dummy)
+    x$Interaction_Fraction_y12 = (x$Fraction.14 * x$year12.dummy)
     # Population in log
     x$Log.Population = log(x$Observations)
   return(x)
@@ -69,31 +76,31 @@ estimation = pre_processing_estimation(estimation)
 # Regression 1.1.1 (baseline): Using Kaitz Index
 did_1.1.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 1.1.2: Using Kaitz Index and Control Variables
-did_1.1.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + (year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_1.1.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + Interaction_Kaitz_y13 + Interaction_Kaitz_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 1.2.1 (baseline): Using Fraction Index
 did_1.2.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 1.2.2: Using Fraction Index and Control Variables
-did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Kaitz_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ## Regression 2: We regress on Log Part Time Employment Rate
 # Regression 2.1.1 (baseline): Using Kaitz Index
 did_2.1.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 2.1.2: Using Kaitz Index and Control Variables
-did_2.1.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population +(year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_2.1.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population +Interaction_Kaitz_y13 + Interaction_Kaitz_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 2.2.1 (baseline): Using Fraction Index
 did_2.2.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 2.2.2: Using Fraction Index and Control Variables
-did_2.2.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_2.2.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ## Regression 3: We regress on Log marginal Employment Rate
 # Regression 3.1.1 (baseline): Using Kaitz Index
 did_3.1.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 3.1.2: Using Kaitz Index and Control Variables
-did_3.1.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + (year13.dummy*Kaitz.14) + (year12.dummy*Kaitz.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_3.1.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + Interaction_Kaitz_y13 + Interaction_Kaitz_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 3.2.1 (baseline): Using Fraction Index
 did_3.2.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 3.2.2: Using Fraction Index and Control Variables
-did_3.2.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + (year13.dummy*Fraction.14) + (year12.dummy*Fraction.14), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_3.2.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 
 ### Schmitz(2017): Use the Change in Log Employment of each Employment Group

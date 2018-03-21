@@ -96,5 +96,6 @@ estimate_appropriate_model = function(fe, re) {
 
 # Apply estimate_appropriate_model-function to fee and ree
 estimate_appropriate_model(fee, ree)
+# Compare with original estimation
 summary(fee)
 

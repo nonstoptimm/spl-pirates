@@ -184,30 +184,30 @@ plot_graphs_year = function(input, mode, title, y) {
     print("Input must be either Log, ChangeLog, EmployRates or LogEmployRates")
   }
   ggplot(data = input, aes(x = Period, group = 1 )) +
-    geom_line(aes(y = v1, color = "Full time Employment")) +
-    geom_line(aes(y = v2, color ="Part time Employment")) +
-    geom_line(aes(y = v3, color ="Marginal Employment")) + 
-    geom_line(aes(y = v4, color ="Not Employment")) +
+    geom_line(aes(y = v1, color = "Full Time")) +
+    geom_line(aes(y = v2, color ="Part Time")) +
+    geom_line(aes(y = v3, color ="Marginal")) + 
+    geom_line(aes(y = v4, color ="None")) +
     theme_classic() +
     labs(title = title,
          y = y,
          x = "Years") +
-    scale_colour_hue(name = "Status group") +
+    scale_colour_hue(name = "Employment Status") +
     geom_vline(xintercept = 5, color = "red") 
 }
 
 # Apply plot_graphs_year to Employment.yearly using different mode
 # illustrate Log Employment of all three groups
-plot_graphs_year_log = plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Employment")
+plot_graphs_year_log = plot_graphs_year(Employment.yearly, "Log", "Log Employment over Time", "Log Employment")
 #ggsave("plots/plot_graphs_year_log.png", plot_graphs_year_log)
 # illustrate % change of Log Employment of all three groups
-plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "% change of employment growth rate")
+plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth Rate of Employment over Time", "Growth rate change in %")
 #ggsave("plots/plot_graphs_year_changelog.png", plot_graphs_year_changelog)
 # illustrate Emplyoment Rates of all three groups
-plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate in %")
+plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment Rate over Time", "Employment rate in %")
 #ggsave("plots/plot_graphs_year_employrates.png", plot_graphs_year_employrates)
 # illustrate Log Employment Rates of all three groups
-plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
+plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment Rate over Time", "Log Employment rate in %")
 #ggsave("plots/plot_graphs_year_logemployrates.png", plot_graphs_year_logemployrates)
 
 
