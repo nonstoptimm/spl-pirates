@@ -126,30 +126,33 @@ stargazer(did_1.1.1, did_1.1.2, did_1.2.1, did_1.2.2, title="Results", type="tex
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels = ("Panel A: Log Regular Employment Rate"), 
-          covariate.labels=c("Bite.K x D2015","Population(log,t)", "Bite.K x D2013", "Bite.K x D2012", "Bite.F x D2015", "Bite.F x D2013", "Bite.F x D2012"),
+          order=c(1,7,2,3,4,5,6),
+          covariate.labels=c("Bite.K x D2015","Bite.F x D2015","Population(log,t)", "Bite.K x D2013", "Bite.K x D2012",  "Bite.F x D2013", "Bite.F x D2012"),
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
 ## Regression 2: We regress on Log Part Time Employment Rate
 stargazer(did_2.1.1, did_2.1.2, did_2.2.1, did_2.2.2, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
+          no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels = ("Panel B: Log Part Time Employment Rate"), 
-          covariate.labels=c("Bite.K x D2015","Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite.F x D2015"),
+          covariate.labels=c("Bite.K x D2015","Bite.F x D2015","Population(log,t)", "Bite.K x D2013", "Bite.K x D2012",  "Bite.F x D2013", "Bite.F x D2012"),
+          order=c(1,7,2,3,4,5,6),
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
 ## Regression 3: We regress on Log marginal Employment Rate
 stargazer(did_3.1.1, did_3.1.2, did_3.2.1, did_3.2.2, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
+          no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels = ("Panel C: Log Marginal Employment Rate"), 
-          covariate.labels=c("Bite.K x D2015","Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite.F x D2015"),
+          covariate.labels=c("Bite.K x D2015","Bite.F x D2015","Population(log,t)", "Bite.K x D2013", "Bite.K x D2012",  "Bite.F x D2013", "Bite.F x D2012"),
+          order=c(1,7,2,3,4,5,6),
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
 ## Regression 4: We regress on Change in Log Employment Status Using Kaitz2013 
-stargazer(did_4.1, did_5.1, did_6.1, title="Results", type="text", align=TRUE, 
+stargazer(did_4.1, did_5.1, did_6.1, title="Results", type="text", align=TRUE,
           no.space=TRUE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels.include = FALSE,
