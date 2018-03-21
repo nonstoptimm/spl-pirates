@@ -1,4 +1,4 @@
-### EXECUTE ENTIRE R CODE ###
+### QUANTLET PREPARATION ###
 # Install FormatR Package
 # install.packages("formatR")
 library(formatR)
