@@ -45,12 +45,15 @@ pre_processing_estimation = function(x) {
   x$DiD.estimator.Kaitz = (x$year15.dummy * x$Kaitz.14)
   #Generate Interaction Variable Kaitz for Schmitz2017
   x$DiD.estimator.Kaitz.Schmitz = (x$year15.dummy * x$Kaitz.13)
+  #Generate Interaction Variable Binary Treatment Schimtz2017
+  x$binary1 = (x$binary_treatment1 * x$year15.dummy)
+  x$binary2 = (x$binary_treatment2 * x$year15.dummy)
   ##Generate Control Variables
     # Control for years:
     x$year14.dummy = ifelse(x$year >= 2014, 1, 0)
     x$year13.dummy = ifelse(x$year >= 2013, 1, 0)
     x$year12.dummy = ifelse(x$year >= 2012, 1, 0)
-    # Interaction Variables:
+    # Interaction Variables Caliendo(2017):
     x$Interaction_Kaitz_y14 = (x$Kaitz.14 * x$year14.dummy)
     x$Interaction_Kaitz_y13 = (x$Kaitz.14 * x$year13.dummy)
     x$Interaction_Kaitz_y12 = (x$Kaitz.14 * x$year12.dummy)
@@ -110,15 +113,14 @@ did_5.1 = plm(Delta.Log.Part.Employment ~ DiD.estimator.Kaitz.Schmitz, data = es
 did_6.1 = plm(Delta.Log.Marginal.Employment ~ DiD.estimator.Kaitz.Schmitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ## Regression: We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
-did_4.2 = plm(Delta.Log.Full.Employment ~ binary_treatment1 + year15.dummy + (binary_treatment1*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
-did_5.2 = plm(Delta.Log.Part.Employment ~ binary_treatment1 + year15.dummy + (binary_treatment1*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
-did_6.2 = plm(Delta.Log.Marginal.Employment ~ binary_treatment1 + year15.dummy + (binary_treatment1*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_4.2 = plm(Delta.Log.Full.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_5.2 = plm(Delta.Log.Part.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_6.2 = plm(Delta.Log.Marginal.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ## Regression: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
-did_4.3 = plm(Delta.Log.Full.Employment ~ binary_treatment2 + year15.dummy + (binary_treatment2*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
-did_5.3 = plm(Delta.Log.Part.Employment ~ binary_treatment2 + year15.dummy + (binary_treatment2*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
-did_6.3 = plm(Delta.Log.Marginal.Employment ~ binary_treatment2 + year15.dummy + (binary_treatment2*year15.dummy), data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
-
+did_4.3 = plm(Delta.Log.Full.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_5.3 = plm(Delta.Log.Part.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_6.3 = plm(Delta.Log.Marginal.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ##### Output ####
 ## Regression 1: We regress on Log Regular Employment Rate
@@ -162,7 +164,7 @@ stargazer(did_4.1, did_5.1, did_6.1, title="Results", type="text", align=TRUE,
 
 ## Regression 5:  We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
 stargazer(did_4.2, did_5.2, did_6.2, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
+          no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels.include = FALSE,
           dep.var.caption  = ("Panel E: Log Employment Status"),
@@ -171,11 +173,11 @@ stargazer(did_4.2, did_5.2, did_6.2, title="Results", type="text", align=TRUE,
 
 ## Regression 6: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
 stargazer(did_4.3, did_5.3, did_6.3, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
+          no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels.include = FALSE,
           dep.var.caption  = ("Panel F: Log Employment Status"),
-          covariate.labels=c("D2015", "Treat2 x D2015"),
+          #covariate.labels=c("D2015", "Treat2 x D2015"),
           column.labels=c("Full", "Part", "Marginal"))
 
 
