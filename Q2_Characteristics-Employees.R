@@ -2,6 +2,7 @@
 # Load Packages used in Q2
 library(dplyr)
 library(ggplot2)
+library(stringr)
 library(stargazer)
 # Execution of Q1 is necessary beforehand!
 
