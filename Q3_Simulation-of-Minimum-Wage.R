@@ -3,8 +3,8 @@
 library(dplyr)
 # Execution of Q1 is necessary beforehand
 
-#### Simulation of Minimum Wage ####
-## Function to gather average wages for employees affected by minimum wage for each employment status
+# Simulation of Minimum Wage
+# Function to gather average wages for employees affected by minimum wage for each employment status
 minwage_affect = function(x) { 
   x %>%
   group_by(Employment.Status, Subject.to.minwage) %>%
@@ -25,7 +25,7 @@ Affected.by.minwage = select(filter(Affected.by.minwage, Subject.to.minwage == 1
 # Store it as dataframe for later procedure
 Affected.by.minwage = as.data.frame(Affected.by.minwage)
 
-#Employment effect if Neo Classical Labor market in %
+# Employment effect if Neo Classical Labor market in %
 # Formula: 1 - (wmin / w)^(-x), with wmin: minimum wage, m:average gross hourly rate and x: labor demand elasticity
 # Input Data Frame with different values
 Labor.Demand.Elasticity = c(-0.2, -0.5, -0.75, -1, -1.2)
@@ -107,6 +107,6 @@ plot_graph_effect_minwage = function(input, elasticities) {
 # Apply plot_graph_effect_minwage
 plot_graph_effect_minwage_output = plot_graph_effect_minwage(Affected.by.minwage, Labor.Demand.Elasticity)
 # Save the plot created above into a png-file
-#ggsave("plots/plot_graph_effect_minwage_output.png", plot_graph_effect_minwage_output)
+# ggsave("plots/plot_graph_effect_minwage_output.png", plot_graph_effect_minwage_output)
 
 

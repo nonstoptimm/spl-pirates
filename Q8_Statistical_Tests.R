@@ -1,7 +1,5 @@
 # Quantlet 8
 # Load Packages used in Q8
-library(ggplot2)
-library(sp)
 library(plm)
 library(lmtest)
 

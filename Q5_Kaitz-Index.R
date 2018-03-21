@@ -3,12 +3,7 @@
 library(dplyr)
 # Execution of Q1 is necessary beforehand!
 
-# ##### Bites #####
-# This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Keitz Index for each German State each year
-# The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
-# Kaitz Index is ration between the minimum legal wage and the average wage
-
-#Note Legend according to SOEP Info:
+# Note Legend according to SOEP Info:
 # https://data.soep.de/soep-core
 # -1: no answer /don`t know
 # -2: does not apply
@@ -85,8 +80,9 @@ dummy_minimum_wage = function(x) {
 # Apply the dummy_minimum_wage function to Reduced_merged and assign it to the same variable
 Reduced_merged_noNA = dummy_minimum_wage(Reduced_merged_noNA)
 
-###Function to collapse dataset by year and state to dbys (data by year and state)
-collapse_dataset = function(x) { x %>%
+# Function to collapse dataset by year and state to dbys (data by year and state)
+collapse_dataset = function(x) { 
+    x %>%
     group_by(State.of.Residence, Wave) %>%
     summarise(n(),
               Hourly_earnings = mean(Hourly.earnings, na.rm=TRUE), 
@@ -113,7 +109,7 @@ generate_index = function(x) {
 # Apple the generate_index Function to dbys dataset
 dbys = generate_index(dbys)
 
-## Generate a correlation variable of bites 
+# Generate a correlation variable of bites 
 generate_correlation = function(x) {
   x %>%
   group_by(Wave) %>%
@@ -123,7 +119,7 @@ generate_correlation = function(x) {
 # Apply generate_correlation to dbys dataset
 Correlation.Bites.yearly = generate_correlation(dbys)
 
-### Create Function to set periods for the years in list_years (+1 each)
+# Create Function to set periods for the years in list_years (+1 each)
 create_periods = function(list_years) {
   list_years_up = as.numeric(list_years) + 1
   list = paste(list_years, list_years_up, sep = "/")
@@ -198,9 +194,8 @@ plot_output_correlation_bites_states = plot_correlation_bites_states(Correlation
 # Save the plot_output_correlation_bites
 # ggsave("plots/plot_output_correlation_bites_states.png", plot_output_correlation_bites_states)
 
-### OUTPUT FRACTION and KEITZ  ###
-
-##Density Plots of Kaitz or Fraction Index with aggreagted data
+### OUTPUT FRACTION and KAITZ  ###
+# Density Plots of Kaitz or Fraction Index with aggreagted data
 plot_density_aggregated = function(input, index) {
   if(index == "Kaitz") {
     input$x = input$Kaitz
@@ -242,7 +237,7 @@ shapiro_test = function(input, mode, list_years) {
 # Apply shapiro_test-function to dbys using the years in list_years and fraction index
 shapiro_test(dbys, "Fraction", list_years)
   
-##Plot-Function for Kaitz or Fraction Indexes over time with aggregated data
+# Plot-Function for Kaitz or Fraction Indexes over time with aggregated data
 plot_aggregated_data = function(input, index) {
   if(index == "Kaitz") {
     input$y = input$Kaitz

@@ -2,7 +2,9 @@ Name of Quantlet: 	SOEPQ5_IdentificationAffectedRegions
 
 Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		MUST NOT BE EMPTY!
+Description: 		'This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Kaitz Index for each German State each year.
+			The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
+			The Kaitz Index is ration between the minimum legal wage and the average wage'
 
 Keywords: 		MUST NOT BE EMPTY!
 

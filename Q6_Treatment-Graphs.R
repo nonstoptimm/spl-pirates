@@ -1,11 +1,11 @@
 # Quantlet 6
-### Graphical Analysis for Employment Rates of Treatment and Control Groups###
+# Graphical Analysis for Employment Rates of Treatment and Control Groups###
 # Load Packages used in Q6
 library(ggplot2)
 library(sp)
 # Execution of Q1 is necessary beforehand!
 
-### Combine Information of Q4 and Q5
+# Combine Information of Q4 and Q5
 # We use the averaged data from Q4 for the employment rates and add the Fraction and Keitz Index from Q5
 combine_data = function(x,y) {
   combined = merge(x, y)
@@ -16,10 +16,10 @@ combine_data = function(x,y) {
 # Apply combine_data to merge, filter, group and arrange Employment.yearly.state and dbys
 analyze_tc = combine_data(Employment.yearly.state, dbys)
 
-###Treatment Identification with Keitz Index
-## Use Median of Keitz Index in 2013 for identification
-#1.Standart treatment: If Kaitz higher than Median the State will be treatmant, otherwise control
-#2.Robust treatment: If Kaitz higher than 60% - Percetil will be treatment, if under 40% 
+# Treatment Identification with Keitz Index
+# Use Median of Keitz Index in 2013 for identification
+# 1.Standart treatment: If Kaitz higher than Median the State will be treatmant, otherwise control
+# 2.Robust treatment: If Kaitz higher than 60% - Percetil will be treatment, if under 40% 
 data_selector = function(analyze_tc, wave) {
   select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz, Fraction))
 }
@@ -40,11 +40,11 @@ add_treatment = function(x) {
 # Apply add_treatment with analyze_2013 dataset
 analyze_2013 = add_treatment(analyze_2013)
 
-#Set Treatment Identifiers to the same column in the main data  
+# Set Treatment Identifiers to the same column in the main data  
 analyze_tc$binary_treatment1 = analyze_2013$binary_treatment1
 analyze_tc$binary_treatment2 = analyze_2013$binary_treatment2
 
-## Function to aggregate data into standard Treatment and Control group using binary_treatment1 or binary_treatment2, depending on the input
+# Function to aggregate data into standard Treatment and Control group using binary_treatment1 or binary_treatment2, depending on the input
 aggregate_treatment_control = function(x, y) {
   if(y == 1) {
     x$y = x$binary_treatment1
@@ -83,7 +83,7 @@ drop_sub_na = function(x) { x[complete.cases(x), ] }
 # Apply drop_sub_na to Treatment.analysis2 to drop lines with missing values
 Treatment.analysis2_noNA = drop_sub_na(Treatment.analysis2)
 
-### GRAPHS ###
+# GRAPHS #
 # Function to plot log employment of binary treatmentgroup for different employment status
 plot_treatment = function(x, yaxis, treatment, title) {
   if(yaxis == "Full") {
@@ -118,22 +118,22 @@ plot_treatment = function(x, yaxis, treatment, title) {
 # Apply the function to different treatment analysis datasets
 # For Full Time Employment, T1
 plot_treatment_t1full = plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of Binary Groups1 for Full Employment")
-#ggsave("plots/plot_treatment_t1full.png", plot_treatment_t1full)
+# ggsave("plots/plot_treatment_t1full.png", plot_treatment_t1full)
 # For Part Time Employment, T1
 plot_treatment_t1part = plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of Binary Groups1 for Part Employment")
-#ggsave("plots/plot_treatment_t1part.png", plot_treatment_t1part)
+# ggsave("plots/plot_treatment_t1part.png", plot_treatment_t1part)
 # For Marginal Time Employment, T1
 plot_treatment_ta1marginal = plot_treatment(Treatment.analysis1, "Marginal", 1,"Log Employment of Binary Groups1 for Marginal Employment")
-#ggsave("plots/plot_treatment_ta1marginal.png", plot_treatment_ta1marginal)
+# ggsave("plots/plot_treatment_ta1marginal.png", plot_treatment_ta1marginal)
 # For Full Time Employment, T2
 plot_treatment_ta2full = plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of Binary Groups2 for Full Employment")
-#ggsave("plots/plot_treatment_ta2full.png", plot_treatment_ta2full)
+# ggsave("plots/plot_treatment_ta2full.png", plot_treatment_ta2full)
 # For Part Time Employment, T2
 plot_treatment_ta2part = plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of Binary Groups2 for Part Employment")
-#ggsave("plots/plot_treatment_ta2part.png", plot_treatment_ta2part)
+# ggsave("plots/plot_treatment_ta2part.png", plot_treatment_ta2part)
 # For Marginal Time Employment, T2
 plot_treatment_ta2marginal = plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of Binary Groups2 for Marginal Employment")
-#ggsave("plots/plot_treatment_ta2marginal.png", plot_treatment_ta2marginal)
+# ggsave("plots/plot_treatment_ta2marginal.png", plot_treatment_ta2marginal)
 
 # MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states
 # Read Map File for Germany
