@@ -80,7 +80,7 @@ did_1.1.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population 
 # Regression 1.2.1 (baseline): Using Fraction Index
 did_1.2.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 1.2.2: Using Fraction Index and Control Variables
-did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Kaitz_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
+did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
 ## Regression 2: We regress on Log Part Time Employment Rate
 # Regression 2.1.1 (baseline): Using Kaitz Index
@@ -123,10 +123,10 @@ did_6.3 = plm(Delta.Log.Marginal.Employment ~ binary_treatment2 + year15.dummy +
 ##### Output ####
 ## Regression 1: We regress on Log Regular Employment Rate
 stargazer(did_1.1.1, did_1.1.2, did_1.2.1, did_1.2.2, title="Results", type="text", align=TRUE, 
-          no.space=TRUE, 
+          no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels = ("Panel A: Log Regular Employment Rate"), 
-          covariate.labels=c("Bite.K x D2015","Population(log,t)", "Bite x D2013", "Bite x D2012", "Bite.F x D2015"),
+          covariate.labels=c("Bite.K x D2015","Population(log,t)", "Bite.K x D2013", "Bite.K x D2012", "Bite.F x D2015", "Bite.F x D2013", "Bite.F x D2012"),
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
