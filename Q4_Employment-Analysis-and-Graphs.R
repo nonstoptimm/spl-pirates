@@ -26,9 +26,9 @@ adj_labor_force = function(x) {
   x$LaborForce_num = NA
   x$LaborForce_num = as.numeric(x$Labor.Force.Status)
   summary(x$LaborForce_num)
-  ## Just in case there would be missing values
+  # Just in case there would be missing values
   x$LaborForce_num[x$LaborForce_num <= 6] = NA
-  ##Too old -> 4720 NA
+  # Too old -> 4720 NA
   x$LaborForce_num[x$LaborForce_num == 8] = NA
   return(x)
 }
@@ -209,7 +209,6 @@ plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates"
 # illustrate Log Employment Rates of all three groups
 plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment Rate over Time", "Log Employment rate in %")
 # ggsave("plots/plot_graphs_year_logemployrates.png", plot_graphs_year_logemployrates)
-
 
 # OUTPUT Graphs for each state of the employment variables over time
 # Define a function with different employment modes

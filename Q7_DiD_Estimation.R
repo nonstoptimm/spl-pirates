@@ -4,7 +4,7 @@
 library(plm)
 # Execution of Q1 is necessary beforehand!
 
-## Data Pre Processing for DiD estimation
+# Data Pre-Processing for DiD estimation
 # Create sub-dataframe with only variables of interest
 data_selector = function(analyze_tc) {
   select(filter(analyze_tc), c(Wave, State.of.Residence, Observations, Fraction, Kaitz, 
@@ -16,18 +16,18 @@ data_selector = function(analyze_tc) {
 # Apply data selector for sub-dataframe
 estimation = data_selector(analyze_tc)
 
-# Use data selector
-data_selector = function(analyze_tc, wave) {
+# Create data_filter 
+data_filter = function(analyze_tc, wave) {
   select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz, Fraction))
 }
 # Create subset for 2013
-analyze_2013 = data_selector(analyze_tc, 2013)
+analyze_2013 = data_filter(analyze_tc, 2013)
 # Append Kaitz from 2013 back to estimation dataset
 # Need it for Schmitz(2017)
 estimation$Kaitz.13 = analyze_2013$Kaitz
 
 # Create subset for 2014
-analyze_2014 = data_selector(analyze_tc, 2014)
+analyze_2014 = data_filter(analyze_tc, 2014)
 # Append Kaitz and Fraction from 2014 back to estimation dataset
 # Need it for Caliendo(2017) estimation
 estimation$Kaitz.14 = analyze_2014$Kaitz
@@ -68,14 +68,13 @@ pre_processing_estimation = function(x) {
 # Apply it to data
 estimation = pre_processing_estimation(estimation)
 
-
-####Regressions ####
-## Note: Both estimation models use a fixed effect model. We will assume this holds for now and apply it.
-## We will test for the properties of the models in Q8
+# Regressions
+# Note: Both estimation models use a fixed effect model. We will assume this holds for now and apply it.
+# We will test for the properties of the models in Q8
 
 ### Caliendo(2017): Use the log employment rates of each Employment Group
 ## Four regressions per Group: One baseline and one with control variables, with each Bite Index
-## Regression 1: We regress on Log Regular Employment Rate
+# Regression 1: We regress on Log Regular Employment Rate
 # Regression 1.1.1 (baseline): Using Kaitz Index
 did_1.1.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 1.1.2: Using Kaitz Index and Control Variables
@@ -85,7 +84,7 @@ did_1.2.1 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction, data = estima
 # Regression 1.2.2: Using Fraction Index and Control Variables
 did_1.2.2 = plm(Log.Full.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-## Regression 2: We regress on Log Part Time Employment Rate
+# Regression 2: We regress on Log Part Time Employment Rate
 # Regression 2.1.1 (baseline): Using Kaitz Index
 did_2.1.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 2.1.2: Using Kaitz Index and Control Variables
@@ -95,7 +94,7 @@ did_2.2.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction, data = estima
 # Regression 2.2.2: Using Fraction Index and Control Variables
 did_2.2.2 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-## Regression 3: We regress on Log marginal Employment Rate
+# Regression 3: We regress on Log marginal Employment Rate
 # Regression 3.1.1 (baseline): Using Kaitz Index
 did_3.1.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Kaitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 # Regression 3.1.2: Using Kaitz Index and Control Variables
@@ -105,25 +104,24 @@ did_3.2.1 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction, data = es
 # Regression 3.2.2: Using Fraction Index and Control Variables
 did_3.2.2 = plm(Log.Marginal.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + Interaction_Fraction_y12, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-
-### Schmitz(2017): Use the Change in Log Employment of each Employment Group
-## Regression: We regress on Change in Log Employment Status Using Kaitz2013 
+# Schmitz(2017): Use the Change in Log Employment of each Employment Group
+# Regression: We regress on Change in Log Employment Status Using Kaitz2013 
 did_4.1 = plm(Delta.Log.Full.Employment ~ DiD.estimator.Kaitz.Schmitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_5.1 = plm(Delta.Log.Part.Employment ~ DiD.estimator.Kaitz.Schmitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_6.1 = plm(Delta.Log.Marginal.Employment ~ DiD.estimator.Kaitz.Schmitz, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-## Regression: We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
+# Regression: We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
 did_4.2 = plm(Delta.Log.Full.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_5.2 = plm(Delta.Log.Part.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_6.2 = plm(Delta.Log.Marginal.Employment ~ binary_treatment1 + year15.dummy + binary1, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-## Regression: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
+# Regression: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
 did_4.3 = plm(Delta.Log.Full.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_5.3 = plm(Delta.Log.Part.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 did_6.3 = plm(Delta.Log.Marginal.Employment ~ binary_treatment2 + year15.dummy + binary2, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
 
-##### Output ####
-## Regression 1: We regress on Log Regular Employment Rate
+# Output
+# Regression 1: We regress on Log Regular Employment Rate
 stargazer(did_1.1.1, did_1.1.2, did_1.2.1, did_1.2.2, title="Results", type="text", align=TRUE, 
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
@@ -133,7 +131,7 @@ stargazer(did_1.1.1, did_1.1.2, did_1.2.1, did_1.2.2, title="Results", type="tex
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
-## Regression 2: We regress on Log Part Time Employment Rate
+# Regression 2: We regress on Log Part Time Employment Rate
 stargazer(did_2.1.1, did_2.1.2, did_2.2.1, did_2.2.2, title="Results", type="text", align=TRUE, 
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
@@ -143,7 +141,7 @@ stargazer(did_2.1.1, did_2.1.2, did_2.2.1, did_2.2.2, title="Results", type="tex
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
-## Regression 3: We regress on Log marginal Employment Rate
+# Regression 3: We regress on Log marginal Employment Rate
 stargazer(did_3.1.1, did_3.1.2, did_3.2.1, did_3.2.2, title="Results", type="text", align=TRUE, 
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
@@ -153,7 +151,7 @@ stargazer(did_3.1.1, did_3.1.2, did_3.2.1, did_3.2.2, title="Results", type="tex
           column.labels=c("Kaitz","Fraction"),
           column.separate = c(2,2))
 
-## Regression 4: We regress on Change in Log Employment Status Using Kaitz2013 
+# Regression 4: We regress on Change in Log Employment Status Using Kaitz2013 
 stargazer(did_4.1, did_5.1, did_6.1, title="Results", type="text", align=TRUE,
           no.space=TRUE, 
           keep.stat= c("n","adj.rsq","rsq"), 
@@ -162,7 +160,7 @@ stargazer(did_4.1, did_5.1, did_6.1, title="Results", type="text", align=TRUE,
           covariate.labels=c("Bite.K.Sch x D2015"),
           column.labels=c("Full", "Part", "Marginal"))
 
-## Regression 5:  We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
+# Regression 5:  We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment
 stargazer(did_4.2, did_5.2, did_6.2, title="Results", type="text", align=TRUE, 
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
@@ -171,13 +169,12 @@ stargazer(did_4.2, did_5.2, did_6.2, title="Results", type="text", align=TRUE,
           covariate.labels=c("D2015", "Treat1 x D2015"),
           column.labels=c("Full", "Part", "Marginal"))
 
-## Regression 6: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
+# Regression 6: We regress on Change in Log Employment Status Using Kaitz2013 and robust binary treatment
 stargazer(did_4.3, did_5.3, did_6.3, title="Results", type="text", align=TRUE, 
           no.space=FALSE, 
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels.include = FALSE,
           dep.var.caption  = ("Panel F: Log Employment Status"),
-          #covariate.labels=c("D2015", "Treat2 x D2015"),
           column.labels=c("Full", "Part", "Marginal"))
 
 

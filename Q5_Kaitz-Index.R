@@ -23,8 +23,8 @@ data_selector = function(merged_all) {
 # Create dataset only with variables of interest by applying the data_selector-Function
 Reduced_merged = data_selector(merged_all)
 
-## Adjust Labor Force Variable
-##Sort out people not in working force anymore
+# Adjust Labor Force Variable
+# Sort out people not in working force anymore
 adj_labor_force = function(x) { 
   table(x$Labor.Force.Status)
   levels(x$Labor.Force.Status)
@@ -57,7 +57,7 @@ drop_sub_na = function(x) { x[complete.cases(x), ] }
 Reduced_merged_noNA = drop_sub_na(Reduced_merged)
 
 # Create Function for computing hourly earnings
-#For more exact analyzes drop observations from first and last percentil of hourly earnings
+# For more exact analyzes drop observations from first and last percentil of hourly earnings
 create_hourly_earnings = function(x) {
   x$Hourly.earnings = x$Current.Gross.Labor.Income.in.Euro/(4.3 * x$Actual.Work.Time.Per.Week)
   x$Hourly.earnings[x$Hourly.earnings > quantile((x$Hourly.earnings), c(.99)) | x$Hourly.earnings < quantile((x$Hourly.earnings), c(.01))] = NA
@@ -67,7 +67,7 @@ create_hourly_earnings = function(x) {
 # Apply create_hourly_earnings to a dataset
 Reduced_merged_noNA = create_hourly_earnings(Reduced_merged_noNA)
 
-## Dummy for Affected by Minimum Wage
+# Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
 # Function to make it reusable
 dummy_minimum_wage = function(x) {
@@ -194,7 +194,7 @@ plot_output_correlation_bites_states = plot_correlation_bites_states(Correlation
 # Save the plot_output_correlation_bites
 # ggsave("plots/plot_output_correlation_bites_states.png", plot_output_correlation_bites_states)
 
-### OUTPUT FRACTION and KAITZ  ###
+# OUTPUT FRACTION and KAITZ
 # Density Plots of Kaitz or Fraction Index with aggreagted data
 plot_density_aggregated = function(input, index) {
   if(index == "Kaitz") {
