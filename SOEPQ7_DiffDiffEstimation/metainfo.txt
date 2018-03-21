@@ -2,7 +2,10 @@ Name of Quantlet: 	SOEPQ7_DiffDiffEstimation
 
 Published in:		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		MUST NOT BE EMPTY!
+Description: 		'This quantlet is about an estimation of the minimum wage effect on Employment.
+			We use regression estimations of Schmitz(2017) and Caliendo(2017)
+			Schmitz uses the log change of employment, Caliendo the log employment rate
+			We estimate some regressions from them'
 
 Keywords: 		MUST NOT BE EMPTY!
 

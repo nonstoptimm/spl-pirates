@@ -4,11 +4,6 @@
 library(plm)
 # Execution of Q1 is necessary beforehand!
 
-## This quantlet is about an estimation of the minimum wage effect on Employment.
-# We use regression estimations of Schmitz(2017) and Caliendo(2017)
-# Schmitz uses the log change of employment, Caliendo the log employment rate
-# We estimate some regressions from them
-
 ## Data Pre Processing for DiD estimation
 # Create sub-dataframe with only variables of interest
 data_selector = function(analyze_tc) {
@@ -50,7 +45,6 @@ pre_processing_estimation = function(x) {
   x$DiD.estimator.Kaitz = (x$year15.dummy * x$Kaitz.14)
   #Generate Interaction Variable Kaitz for Schmitz2017
   x$DiD.estimator.Kaitz.Schmitz = (x$year15.dummy * x$Kaitz.13)
-  #Generate Interaction Variable Kaitz for Schmitz2017
   ##Generate Control Variables
     # Control for years:
     x$year14.dummy = ifelse(x$year >= 2014, 1, 0)
@@ -59,15 +53,14 @@ pre_processing_estimation = function(x) {
     # Population in log
     x$Log.Population = log(x$Observations)
   return(x)
-  
 }
 
-#Apply it to data
+# Apply it to data
 estimation = pre_processing_estimation(estimation)
 
 
 ####Regressions ####
-##Note: Both estimation models use a fixed effect model. We will assume this holds for now and apply it.
+## Note: Both estimation models use a fixed effect model. We will assume this holds for now and apply it.
 ## We will test for the properties of the models in Q8
 
 ### Caliendo(2017): Use the log employment rates of each Employment Group

@@ -102,7 +102,7 @@ plot_treatment = function(x, yaxis, treatment, title) {
   } else {
     print("Input must be 1 or 2!")
   }
-  ggplot(data = x, aes(x=Wave, y = yaxis, group = factor(treatment), colour = factor(treatment))) +
+  ggplot(data = na.omit(x), aes(x=Wave, y = yaxis, group = factor(treatment), colour = factor(treatment)), na.rm = TRUE) +
   geom_line() +
   geom_point() +
   labs(title = title,
@@ -110,29 +110,29 @@ plot_treatment = function(x, yaxis, treatment, title) {
        x = "Years") +
   geom_vline(xintercept = 5, color = "red") +
   theme_classic() +
-  scale_colour_discrete(name = "Treatment",
-                        labels = c("lower Kaitz than median", "higher Kaitz than median")) +
+  scale_colour_discrete(name = "Group",
+                        labels = c("Control", "Treatment")) +
   coord_cartesian(xlim = c(1.6,7))
 }
 
 # Apply the function to different treatment analysis datasets
 # For Full Time Employment, T1
-plot_treatment_t1full = plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of binary Treatmentgroups for Full Employment")
+plot_treatment_t1full = plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of Binary Groups1 for Full Employment")
 #ggsave("plots/plot_treatment_t1full.png", plot_treatment_t1full)
 # For Part Time Employment, T1
-plot_treatment_t1part = plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of binary Treatmentgroups for Part Employment")
+plot_treatment_t1part = plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of Binary Groups1 for Part Employment")
 #ggsave("plots/plot_treatment_t1part.png", plot_treatment_t1part)
 # For Marginal Time Employment, T1
-plot_treatment_ta1marginal = plot_treatment(Treatment.analysis1, "Marginal", 1,"Log Employment of binary Treatmentgroups for Marginal Employment")
+plot_treatment_ta1marginal = plot_treatment(Treatment.analysis1, "Marginal", 1,"Log Employment of Binary Groups1 for Marginal Employment")
 #ggsave("plots/plot_treatment_ta1marginal.png", plot_treatment_ta1marginal)
 # For Full Time Employment, T2
-plot_treatment_ta2full = plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of binary Treatmentgroups for Full Employment")
+plot_treatment_ta2full = plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of Binary Groups2 for Full Employment")
 #ggsave("plots/plot_treatment_ta2full.png", plot_treatment_ta2full)
 # For Part Time Employment, T2
-plot_treatment_ta2part = plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of binary Treatmentgroups for Part Employment")
+plot_treatment_ta2part = plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of Binary Groups2 for Part Employment")
 #ggsave("plots/plot_treatment_ta2part.png", plot_treatment_ta2part)
 # For Marginal Time Employment, T2
-plot_treatment_ta2marginal = plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of binary Treatmentgroups for Marginal Employment")
+plot_treatment_ta2marginal = plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of Binary Groups2 for Marginal Employment")
 #ggsave("plots/plot_treatment_ta2marginal.png", plot_treatment_ta2marginal)
 
 # MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states
@@ -219,7 +219,7 @@ plot_result_factor = function(x) {
     aes(x=long, y = lat, group = group, fill=Treatment) + 
     geom_polygon(color = "black") +
     coord_map() +
-    scale_fill_manual(values = c("white", "blue")) + 
+    scale_fill_manual(values = c("white", "blue"), labels = c("Control", "Treatment")) + 
     geom_path(color="black") +
     theme(legend.position = "bottom", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
           panel.background = element_blank(), axis.line=element_blank(),axis.text.x=element_blank(),
@@ -229,7 +229,7 @@ plot_result_factor = function(x) {
           plot.title = element_text(hjust = 0.5),
           axis.ticks.length = unit(0, "mm"),
           legend.title = element_blank()) +
-    labs(title = "Binary")
+    labs(title = "Binary Groups")
 }
 
 # APPLY Plot Functions
@@ -243,5 +243,5 @@ plot_result_fraction = plot_result_index(final_map, "Fraction", "red")
 # SAVE the Plots
 # ggsave("plots/plot-kaitz.png", plot_result_kaitz)
 # ggsave("plots/plot-fraction.png", plot_result_fraction)
-# ggsave("plots/plot-factor.png", plot_result_kaitz)
+# ggsave("plots/plot-factor.png", plot_result_binary)
 

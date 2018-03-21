@@ -201,10 +201,10 @@ plot_graphs_year = function(input, mode, title, y) {
 plot_graphs_year_log = plot_graphs_year(Employment.yearly, "Log", "Log Employment over time", "Log Employment")
 #ggsave("plots/plot_graphs_year_log.png", plot_graphs_year_log)
 # illustrate % change of Log Employment of all three groups
-plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "percentage change of employment growth rate")
+plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth rate of employment over time", "% change of employment growth rate")
 #ggsave("plots/plot_graphs_year_changelog.png", plot_graphs_year_changelog)
 # illustrate Emplyoment Rates of all three groups
-plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate")
+plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment rates over time", "Employment rate in %")
 #ggsave("plots/plot_graphs_year_employrates.png", plot_graphs_year_employrates)
 # illustrate Log Employment Rates of all three groups
 plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment rates over time", "Log Employment rate")
@@ -227,9 +227,8 @@ plot_graphs_growth = function(input, mode, title) {
   geom_line(aes(y = v1)) +
   theme_classic() +
   labs(title = title,
-       y = "growth rate",
+       y = "Growth Rate in %",
        x = "Years") +
-  #scale_colour_hue(name = "state") +
   geom_vline(xintercept = 5, color = "red") +
   coord_cartesian(xlim = c(1.6,7)) +
     scale_colour_hue(name = "States",

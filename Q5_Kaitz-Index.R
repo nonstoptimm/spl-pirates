@@ -201,7 +201,7 @@ plot_output_correlation_bites_states = plot_correlation_bites_states(Correlation
 ### OUTPUT FRACTION and KEITZ  ###
 
 ##Density Plots of Kaitz or Fraction Index with aggreagted data
-plot_density_aggregated = function(input, index, xlim) {
+plot_density_aggregated = function(input, index) {
   if(index == "Kaitz") {
     input$x = input$Kaitz
   } else if(index == "Fraction") {
@@ -215,12 +215,11 @@ plot_density_aggregated = function(input, index, xlim) {
     scale_colour_hue(name = "Years") +
     labs(title = paste(index, "Index-Density of States seperated by Years", sep="-"),
          y = "Density",
-         x = index) +
-    coord_cartesian(xlim = xlim)
+         x = index)
 }
 
 # Apply plot_density_aggregated to create density plot for Fraction
-plot_density_aggr_fraction = plot_density_aggregated(dbys, "Fraction", c(0.1,0.6))
+plot_density_aggr_fraction = plot_density_aggregated(dbys, "Fraction")
 # Save the plot_density_aggr_fraction
 # ggsave("plots/plot_aggregated_data_fraction.png", plot_aggregated_data_fraction)
 
@@ -291,7 +290,7 @@ plot_aggregated_data_kaitz = plot_aggregated_data(dbys, "Kaitz")
 # ggsave("plots/plot_aggregated_data_kaitz.png", plot_aggregated_data_kaitz)
 
 # Apply plot_density_aggregated to create density plot for Kaitz
-plot_density_aggr_kaitz = plot_density_aggregated(dbys, "Kaitz", c(0.43,0.7))
+plot_density_aggr_kaitz = plot_density_aggregated(dbys, "Kaitz")
 # Save the plot_density_aggr_kaitz
 # ggsave("plots/plot_density_aggr_kaitz.png", plot_density_aggr_kaitz)
 

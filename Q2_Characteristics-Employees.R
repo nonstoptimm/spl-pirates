@@ -269,10 +269,10 @@ print_means(Means2013)
 # Plots
 # Densityplot-Function for Age
 plot_density_age = function(x) {
-  ggplot(data = x,aes(x = Age,group = Employment.Status, color = Employment.Status )) +
+  ggplot(data = na.omit(x),aes(x = Age,group = Employment.Status, color = Employment.Status )) +
     geom_line(stat = "density") +
     theme_classic() +
-    labs(title = "density of the age seperated by employment status ",
+    labs(title = "Density of Age",
          y = "Density",
          x = "Age") +
     scale_colour_hue(name = "Employment Status",
@@ -286,11 +286,11 @@ plot_output_density_age = plot_density_age(sumsub2013)
 
 # Densityplot-Function for Hourly Earnings
 plot_density_earnings = function(x) {
-  ggplot(data = x,aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status)) +
+  ggplot(data = na.omit(x),aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status)) +
     geom_line(stat = "density") +
     coord_cartesian(xlim = c(0,100)) +
     theme_classic() +
-    labs(title = "density of the hourly earnings seperated by employment status ",
+    labs(title = "Density of Hourly Earnings",
          y = "Density",
          x = "hourly earnings") +
     scale_colour_hue(name = "Employment Status",
@@ -304,13 +304,13 @@ plot_output_density_earnings = plot_density_earnings(sumsub2013)
 
 # Densityplot-Function for monthly earning
 plot_density_monthly_earnings = function(x) {
-  ggplot(data = x,aes(x = Current.Gross.Labor.Income.in.Euro ,group = Employment.Status, color = Employment.Status )) +
+  ggplot(data = na.omit(x),aes(x = Current.Gross.Labor.Income.in.Euro ,group = Employment.Status, color = Employment.Status )) +
     geom_line(stat = "density") +
     coord_cartesian(xlim = c(190,4000),ylim = c(0,0.0035)) +
     theme_classic() +
-    labs(title = "density of the monthly earnings seperated by employment status",
+    labs(title = "Density of Monthly Earnings",
          y = "Density",
-         x = "monthly earnings") +
+         x = "Monthly Earnings") +
     scale_colour_hue(name = "Employment Status",
                      labels = c("Full time","Part Time", "Marginal", "Unemployed"))
 }
@@ -322,9 +322,15 @@ plot_output_density_monthly_earnings = plot_density_monthly_earnings(sumsub2013)
 
 # Densityplot-Function for Actual Worktime (per week)
 plot_density_actual_work = function(x) {
-  ggplot(data = x,aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
+  ggplot(data = na.omit(x),aes(x = Actual.Work.Time.Per.Week ,group = Employment.Status, color = Employment.Status )) +
     geom_line(stat = "density") +
-    coord_cartesian(xlim = c(4.5,80),ylim = c(0,0.15)) 
+    coord_cartesian(xlim = c(4.5,80),ylim = c(0,0.15)) +
+    theme_classic() +
+    labs(title = "Density of Actual Work Time per Week",
+         y = "Density",
+         x = "Actual Working Time") +
+    scale_colour_hue(name = "Employment Status",
+                     labels = c("Full time","Part Time", "Marginal", "Unemployed"))
 }
 
 # Plot plot_density_actual_work with 2013 dataset
@@ -336,9 +342,10 @@ plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
 plot_gender_employment = function(x) {
   ggplot(data = x, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
     theme_classic() +
-    labs(title = "Gender for every emloyment status",
-         y = "Count",
-         x = "Employment Status", fill = "Sex")
+    scale_fill_manual(values = c("dodgerblue4", "firebrick"), labels = c("Male", "Female")) +
+    labs(title = "Gender for every employment status",
+         y = "Ratio in percent",
+         x = "Employment Status", fill = "Gender")
 }
 
 # Plot plot_gender_employment with 2013 dataset
