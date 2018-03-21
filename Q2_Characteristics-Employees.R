@@ -340,11 +340,17 @@ plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
 
 # Plot-Function for Gender of every emloyment status
 plot_gender_employment = function(x) {
+  x$Employment.Status = as.character(x$Employment.Status)
+  x$Employment.Status = str_sub(x$Employment.Status, 5)
+  x$Employment.Status = gsub("Voll erwerbstaetig", "Full Time", x$Employment.Status)
+  x$Employment.Status = gsub("Geringfuegig beschaeftigt", "Marginal", x$Employment.Status)
+  x$Employment.Status = gsub("Nicht erwerbstaetig", "Not Employed", x$Employment.Status)
+  x$Employment.Status = gsub("Teilzeitbeschaeftigung", "Part Time", x$Employment.Status)
   ggplot(data = x, aes(x = Employment.Status, fill = as.character(Sexnum))) + geom_bar(position = "fill") +
     theme_classic() +
     scale_fill_manual(values = c("dodgerblue4", "firebrick"), labels = c("Male", "Female")) +
     labs(title = "Gender for every employment status",
-         y = "Ratio in percent",
+         y = "Ratio in %",
          x = "Employment Status", fill = "Gender")
 }
 

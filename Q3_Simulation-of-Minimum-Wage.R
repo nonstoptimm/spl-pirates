@@ -101,7 +101,7 @@ plot_graph_effect_minwage = function(input, elasticities) {
          x = "Elasticity",
          y = "Negative Change in Employment in Percent") +
     scale_colour_hue(name = "Employment Status",
-                     labels = c("Full time", "Marginal", "Part Time","Unemployed"))
+                     labels = c("Full time","Marginal", "Part Time","Unemployed"))
 }
 
 # Apply plot_graph_effect_minwage
