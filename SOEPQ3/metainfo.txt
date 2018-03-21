@@ -1,0 +1,21 @@
+Name of Quantlet: CharacteristicsEmployees.R
+
+Published in: Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: MUST NOT BE EMPTY!
+
+Keywords: MUST NOT BE EMPTY!
+
+See also: SOEPQ1
+
+Authors: Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: no immediate import data in this quantlet, see SOEPQ1
+
+Input: (optional - delete if not used)
+
+Output:  (optional - delete if not used)
+
+Example: for your plots, graphs, results etc. - delete if not used

@@ -2,6 +2,7 @@
 # Load Packages used in Q4
 library(dplyr)
 library(ggplot2)
+# Execution of Q1 is necessary beforehand!
 
 ##### Employment Graphs #####
 ## This Quantlet produces output of differenst employment measures ##
@@ -98,37 +99,37 @@ calc_employment_variables = function(input, type) {
     input$v2 = c(0, diff(input$v1))
     input$v3 = (input$Full.Employment / input$Observations) *100
     input$v4 = log(input$v3)
-    colnames(input)[colnames(input)=="v1"] <- "Log.Full.Employment"
-    colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Full.Employment"
-    colnames(input)[colnames(input)=="v3"] <- "Full.Employment.Rate"
-    colnames(input)[colnames(input)=="v4"] <- "Log.Full.Employment.Rate"
+    colnames(input)[colnames(input)=="v1"] = "Log.Full.Employment"
+    colnames(input)[colnames(input)=="v2"] = "Delta.Log.Full.Employment"
+    colnames(input)[colnames(input)=="v3"] = "Full.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] = "Log.Full.Employment.Rate"
   } else if(type == "Part") {
     input$v1 = log(input$Part.Employment)
     input$v2 = c(0, diff(input$v1))
     input$v3 = (input$Part.Employment / input$Observations) *100
     input$v4 = log(input$v3)
-    colnames(input)[colnames(input)=="v1"] <- "Log.Part.Employment"
-    colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Part.Employment"
-    colnames(input)[colnames(input)=="v3"] <- "Part.Employment.Rate"
-    colnames(input)[colnames(input)=="v4"] <- "Log.Part.Employment.Rate"
+    colnames(input)[colnames(input)=="v1"] = "Log.Part.Employment"
+    colnames(input)[colnames(input)=="v2"] = "Delta.Log.Part.Employment"
+    colnames(input)[colnames(input)=="v3"] = "Part.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] = "Log.Part.Employment.Rate"
   } else if(type == "Marginal") {
     input$v1 = log(input$Marginal.Employment)
     input$v2 = c(0, diff(input$v1))
     input$v3 = (input$Marginal.Employment / input$Observations) *100
     input$v4 = log(input$v3)
-    colnames(input)[colnames(input)=="v1"] <- "Log.Marginal.Employment"
-    colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Marginal.Employment"
-    colnames(input)[colnames(input)=="v3"] <- "Marginal.Employment.Rate"
-    colnames(input)[colnames(input)=="v4"] <- "Log.Marginal.Employment.Rate"
+    colnames(input)[colnames(input)=="v1"] = "Log.Marginal.Employment"
+    colnames(input)[colnames(input)=="v2"] = "Delta.Log.Marginal.Employment"
+    colnames(input)[colnames(input)=="v3"] = "Marginal.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] = "Log.Marginal.Employment.Rate"
   } else if(type == "Not") {
     input$v1 = log(input$Not.Employment)
     input$v2 = c(0, diff(input$v1))
     input$v3 = (input$Not.Employment / input$Observations) *100
     input$v4 = log(input$v3)
-    colnames(input)[colnames(input)=="v1"] <- "Log.Not.Employment"
-    colnames(input)[colnames(input)=="v2"] <- "Delta.Log.Not.Employment"
-    colnames(input)[colnames(input)=="v3"] <- "Not.Employment.Rate"
-    colnames(input)[colnames(input)=="v4"] <- "Log.Not.Employment.Rate"
+    colnames(input)[colnames(input)=="v1"] = "Log.Not.Employment"
+    colnames(input)[colnames(input)=="v2"] = "Delta.Log.Not.Employment"
+    colnames(input)[colnames(input)=="v3"] = "Not.Employment.Rate"
+    colnames(input)[colnames(input)=="v4"] = "Log.Not.Employment.Rate"
   } else {
     print("Error! Input must either be Full, Part, Marginal or Not")
   }
@@ -263,3 +264,5 @@ plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Margi
 # Not employed growth rate
 plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
 #ggsave("plots/plot_graphs_growth_not.png", plot_graphs_growth_not)
+
+

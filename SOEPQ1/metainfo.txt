@@ -1,4 +1,4 @@
-Name of Quantlet: Import_Prepare_SOEPdata.R
+Name of Quantlet: ImportPrepareData.R
 
 Published in: Employment effects of the new German minimum wage (SOEP dataset)
 
@@ -10,7 +10,7 @@ Authors: Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
 Submitted: 30th of March 2018 by the research team mentioned in "Authors"
 
-Datafile: variable-selection/soep-var-selection.csv, input-data/  for your data sets - delete if not used
+Datafile: variable-selection/soep-var-selection.csv, input-data/2010_bap.dta, input-data/2010_bapequiv.dta, input-data/2010_bapgen.dta, input-data/2010_bapkal.dta, input-data/2011_bbp.dta, input-data/2011_bbpequiv.dta, input-data/2011_bbpgen.dta, input-data/2011_bbpkal.dta, input-data/2012_bcp.dta, input-data/2012_bcpequiv.dta, input-data/2012_bcpgen.dta, input-data/2012_bcpkal.dta, input-data/2013_bdp.dta, input-data/2013_bdpequiv.dta, input-data/2013_bdpgen.dta, input-data/2013_bdpkal.dta, input-data/2014_bep.dta, input-data/2014_bepequiv.dta, input-data/2014_bepgen.dta, input-data/2014_bepkal.dta, input-data/2015_bfp.dta, input-data/2015_bfpequiv.dta, input-data/2015_bfpgen.dta, input-data/2015_bfpkal.dta, input-data/2016_bgp.dta, input-data/2016_bgpequiv.dta, input-data/2016_bgpgen.dta, input-data/2016_bgpkal.dta,
 
 Input: (optional - delete if not used)
 

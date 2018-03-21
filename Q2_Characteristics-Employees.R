@@ -3,6 +3,7 @@
 library(dplyr)
 library(ggplot2)
 library(stargazer)
+# Execution of Q1 is necessary beforehand!
 
 # Descriptive Analysis of Data in 2013
 # Code can be applied for any year as it's created as functions
@@ -226,7 +227,7 @@ sumsub2013 = calc_hourly_earnings(sumsub2013)
 ## Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
 # Function to make it reusable
-dummy_minimum_wage <- function(x) {
+dummy_minimum_wage = function(x) {
   x$Subject.to.minwage = NA
   x$Subject.to.minwage[x$Hourly.earnings < 8.5] = 1
   x$Subject.to.minwage[is.na(x$Subject.to.minwage)] = 0
@@ -343,4 +344,5 @@ plot_gender_employment = function(x) {
 # Plot plot_gender_employment with 2013 dataset
 plot_ouput_gender_employment = plot_gender_employment(sumsub2013)
 # Save the plot created above into a png-file
-#ggsave("plots/plot_ouput_gender_employment.png", plot_ouput_gender_employment)
+# ggsave("plots/plot_ouput_gender_employment.png", plot_ouput_gender_employment)
+

@@ -94,5 +94,3 @@ names(merged_all) = valid_column_names
 rm(list=datalist)
 rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'Wave', 'years', 'z'))
 
-# REMOVE ALL OBJECTS
-# rm(list=ls())

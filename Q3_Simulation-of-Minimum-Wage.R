@@ -1,6 +1,7 @@
 # Quantlet 3
 # Load Packages used in Q3
 library(dplyr)
+# Execution of Q1 is necessary beforehand
 
 #### Simulation of Minimum Wage ####
 ## Function to gather average wages for employees affected by minimum wage for each employment status
@@ -30,7 +31,7 @@ Affected.by.minwage = as.data.frame(Affected.by.minwage)
 Labor.Demand.Elasticity = c(-0.2, -0.5, -0.75, -1, -1.2)
 
 # Create Function to apply the formula with the input data x
-employ_effect <- function(x, y) {
+employ_effect = function(x, y) {
   i = 1
   for(list in 1:length(x)) {
     curr_col = 1 - (8.5 / y$avg_Hourly.earnings)^(-1 * x[i])
@@ -78,3 +79,4 @@ employ_effect_monopsonic = function(x, y, m) {
 
 # Apply the employ_effect_monopsonic function for the dataset used before with market power of 0.2
 Affected.by.minwage = employ_effect_monopsonic(Labor.Demand.Elasticity, Affected.by.minwage, 0.2)
+

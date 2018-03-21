@@ -1,6 +1,8 @@
+# Quantlet 7
 # D&D Analysis
-# install.packages("plm")
+# Load Packages used in Q7
 library(plm)
+# Execution of Q1 is necessary beforehand!
 
 ## This quantlet is about an estimation of the minimum wage effect on Employment.
 # We use regression estimations of Schmitz(2017) and Caliendo(2017)
@@ -172,3 +174,5 @@ stargazer(did_4.3, did_5.3, did_6.3, title="Results", type="text", align=TRUE,
           dep.var.caption  = ("Panel F: Log Employment Status"),
           covariate.labels=c("D2015", "Treat2 x D2015"),
           column.labels=c("Full", "Part", "Marginal"))
+
+

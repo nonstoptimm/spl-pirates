@@ -1,6 +1,8 @@
 # Quantlet 5
 # Load Packages used in Q5
 library(dplyr)
+# Execution of Q1 is necessary beforehand!
+
 # ##### Bites #####
 # This file is about the estimation and graphical analysis of different bites, namely the Fraction Index and Keitz Index for each German State each year
 # The Fraction Index is the ratio of affected individuals by the minimum wage, hence all that earn less than 8.50 Euro per hour.
@@ -73,7 +75,7 @@ Reduced_merged_noNA = create_hourly_earnings(Reduced_merged_noNA)
 ## Dummy for Affected by Minimum Wage
 # 1 if hourly earnings < 8.50
 # Function to make it reusable
-dummy_minimum_wage <- function(x) {
+dummy_minimum_wage = function(x) {
   x$Subject.to.minwage = NA
   x$Subject.to.minwage[x$Hourly.earnings < 8.5] = 1
   x$Subject.to.minwage[is.na(x$Subject.to.minwage)] = 0
@@ -100,11 +102,11 @@ dbys = collapse_dataset(Reduced_merged_noNA)
 # Function to generate Index 
 generate_index = function(x) {
   ## Generate Change of Fraction Index
-  x$Delta.Fraction <- c(0, diff(x$Fraction))
+  x$Delta.Fraction = c(0, diff(x$Fraction))
   # Generate Kaitz Index for each state and year
   x$Kaitz = 8.5/x$Hourly_earnings
   # Generate Change of Kaitz Index
-  x$Delta.Kaitz <- c(0, diff(x$Kaitz))
+  x$Delta.Kaitz = c(0, diff(x$Kaitz))
   return(x)
 }
 
@@ -295,3 +297,4 @@ plot_density_aggr_kaitz = plot_density_aggregated(dbys, "Kaitz", c(0.43,0.7))
 
 # Apply Shapiro Test to dbys using shapiro_test and the list of years for kaitz index
 shapiro_test(dbys, "Kaitz", list_years)
+
