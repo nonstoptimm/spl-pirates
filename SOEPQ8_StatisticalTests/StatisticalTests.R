@@ -1,7 +1,7 @@
 ## Quantlet 8 - StatisticalTests Load Packages used in Q8
 library(plm)
 library(lmtest)
-# Execution of Q1 is necessary beforehand!
+# Execution of Q1, Q4, Q5, Q6 and Q7 is necessary beforehand!
 
 # Create regressions fee and ree
 fee = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, 
@@ -14,15 +14,15 @@ estimate_appropriate_model = function(fe, re) {
     testvalues = c()
     output = vector("list", length = 2)
     # HausmannTest
-    HausmanTest = phtest(fee, ree)
+    HausmanTest = phtest(fe, re)
     hvalue = ifelse(HausmanTest$p.value < 0.05, 1, 0)
     testvalues = c(testvalues, hvalue)
     if (hvalue == 1) {
-        TimeFixedEffectsTest = plmtest(fee, effect = c("time"), type = c("bp"))
+        TimeFixedEffectsTest = plmtest(fe, effect = c("time"), type = c("bp"))
         currvalue = ifelse(TimeFixedEffectsTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     } else {
-        TimeFixedEffectsTest = plmtest(ree, effect = c("time"), type = c("bp"))
+        TimeFixedEffectsTest = plmtest(re, effect = c("time"), type = c("bp"))
         currvalue = ifelse(TimeFixedEffectsTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     }
@@ -31,13 +31,13 @@ estimate_appropriate_model = function(fe, re) {
         currvalue = 0
         testvalues = c(testvalues, currvalue)
     } else {
-        RandomEffectsTest = plmtest(ree, type = c("bp"))
+        RandomEffectsTest = plmtest(re, type = c("bp"))
         currvalue = ifelse(RandomEffectsTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     }
     # CrossSectionalDependenceTest
     if (hvalue == 1) {
-        CrossSectionalDependence = pcdtest(fee, test = c("lm"))
+        CrossSectionalDependence = pcdtest(fe, test = c("lm"))
         currvalue = ifelse(CrossSectionalDependence$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     } else {
@@ -46,7 +46,7 @@ estimate_appropriate_model = function(fe, re) {
     }
     # SerialCorrelationTest
     if (hvalue == 1) {
-        SerialCorrelationTest = pbgtest(fee)
+        SerialCorrelationTest = pbgtest(fe)
         currvalue = ifelse(SerialCorrelationTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     } else {
@@ -55,11 +55,11 @@ estimate_appropriate_model = function(fe, re) {
     }
     # HeteroSkedasticityTest
     if (hvalue == 1) {
-        HeteroSkedasticityTest = bptest(fee)
+        HeteroSkedasticityTest = bptest(fe)
         currvalue = ifelse(HeteroSkedasticityTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     } else {
-        HeteroSkedasticityTest = bptest(ree)
+        HeteroSkedasticityTest = bptest(re)
         currvalue = ifelse(HeteroSkedasticityTest$p.value < 0.05, 1, 0)
         testvalues = c(testvalues, currvalue)
     }
@@ -67,35 +67,48 @@ estimate_appropriate_model = function(fe, re) {
     if (testvalues[1] == 0) {
         if (testvalues[6] == 0) {
             output[1] = "Random effect model without heteroskedasticity"
-            output[[2]] = coeftest(ree)
+            output[[2]] = coeftest(re)
         } else {
             if (testvalues[5] == 0) {
                 output[1] = "Random effect model with heteroskedasticity but without serial correlation"
-                output[[2]] = coeftest(ree, vcovHC(ree, method = "white1"))
+                output[[2]] = coeftest(re, vcovHC(re, method = "white1"))
             } else {
                 output[1] = "Random effect model with heteroskedasticity and serial correlation"
-                output[[2]] = coeftest(ree, vcovHC(ree, method = "arellano"))
+                output[[2]] = coeftest(re, vcovHC(re, method = "arellano"))
             }
         }
     } else {
         if (testvalues[6] == 0) {
             output[1] = "Fixed effect model without heteroskedasticity"
-            output[[2]] = coeftest(fee)
+            output[[2]] = coeftest(fe)
         } else {
             if (testvalues[5] == 0) {
                 output[1] = "Fixed effect model with heteroskedasticity but without serial correlation"
-                output[[2]] = coeftest(fee, vcovHC(fee, method = "white1"))
+                output[[2]] = coeftest(fe, vcovHC(fe, method = "white1"))
             } else {
                 output[1] = "Fixed effect model with heteroskedasticity and serial correlation"
-                output[[2]] = coeftest(fee, vcovHC(fee, method = "arellano"))
+                output[[2]] = coeftest(fe, vcovHC(fe, method = "arellano"))
             }
         }
     }
     return(output)
 }
 
-# Apply estimate_appropriate_model-function to fee and ree
-estimate_appropriate_model(fee, ree)
+# Apply estimate_appropriate_model-function to the regressions in Q7 Use did_2.2.2 and specify
+# counterpart random model
+fixed.1 = did_2.2.2
+random.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + 
+    Interaction_Fraction_y12, data = estimation, index = c("State.of.Residence", "Wave"), model = "random")
+# Estimate the appropriate model
+estimate_appropriate_model(fixed.1, random.1)
 # Compare with original estimation
-summary(fee)
+summary(fixed.1)
 
+# Use did.4.2 and specify counterpart random model
+fixed.2 = did_4.2
+random.2 = plm(Delta.Log.Full.Employment ~ binary1, data = estimation, index = c("State.of.Residence", 
+    "Wave"), model = "random")
+# Estimate the appropriate model
+estimate_appropriate_model(fixed.2, random.2)
+# Compare with original estimation
+summary(fixed.2)

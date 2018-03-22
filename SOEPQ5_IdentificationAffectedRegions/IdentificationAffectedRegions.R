@@ -130,9 +130,10 @@ plot_correlation_bites_yearly = function(x) {
 }
 
 # Apply plot_correlation_bites_yearly to create bar chart for the states
+plot_correlation_bites_yearly(Correlation.Bites.yearly)
 plot_output_correlation_bites_yearly = plot_correlation_bites_yearly(Correlation.Bites.yearly)
 # Save the plot_output_correlation_bites_yearly
-# ggsave('plots/plot_output_correlation_bites_yearly.png', plot_output_correlation_bites_yearly)
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_output_correlation_bites_yearly.png', plot_output_correlation_bites_yearly)
 
 # Create function to summarize correlation between Fraction and Kaitz
 summarize_corr_fk = function(x) {
@@ -154,9 +155,10 @@ plot_correlation_bites_states = function(input) {
 }
 
 # Apply plot_correlation_bites_states to create bar chart for the states
+plot_correlation_bites_states(Correlation.Bites.State)
 plot_output_correlation_bites_states = plot_correlation_bites_states(Correlation.Bites.State)
-# Save the plot_output_correlation_bites ggsave('plots/plot_output_correlation_bites_states.png',
-# plot_output_correlation_bites_states)
+# Save the plot_output_correlation_bites 
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_output_correlation_bites_states.png', plot_output_correlation_bites_states)
 
 # OUTPUT FRACTION and KAITZ Density Plots of Kaitz or Fraction Index with aggreagted data
 plot_density_aggregated = function(input, index) {
@@ -173,9 +175,10 @@ plot_density_aggregated = function(input, index) {
 }
 
 # Apply plot_density_aggregated to create density plot for Fraction
+plot_density_aggregated(dbys, "Fraction")
 plot_density_aggr_fraction = plot_density_aggregated(dbys, "Fraction")
-# Save the plot_density_aggr_fraction ggsave('plots/plot_aggregated_data_fraction.png',
-# plot_aggregated_data_fraction)
+# Save the plot_density_aggr_fraction 
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_aggregated_data_fraction.png', plot_aggregated_data_fraction)
 
 # Function to test normality assumption of fraction or kaitz
 shapiro_test = function(input, mode, list_years) {
@@ -215,18 +218,22 @@ plot_aggregated_data = function(input, index) {
 }
 
 # Apply the plot_aggregated_data for Fraction index
+plot_aggregated_data(dbys, "Fraction")
 plot_aggregated_data_fraction = plot_aggregated_data(dbys, "Fraction")
-# Save the plot_aggregated_data_fraction ggsave('plots/plot_aggregated_data_fraction.png',
-# plot_aggregated_data_fraction)
+# Save the plot_aggregated_data_fraction 
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_aggregated_data_fraction.png', plot_aggregated_data_fraction)
 
 # Apply the plot_aggregated_data for Kaitz index
+plot_aggregated_data(dbys, "Kaitz")
 plot_aggregated_data_kaitz = plot_aggregated_data(dbys, "Kaitz")
-# Save the plot_aggregated_data_kaitz ggsave('plots/plot_aggregated_data_kaitz.png',
-# plot_aggregated_data_kaitz)
+# Save the plot_aggregated_data_kaitz 
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_aggregated_data_kaitz.png', plot_aggregated_data_kaitz)
 
 # Apply plot_density_aggregated to create density plot for Kaitz
+plot_density_aggregated(dbys, "Kaitz")
 plot_density_aggr_kaitz = plot_density_aggregated(dbys, "Kaitz")
-# Save the plot_density_aggr_kaitz ggsave('plots/plot_density_aggr_kaitz.png', plot_density_aggr_kaitz)
+# Save the plot_density_aggr_kaitz 
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_density_aggr_kaitz.png', plot_density_aggr_kaitz)
 
 # Apply Shapiro Test to dbys using shapiro_test and the list of years for kaitz index
 shapiro_test(dbys, "Kaitz", list_years)

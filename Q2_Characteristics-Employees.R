@@ -293,7 +293,7 @@ plot_density_earnings = function(x) {
     theme_classic() +
     labs(title = "Density of Hourly Earnings",
          y = "Density",
-         x = "hourly earnings") +
+         x = "Hourly Earnings") +
     scale_colour_hue(name = "Employment Status",
                      labels = c("Full time","Part Time", "Marginal", "Unemployed"))
 }

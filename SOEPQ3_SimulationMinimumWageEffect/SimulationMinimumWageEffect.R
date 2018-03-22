@@ -1,6 +1,6 @@
 ## Quantlet 3 - SimulationMinimumWageEffect Load Packages used in Q3
 library(dplyr)
-# Execution of Q1 is necessary beforehand
+# Execution of Q1 and Q2 is necessary beforehand
 
 # Simulation of Minimum Wage Function to gather average wages for employees affected by minimum wage
 # for each employment status
@@ -13,11 +13,15 @@ minwage_affect = function(x) {
 # Apply Function to create Affected.by.minwage using sumsub2013
 Affected.by.minwage = minwage_affect(sumsub2013)
 
-# Only Show Average Earnings
-Affected.by.minwage = select(filter(Affected.by.minwage, Subject.to.minwage == 1), c(Employment.Status, 
-    avg_Hourly.earnings))
-# Store it as dataframe for later procedure
-Affected.by.minwage = as.data.frame(Affected.by.minwage)
+# Create function to extract average earnings and store it as dataframe
+select_average_earnings = function(x) {
+    x = select(filter(x, Subject.to.minwage == 1), c(Employment.Status, avg_Hourly.earnings))
+    x = as.data.frame(x)
+    return(x)
+}
+
+# Apply select_average_earnings to Affected.by.minwage
+Affected.by.minwage = select_average_earnings(Affected.by.minwage)
 
 # Employment effect if Neo Classical Labor market in % Formula: 1 - (wmin / w)^(-x), with wmin: minimum
 # wage, m:average gross hourly rate and x: labor demand elasticity Input Data Frame with different
@@ -26,11 +30,9 @@ Labor.Demand.Elasticity = c(-0.2, -0.5, -0.75, -1, -1.2)
 
 # Create Function to apply the formula with the input data x
 employ_effect = function(x, y) {
-    i = 1
     for (list in 1:length(x)) {
-        curr_col = 1 - (8.5/y$avg_Hourly.earnings)^(-1 * x[i])
-        y[, paste("Neo.Employment.Effect", i, sep = "")] = curr_col
-        i = i + 1
+        curr_col = 1 - (8.5/y$avg_Hourly.earnings)^(-1 * x[list])
+        y[, paste("Neo.Employment.Effect", list, sep = "")] = curr_col
     }
     return(y)
 }
@@ -90,8 +92,8 @@ plot_graph_effect_minwage = function(input, elasticities) {
 }
 
 # Apply plot_graph_effect_minwage using Affected.by.minwage and Labor.Demand.Elasticity as inputs
+plot_graph_effect_minwage(Affected.by.minwage, Labor.Demand.Elasticity)
 plot_graph_effect_minwage_output = plot_graph_effect_minwage(Affected.by.minwage, Labor.Demand.Elasticity)
-# Save the plot created above into a png-file ggsave('plots/plot_graph_effect_minwage_output.png',
-# plot_graph_effect_minwage_output)
-
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ3_SimulationMinimumWageEffect/plots/plot_graph_effect_minwage_output.png', plot_graph_effect_minwage_output)
 

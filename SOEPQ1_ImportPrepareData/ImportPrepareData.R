@@ -7,19 +7,20 @@ library(data.table)
 getwd()
 # Otherwise Set the Working Directory -> setwd('/Your/Path/to/Happiness')
 
-### IMPORT, MERGE AND CLEAN ALL DATA ### We need two iterators: i is to step through the list of years,
+### IMPORT, MERGE AND CLEAN ALL DATA 
+### We need two iterators: i is to step through the list of years,
 ### beginning with k is always one digit higher than i as it reads the second column of the feature
 ### selection list (the first column is the label)
 i = 1  # iterator to step through the list of years
 k = 2  # iterator to step through the columns in variable list
 # List all directories within the input data, non-recursive
-list_dirs = list.dirs(path = "input-data", recursive = FALSE)
+list_dirs = list.dirs(path = "SOEPQ1_ImportPrepareData/input-data", recursive = FALSE)
 # Extract the year name of the directories, so the last 4 digits and make it numeric
 list_years = str_sub(list_dirs, -4)
 # Create Variable names for every merged year based on the style merged[year]
 list_varnames = paste("merged", list_years, sep = "")
 # Load the variable list we cleaned manually in Excel as CSV
-soep_selection = read.table("variable-selection/soep-var-selection.csv", header = TRUE, sep = ";", check.names = FALSE)
+soep_selection = read.table("SOEPQ1_ImportPrepareData/variable-selection/soep-var-selection.csv", header = TRUE, sep = ";", check.names = FALSE)
 # Get all Labels, unfiltered
 labels = soep_selection[, 1]
 # Create a vector to put object names of all years in it

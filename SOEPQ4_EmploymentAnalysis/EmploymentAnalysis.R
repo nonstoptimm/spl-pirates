@@ -66,6 +66,7 @@ yearly_employment = function(x) {
         7]), Part.Employment = length(Employment.Status[as.numeric(Employment.Status) == 8]), Marginal.Employment = length(Employment.Status[as.numeric(Employment.Status) == 
         10]), Not.Employment = length(Employment.Status[as.numeric(Employment.Status) == 15]))
 }
+
 # Apply yearly_employment to the reduced_merged dataset without NAs
 Employment.yearly = yearly_employment(Reduced_merged_noNA)
 
@@ -179,22 +180,29 @@ plot_graphs_year = function(input, mode, title, y) {
         geom_vline(xintercept = 5, color = "red")
 }
 
-# Apply plot_graphs_year to Employment.yearly using different mode illustrate Log Employment of all
-# three groups
+# Apply plot_graphs_year to Employment.yearly using different mode 
+# Illustrate Log Employment of all three groups
+plot_graphs_year(Employment.yearly, "Log", "Log Employment over Time", "Log Employment")
 plot_graphs_year_log = plot_graphs_year(Employment.yearly, "Log", "Log Employment over Time", "Log Employment")
-# ggsave('plots/plot_graphs_year_log.png', plot_graphs_year_log) illustrate % change of Log Employment
-# of all three groups
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_log.png', plot_graphs_year_log) 
+
+# Illustrate % change of Log Employment of all three groups
+plot_graphs_year(Employment.yearly, "ChangeLog", "Growth Rate of Employment over Time", "Growth rate change in %")
 plot_graphs_year_changelog = plot_graphs_year(Employment.yearly, "ChangeLog", "Growth Rate of Employment over Time", 
     "Growth rate change in %")
-# ggsave('plots/plot_graphs_year_changelog.png', plot_graphs_year_changelog) illustrate Emplyoment
-# Rates of all three groups
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_changelog.png', plot_graphs_year_changelog) 
+
+# Illustrate Emplyoment Rates of all three groups
+plot_graphs_year(Employment.yearly, "EmployRates", "Employment Rate over Time", "Employment rate in %")
 plot_graphs_year_employrates = plot_graphs_year(Employment.yearly, "EmployRates", "Employment Rate over Time", 
     "Employment rate in %")
-# ggsave('plots/plot_graphs_year_employrates.png', plot_graphs_year_employrates) illustrate Log
-# Employment Rates of all three groups
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_employrates.png', plot_graphs_year_employrates) 
+
+# Illustrate Log Employment Rates of all three groups
+plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment Rate over Time", "Log Employment rate in %")
 plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmployRates", "LogEmployment Rate over Time", 
     "Log Employment rate in %")
-# ggsave('plots/plot_graphs_year_logemployrates.png', plot_graphs_year_logemployrates)
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_logemployrates.png', plot_graphs_year_logemployrates)
 
 # OUTPUT Graphs for each state of the employment variables over time Define a function with different
 # employment modes
@@ -218,13 +226,19 @@ plot_graphs_growth = function(input, mode, title) {
 
 # Apply plot_graphs_growth to Employment.yearly.state using different employment types Full time
 # employment growth rate
+plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
 plot_graphs_growth_full = plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
-# ggsave('plots/plot_graphs_growth_full.png', plot_graphs_growth_full) Part time employment growth rate
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_full.png', plot_graphs_growth_full) 
+# Part time employment growth rate
+plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
 plot_graphs_growth_part = plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
-# ggsave('plots/plot_graphs_growth_part.png', plot_graphs_growth_part) Marginal employment growth rate
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_part.png', plot_graphs_growth_part) 
+# Marginal employment growth rate
+plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
 plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
-# ggsave('plots/plot_graphs_growth_marginal.png', plot_graphs_growth_marginal) Not employed growth rate
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_marginal.png', plot_graphs_growth_marginal) 
+# Not employed growth rate
+plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
 plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
-# ggsave('plots/plot_graphs_growth_not.png', plot_graphs_growth_not)
-
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_not.png', plot_graphs_growth_not)
 

@@ -104,12 +104,11 @@ plot_graph_effect_minwage = function(input, elasticities) {
          x = "Elasticity",
          y = "Negative Change in Employment in Percent") +
     scale_colour_hue(name = "Employment Status",
-                     labels = c("Full time","Marginal", "Part Time","Unemployed"))
+                     labels = c("Full time", "Marginal", "Part Time", "Unemployed"))
 }
 
 # Apply plot_graph_effect_minwage using Affected.by.minwage and Labor.Demand.Elasticity as inputs
 plot_graph_effect_minwage_output = plot_graph_effect_minwage(Affected.by.minwage, Labor.Demand.Elasticity)
 # Save the plot created above into a png-file
 # ggsave("plots/plot_graph_effect_minwage_output.png", plot_graph_effect_minwage_output)
-
 

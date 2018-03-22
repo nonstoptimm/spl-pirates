@@ -1,7 +1,7 @@
 
 [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/banner.png" width="888" alt="Visit QuantNet">](http://quantlet.de/)
 
-## [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/qloqo.png" alt="Visit QuantNet">](http://quantlet.de/) **MSMasymptoticnormality1** [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/QN2.png" width="60" alt="Visit QuantNet 2.0">](http://quantlet.de/)
+## [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/qloqo.png" alt="Visit QuantNet">](http://quantlet.de/) **SOEPQ1_ImportPrepareData** [<img src="https://github.com/QuantLet/Styleguide-and-FAQ/blob/master/pictures/QN2.png" width="60" alt="Visit QuantNet 2.0">](http://quantlet.de/)
 
 ```yaml
 
@@ -153,8 +153,5 @@ names(merged_all) = valid_column_names
 # Delete the intermediate variables to clean up the workspace
 rm(list=datalist)
 rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'datalist', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'valid_column_names', 'Wave', 'years', 'z'))
-
-
-
 
 ```

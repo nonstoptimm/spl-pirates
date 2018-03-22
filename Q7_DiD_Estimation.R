@@ -159,7 +159,7 @@ stargazer(did_4.1, did_5.1, did_6.1, title="Effects on Employment Outcomes using
           keep.stat= c("n","adj.rsq","rsq"), 
           dep.var.labels.include = FALSE,
           dep.var.caption  = ("Panel D: Log Employment Status"),
-          covariate.labels=c("Bite x D2015", "t x Bite","t² x Bite"),
+          covariate.labels=c("Bite x D2015", "Linear Trend","Quadratic Trend"),
           column.labels=c("Full", "Part", "Marginal"))
 
 # Regression 5:  We regress on Change in Log Employment Status Using Kaitz2013 and standart binary treatment

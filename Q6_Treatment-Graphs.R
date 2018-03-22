@@ -241,5 +241,3 @@ plot_result_kaitz = plot_result_index(final_map, "Kaitz", "blue")
 # Plot Fraction Index
 plot_result_fraction = plot_result_index(final_map, "Fraction", "red")
 # ggsave("plots/plot-fraction.png", plot_result_fraction)
-
-

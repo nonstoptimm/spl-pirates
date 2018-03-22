@@ -260,22 +260,24 @@ plot_density_age = function(x) {
 }
 
 # Plot plot_density_age with 2013 dataset
+plot_density_age(sumsub2013)
 plot_output_density_age = plot_density_age(sumsub2013)
-# Save the plot created above into a png-file ggsave('plots/plot_output_density_age.png',
-# plot_output_density_age)
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ2_DescriptiveAnalysis/plots/plot_output_density_age.png', plot_output_density_age)
 
 # Densityplot-Function for Hourly Earnings
 plot_density_earnings = function(x) {
     ggplot(data = na.omit(x), aes(x = Hourly.earnings, group = Employment.Status, color = Employment.Status)) + 
         geom_line(stat = "density") + coord_cartesian(xlim = c(0, 100)) + theme_classic() + labs(title = "Density of Hourly Earnings", 
-        y = "Density", x = "hourly earnings") + scale_colour_hue(name = "Employment Status", labels = c("Full time", 
+        y = "Density", x = "Hourly Earnings") + scale_colour_hue(name = "Employment Status", labels = c("Full time", 
         "Part Time", "Marginal", "Unemployed"))
 }
 
 # Plot plot_density_earnings with 2013 dataset
+plot_density_earnings(sumsub2013)
 plot_output_density_earnings = plot_density_earnings(sumsub2013)
-# Save the plot created above into a png-file ggsave('plots/plot_output_density_earnings.png',
-# plot_output_density_earnings)
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ2_DescriptiveAnalysis/plots/plot_output_density_earnings.png', plot_output_density_earnings)
 
 # Densityplot-Function for monthly earning
 plot_density_monthly_earnings = function(x) {
@@ -286,9 +288,10 @@ plot_density_monthly_earnings = function(x) {
 }
 
 # Plot plot_density_monthly_earnings with 2013 dataset
+plot_density_monthly_earnings(sumsub2013)
 plot_output_density_monthly_earnings = plot_density_monthly_earnings(sumsub2013)
-# Save the plot created above into a png-file ggsave('plots/plot_output_density_monthly_earnings.png',
-# plot_output_density_monthly_earnings)
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ2_DescriptiveAnalysis/plots/plot_output_density_monthly_earnings.png', plot_output_density_monthly_earnings)
 
 # Densityplot-Function for Actual Worktime (per week)
 plot_density_actual_work = function(x) {
@@ -299,9 +302,10 @@ plot_density_actual_work = function(x) {
 }
 
 # Plot plot_density_actual_work with 2013 dataset
+plot_density_actual_work(sumsub2013)
 plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
-# Save the plot created above into a png-file ggsave('plots/plot_ouput_density_actual_work.png',
-# plot_ouput_density_actual_work)
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ2_DescriptiveAnalysis/plots/plot_ouput_density_actual_work.png', plot_ouput_density_actual_work)
 
 # Plot-Function for Gender of every emloyment status
 plot_gender_employment = function(x) {
@@ -318,7 +322,8 @@ plot_gender_employment = function(x) {
 }
 
 # Plot plot_gender_employment with 2013 dataset
+plot_gender_employment(sumsub2013)
 plot_ouput_gender_employment = plot_gender_employment(sumsub2013)
-# Save the plot created above into a png-file ggsave('plots/plot_ouput_gender_employment.png',
-# plot_ouput_gender_employment)
+# Save the plot created above into a png-file 
+# ggsave('SOEPQ2_DescriptiveAnalysis/plots/plot_ouput_gender_employment.png', plot_ouput_gender_employment)
 
