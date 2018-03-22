@@ -33,6 +33,7 @@ Output:  		'Estimation Tables using different regression model specifications'
 ```r
 ## Quantlet 7 - DiffDiffEstimation Load Packages used in Q7
 library(plm)
+library(stargazer)
 # Execution of Q1, Q4, Q5 and Q6 is necessary beforehand!
 
 # Data Pre-Processing for DiD estimation Create sub-dataframe with only variables of interest
