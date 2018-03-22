@@ -247,19 +247,19 @@ plot_result_factor = function(x) {
 # Apply Plot Functions Plot Binary Treatment Variable
 plot_result_factor(final_map)
 ```
-![Binary Groups](plots/plot-factor.png)
+![Binary Groups](plots/plot-factor.png =250x)
 ```r
 plot_result_binary = plot_result_factor(final_map)
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-factor.png', plot_result_binary) Plot Kaitz Index
 plot_result_index(final_map, "Kaitz", "blue")
 ```
-![Kaitz-Index](plots/plot-kaitz.png)
+![Kaitz-Index](plots/plot-kaitz.png =250x)
 ```r
 plot_result_kaitz = plot_result_index(final_map, "Kaitz", "blue")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-kaitz.png', plot_result_kaitz) Plot Fraction Index
 plot_result_index(final_map, "Fraction", "red")
 ```
-![Fraction Index](plots/plot-fraction.png)
+![Fraction Index](plots/plot-fraction.png =250x)
 ```r
 plot_result_fraction = plot_result_index(final_map, "Fraction", "red")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-fraction.png', plot_result_fraction)

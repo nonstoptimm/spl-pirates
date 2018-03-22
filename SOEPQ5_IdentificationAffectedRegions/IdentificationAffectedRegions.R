@@ -2,11 +2,6 @@
 library(dplyr)
 # Execution of Q1 is necessary beforehand!
 
-# Note Legend according to SOEP Info: https://data.soep.de/soep-core -1: no answer /don`t know -2: does
-# not apply -3 : implausible value -4: inadmissable multiple response -5: not included in this version
-# of the questionnaire -6 : version of questionnaire with modified filtering -8: question not part of
-# the survey programm this year
-
 ### Data pre-processing for analysis
 data_selector = function(merged_all) {
     select(filter(merged_all), c(Wave, never.Changing.Person.ID, State.of.Residence, Employment.Status, 
