@@ -5,18 +5,18 @@
 
 ```yaml
 
-Name of Quantlet: SOEPQ1_ImportPrepareData
+Name of Quantlet:   SOEPQ1_ImportPrepareData
 
-Published in: Employment effects of the new German minimum wage (SOEP dataset)
+Published in:   Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 'Import, merge, preparation and variable selection of the SOEP data for multiple waves.
+Description:  'Import, merge, preparation and variable selection of the SOEP data for multiple waves.
 The selection of the desired variables are adjustable in the soep-var-selection.csv-file.'
 
-Keywords: process, transformation, standardization
+Keywords:   process, transformation, standardization
 
-Authors: Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+Authors:  Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
-Submitted: 30th of March 2018 by the research team mentioned in Authors
+Submitted:    30th of March 2018 by the research team mentioned in Authors
 
 Datafiles:
 - 1: variable-selection/soep-var-selection.csv
@@ -123,7 +123,7 @@ for (years in list_years) {
 
 # Merge all data into one dataframe and add a column with the respective year, called "Wave"
 # Create a new dataframe
-merged_all <- data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
+merged_all = data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
 # Name the dataframe using the first column of the csv
 colnames(merged_all) <- soep_selection[,1]
 # Add "Wave" column to the dataframe
