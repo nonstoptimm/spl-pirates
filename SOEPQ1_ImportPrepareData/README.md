@@ -47,7 +47,7 @@ Datafiles:
 - 26: input-data/2016_bgp.dta
 - 27: input-data/2016_bgpequiv.dta
 - 28: input-data/2016_bgpgen.dta
-- 29: input-data/2016_bgpkal.dta,
+- 29: input-data/2016_bgpkal.dta
 
 Input:    'Input data provided by SOEP, ending with .dta as well as a csv-file created by the authors of this research, containing labels and variable names.'
 

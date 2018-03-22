@@ -178,7 +178,7 @@ plot_density_aggregated = function(input, index) {
 plot_density_aggregated(dbys, "Fraction")
 plot_density_aggr_fraction = plot_density_aggregated(dbys, "Fraction")
 # Save the plot_density_aggr_fraction 
-# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_aggregated_data_fraction.png', plot_aggregated_data_fraction)
+# ggsave('SOEPQ5_IdentificationAffectedRegions/plots/plot_density_aggr_fraction.png', plot_density_aggr_fraction)
 
 # Function to test normality assumption of fraction or kaitz
 shapiro_test = function(input, mode, list_years) {

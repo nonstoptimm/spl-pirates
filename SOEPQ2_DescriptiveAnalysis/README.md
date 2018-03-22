@@ -276,7 +276,7 @@ plot_density_age = function(x) {
 # Plot plot_density_age with 2013 dataset
 plot_density_age(sumsub2013)
 ```
-![Picture1](plots/plot_output_density_age.png)
+![Density of Age](plots/plot_output_density_age.png)
 ```r
 plot_output_density_age = plot_density_age(sumsub2013)
 # Save the plot created above into a png-file
@@ -293,7 +293,7 @@ plot_density_earnings = function(x) {
 # Plot plot_density_earnings with 2013 dataset
 plot_density_earnings(sumsub2013)
 ```
-![Picture1](plots/plot_output_density_earnings.png)
+![Density of Hourly Earnings](plots/plot_output_density_earnings.png)
 ```r
 plot_output_density_earnings = plot_density_earnings(sumsub2013)
 # Save the plot created above into a png-file
@@ -310,7 +310,7 @@ plot_density_monthly_earnings = function(x) {
 # Plot plot_density_monthly_earnings with 2013 dataset
 plot_density_monthly_earnings(sumsub2013)
 ```
-![Picture1](plots/plot_output_density_monthly_earnings.png)
+![Density of Monthly Earnings](plots/plot_output_density_monthly_earnings.png)
 ```r
 plot_output_density_monthly_earnings = plot_density_monthly_earnings(sumsub2013)
 # Save the plot created above into a png-file
@@ -327,7 +327,7 @@ plot_density_actual_work = function(x) {
 # Plot plot_density_actual_work with 2013 dataset
 plot_density_actual_work(sumsub2013)
 ```
-![Picture1](plots/plot_ouput_density_actual_work.png)
+![Density of Actual Work Time per Week](plots/plot_ouput_density_actual_work.png)
 ```r
 plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
 # Save the plot created above into a png-file
@@ -350,7 +350,7 @@ plot_gender_employment = function(x) {
 # Plot plot_gender_employment with 2013 dataset
 plot_gender_employment(sumsub2013)
 ```
-![Picture1](plots/plot_ouput_gender_employment.png)
+![Gender for every employment status](plots/plot_ouput_gender_employment.png)
 ```r
 plot_ouput_gender_employment = plot_gender_employment(sumsub2013)
 # Save the plot created above into a png-file
