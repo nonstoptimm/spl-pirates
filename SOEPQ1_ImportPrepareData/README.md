@@ -5,18 +5,18 @@
 
 ```yaml
 
-Name of Quantlet:   SOEPQ1_ImportPrepareData
+Name of Quantlet: 	SOEPQ1_ImportPrepareData
 
-Published in:   Employment effects of the new German minimum wage (SOEP dataset)
+Published in:		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description:  'Import, merge, preparation and variable selection of the SOEP data for multiple waves.
+Description: 		'Import, merge, preparation and variable selection of the SOEP data for multiple waves.
 The selection of the desired variables are adjustable in the soep-var-selection.csv-file.'
 
-Keywords:   process, transformation, standardization
+Keywords:		process, transformation, standardization
 
-Authors:  Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+Authors:		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
-Submitted:    30th of March 2018 by the research team mentioned in Authors
+Submitted:		30th of March 2018 by the research team mentioned in Authors
 
 Datafiles:
 - 1: variable-selection/soep-var-selection.csv
@@ -49,9 +49,9 @@ Datafiles:
 - 28: input-data/2016_bgpgen.dta
 - 29: input-data/2016_bgpkal.dta
 
-Input:    'Input data provided by SOEP, ending with .dta as well as a csv-file created by the authors of this research, containing labels and variable names.'
+Input:			'Input data provided by SOEP, ending with .dta as well as a csv-file created by the authors of this research, containing labels and variable names.'
 
-Output:   'Merged and filtered dataset for further processing of the SOEP data.'
+Output:			'Merged and filtered dataset for further processing of the SOEP data.'
 
 ```
 
