@@ -6,7 +6,7 @@
 
 # Information and Important Instructions
 **Topic**:  
-*Employment Effects of the new German minimum wage*  
+*Employment Effects of the new German minimum wage (SOEP Dataset)*
 
 Humboldt-University of Berlin
 
@@ -30,4 +30,3 @@ This is really important to execute the quantlets correctly, as the execution of
 >**Examples:**  
 setwd("Your/Directory/spl-pirates") -> **RIGHT**  
 setwd("Your/Directory/spl-pirates/SOEPQ1_ImportPrepareData") -> **WRONG!**
-[/quote]
