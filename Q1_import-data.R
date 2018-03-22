@@ -1,8 +1,9 @@
-# Quantlet 1 - IMPORT DATA SKRIPT
-# Load Packages used in Q1
+## Quantlet 1 - ImportPrepareData
+## Load Packages used in Q1
 library(foreign)
 library(stringr)
 library(data.table)
+
 # Make Sure you check your Working Directory so that the code works flawless!
 getwd()
 # Otherwise Set the Working Directory -> setwd('/Your/Path/to/Happiness')
@@ -92,5 +93,5 @@ names(merged_all) = valid_column_names
 
 # Delete the intermediate variables to clean up the workspace
 rm(list=datalist)
-rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'Wave', 'years', 'z'))
+rm(list = c('clean_labels','clean_sorted', 'cleaned', 'current_data', 'data_merged', 'datalist', 'list_import', 'ordered_colnames', 'soep_selection', 'soep_selection_sub', 'current_list', 'current_year', 'i', 'k', 'labels', 'list_dirs', 'list_files', 'soep_subcrit', 'valid_column_names', 'Wave', 'years', 'z'))
 

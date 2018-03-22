@@ -1,5 +1,5 @@
-# Quantlet 5
-# Load Packages used in Q5
+## Quantlet 5 - IdentificationAffectedRegions
+## Load Packages used in Q5
 library(dplyr)
 # Execution of Q1 is necessary beforehand!
 

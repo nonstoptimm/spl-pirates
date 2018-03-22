@@ -1,5 +1,5 @@
-# Quantlet 3
-# Load Packages used in Q3
+## Quantlet 3 - SimulationMinimumWageEffect
+## Load Packages used in Q3
 library(dplyr)
 # Execution of Q1 is necessary beforehand
 
@@ -17,7 +17,7 @@ minwage_affect = function(x) {
             )
   }
 
-# Apply Function to create Affected.by.minwage
+# Apply Function to create Affected.by.minwage using sumsub2013
 Affected.by.minwage = minwage_affect(sumsub2013)
 
 # Only Show Average Earnings
@@ -104,7 +104,7 @@ plot_graph_effect_minwage = function(input, elasticities) {
                      labels = c("Full time","Marginal", "Part Time","Unemployed"))
 }
 
-# Apply plot_graph_effect_minwage
+# Apply plot_graph_effect_minwage using Affected.by.minwage and Labor.Demand.Elasticity as inputs
 plot_graph_effect_minwage_output = plot_graph_effect_minwage(Affected.by.minwage, Labor.Demand.Elasticity)
 # Save the plot created above into a png-file
 # ggsave("plots/plot_graph_effect_minwage_output.png", plot_graph_effect_minwage_output)

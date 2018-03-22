@@ -1,5 +1,5 @@
-# Quantlet 2
-# Load Packages used in Q2
+## Quantlet 2 - DescriptiveAnalysis
+## Load Packages used in Q2
 library(dplyr)
 library(ggplot2)
 library(stringr)
@@ -10,7 +10,7 @@ library(stargazer)
 # Code can be applied for any year as it's created as functions
 # Data Cleaning, Summary Statistics, Output
 
-# Definition of Data Selector Function
+# Definition of data_selector Function to be able to select variables for a special wave 
 data_selector = function(input, wave) {
   select(filter(input, Wave == wave), c(Wave, never.Changing.Person.ID, State.of.Residence, Sex, Year.of.Birth,
                                                        Registered.Unemployed, Employment.Status,Labor.Force.Status,
@@ -48,7 +48,7 @@ set_labor_force = function(x, y, z) {
 # Apply set_labor_force to the sub2013 Dataset
 sub2013 = set_labor_force(sub2013, 6, 8)
 
-# Function to calculate the actual age of the people, as there are only years
+# Function to calculate the actual age of the people, as there are only years in the dataset
 age_calculator = function(x, year) {
   x$Age = year - x$Year.of.Birth
   # Implausible Value for Age
@@ -72,6 +72,7 @@ check_gender(sub2013)
 
 # Function to correct Sex values
   gender_correction = function(x) {
+    # New column
       x$Sexnum = NA
     # Convert as numeric for analysis
       x$Sexnum = as.numeric(x$Sex) - 7
@@ -92,7 +93,7 @@ check_unemployment = function(x) {
 # Apply check_unemployment function on sub2013
 check_unemployment(sub2013)
 
-# Employment Status
+# Create a view for the Employment Status
 check_employment_status = function(x) {
   view = c()
   view = c(view, "Employment Status Table: ")
@@ -122,7 +123,7 @@ set_na_not_affected = function(x) {
 # Apply the set_na_not_affected function to the sub2013 subset
 sub2013 = set_na_not_affected(sub2013)
 
-# Qualification
+# View over the Qualification
 # High if college degree, middle if vocational degree, low if school degree, non if no school degree
 # High = 3, Middle = 2, Low = 1, Non = 0
 # Create a function for it
@@ -178,7 +179,7 @@ rearrange_qualification = function(x) {
 sub2013 = rearrange_qualification(sub2013)
 
 # Income
-# Set Values of -2 to 0 -> People that have no Monthly Income
+# Set Values of -2 to 0 -> People who have no Monthly Income
 # Create a function for it
 set_income = function(x) {
   x$Current.Gross.Labor.Income.in.Euro[(x$Current.Gross.Labor.Income.in.Euro) == -2] = 0
@@ -262,7 +263,7 @@ print_means = function(x) {
           covariate.labels = c("n()", "mean age", "mean sex", "mean qualification", "mean hourly earning", "mean monthly earning"))
 }
 
-# Apply Print Means
+# Apply print_means to Means2013 dataset
 print_means(Means2013)
 
 # Show Kernel Density of the Variables in Means Output
@@ -318,7 +319,7 @@ plot_density_monthly_earnings = function(x) {
 # Plot plot_density_monthly_earnings with 2013 dataset
 plot_output_density_monthly_earnings = plot_density_monthly_earnings(sumsub2013)
 # Save the plot created above into a png-file
-#ggsave("plots/plot_output_density_monthly_earnings.png", plot_output_density_monthly_earnings)
+# ggsave("plots/plot_output_density_monthly_earnings.png", plot_output_density_monthly_earnings)
 
 # Densityplot-Function for Actual Worktime (per week)
 plot_density_actual_work = function(x) {
@@ -336,7 +337,7 @@ plot_density_actual_work = function(x) {
 # Plot plot_density_actual_work with 2013 dataset
 plot_ouput_density_actual_work = plot_density_actual_work(sumsub2013)
 # Save the plot created above into a png-file
-#ggsave("plots/plot_ouput_density_actual_work.png", plot_ouput_density_actual_work)
+# ggsave("plots/plot_ouput_density_actual_work.png", plot_ouput_density_actual_work)
 
 # Plot-Function for Gender of every emloyment status
 plot_gender_employment = function(x) {

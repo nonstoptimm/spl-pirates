@@ -1,6 +1,6 @@
-# Quantlet 6
-# Graphical Analysis for Employment Rates of Treatment and Control Groups###
-# Load Packages used in Q6
+## Quantlet 6 - GraphicalAnalysisMinWage
+## Graphical Analysis for Employment Rates of Treatment and Control Groups
+## Load Packages used in Q6
 library(ggplot2)
 library(sp)
 # Execution of Q1 is necessary beforehand!

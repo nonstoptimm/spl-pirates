@@ -1,14 +1,15 @@
-# Quantlet 1 - IMPORT DATA SKRIPT Load Packages used in Q1
+## Quantlet 1 - ImportPrepareData Load Packages used in Q1
 library(foreign)
 library(stringr)
 library(data.table)
+
 # Make Sure you check your Working Directory so that the code works flawless!
 getwd()
 # Otherwise Set the Working Directory -> setwd('/Your/Path/to/Happiness')
 
-### IMPORT, MERGE AND CLEAN ALL DATA ### We need two iterators: i is to step through the list of
-### years, beginning with k is always one digit higher than i as it reads the second column of
-### the feature selection list (the first column is the label)
+### IMPORT, MERGE AND CLEAN ALL DATA ### We need two iterators: i is to step through the list of years,
+### beginning with k is always one digit higher than i as it reads the second column of the feature
+### selection list (the first column is the label)
 i = 1  # iterator to step through the list of years
 k = 2  # iterator to step through the columns in variable list
 # List all directories within the input data, non-recursive
@@ -18,8 +19,7 @@ list_years = str_sub(list_dirs, -4)
 # Create Variable names for every merged year based on the style merged[year]
 list_varnames = paste("merged", list_years, sep = "")
 # Load the variable list we cleaned manually in Excel as CSV
-soep_selection = read.table("variable-selection/soep-var-selection.csv", header = TRUE, sep = ";", 
-    check.names = FALSE)
+soep_selection = read.table("variable-selection/soep-var-selection.csv", header = TRUE, sep = ";", check.names = FALSE)
 # Get all Labels, unfiltered
 labels = soep_selection[, 1]
 # Create a vector to put object names of all years in it
@@ -29,8 +29,8 @@ datalist = c()
 for (years in list_years) {
     # Define Current List of import data based on the 'i' value
     list_files = list.files(path = list_dirs[i], pattern = "", full.names = TRUE)
-    # Import all the data from the current list with the read.dta-Function (part of foreign
-    # package) for SPSS-Files
+    # Import all the data from the current list with the read.dta-Function (part of foreign package) for
+    # SPSS-Files
     list_import = lapply(list_files, read.dta)
     # Merge it into one file
     data_merged = Reduce(function(x, y) merge(x, y, by = "persnr", all.x = TRUE), list_import)
@@ -46,8 +46,8 @@ for (years in list_years) {
     soep_selection_sub = soep_selection[soep_subcrit]
     # Delete NA-Values from the list
     soep_selection_sub = na.omit(soep_selection_sub)
-    # Create a subset of the clean labels, where all codenames match, to make sure that the labels
-    # are correct
+    # Create a subset of the clean labels, where all codenames match, to make sure that the labels are
+    # correct
     clean_labels = subset(soep_selection_sub, sort(soep_selection_sub[, 2]) == sort(names(cleaned)))
     # Order Dataframe alphabetically
     clean_sorted = cleaned[, order(names(cleaned))]
@@ -64,8 +64,8 @@ for (years in list_years) {
     k = k + 1
 }
 
-# Merge all data into one dataframe and add a column with the respective year, called 'Wave'
-# Create a new dataframe
+# Merge all data into one dataframe and add a column with the respective year, called 'Wave' Create a
+# new dataframe
 merged_all <- data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
 # Name the dataframe using the first column of the csv
 colnames(merged_all) <- soep_selection[, 1]
@@ -89,14 +89,14 @@ for (years in c(datalist)) {
     z = z + 1
 }  # END OF FOR-LOOP
 
-# Removes Spaces in Variable Names and substitues with a . - Necessary for the dplyr package,
-# which is handy for later analysis of our data
+# Removes Spaces in Variable Names and substitues with a . - Necessary for the dplyr package, which is
+# handy for later analysis of our data
 valid_column_names = make.names(names = names(merged_all), unique = TRUE, allow_ = TRUE)
 names(merged_all) = valid_column_names
 
 # Delete the intermediate variables to clean up the workspace
 rm(list = datalist)
-rm(list = c("clean_labels", "clean_sorted", "cleaned", "current_data", "data_merged", "list_import", 
-    "ordered_colnames", "soep_selection", "soep_selection_sub", "current_list", "current_year", 
-    "i", "k", "labels", "list_dirs", "list_files", "soep_subcrit", "Wave", "years", "z"))
+rm(list = c("clean_labels", "clean_sorted", "cleaned", "current_data", "data_merged", "datalist", "list_import", 
+    "ordered_colnames", "soep_selection", "soep_selection_sub", "current_list", "current_year", "i", "k", 
+    "labels", "list_dirs", "list_files", "soep_subcrit", "valid_column_names", "Wave", "years", "z"))
 

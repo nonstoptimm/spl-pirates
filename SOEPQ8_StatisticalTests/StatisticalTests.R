@@ -1,8 +1,7 @@
-# Quantlet 8 Load Packages used in Q8
-library(ggplot2)
-library(sp)
+## Quantlet 8 - StatisticalTests Load Packages used in Q8
 library(plm)
 library(lmtest)
+# Execution of Q1 is necessary beforehand!
 
 # Create regressions fee and ree
 fee = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, 
@@ -67,27 +66,27 @@ estimate_appropriate_model = function(fe, re) {
     # Estimate correct coefficients
     if (testvalues[1] == 0) {
         if (testvalues[6] == 0) {
-            output[1] = "Testname"
+            output[1] = "Random effect model without heteroskedasticity"
             output[[2]] = coeftest(ree)
         } else {
             if (testvalues[5] == 0) {
-                output[1] = "Testname"
+                output[1] = "Random effect model with heteroskedasticity but without serial correlation"
                 output[[2]] = coeftest(ree, vcovHC(ree, method = "white1"))
             } else {
-                output[1] = "Testname"
+                output[1] = "Random effect model with heteroskedasticity and serial correlation"
                 output[[2]] = coeftest(ree, vcovHC(ree, method = "arellano"))
             }
         }
     } else {
         if (testvalues[6] == 0) {
-            output[1] = "Testname"
+            output[1] = "Fixed effect model without heteroskedasticity"
             output[[2]] = coeftest(fee)
         } else {
             if (testvalues[5] == 0) {
-                output[1] = "Testname"
+                output[1] = "Fixed effect model with heteroskedasticity but without serial correlation"
                 output[[2]] = coeftest(fee, vcovHC(fee, method = "white1"))
             } else {
-                output[1] = "Testname"
+                output[1] = "Fixed effect model with heteroskedasticity and serial correlation"
                 output[[2]] = coeftest(fee, vcovHC(fee, method = "arellano"))
             }
         }
@@ -97,5 +96,6 @@ estimate_appropriate_model = function(fe, re) {
 
 # Apply estimate_appropriate_model-function to fee and ree
 estimate_appropriate_model(fee, ree)
+# Compare with original estimation
 summary(fee)
 

@@ -1,6 +1,6 @@
-# Quantlet 7
-# D&D Analysis
-# Load Packages used in Q7
+## Quantlet 7 - DiffDiffEstimation
+## D&D Analysis
+## Load Packages used in Q7
 library(plm)
 # Execution of Q1 is necessary beforehand!
 

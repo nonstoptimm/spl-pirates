@@ -1,7 +1,8 @@
-# Quantlet 8
-# Load Packages used in Q8
+## Quantlet 8 - StatisticalTests
+## Load Packages used in Q8
 library(plm)
 library(lmtest)
+# Execution of Q1 is necessary beforehand!
 
 # Create regressions fee and ree
 fee = plm(Log.Full.Employment.Rate ~ DiD.estimator.Kaitz + Log.Population + year13.dummy + year12.dummy, data = estimation, index=c("State.of.Residence", "Wave"), model = "within")
