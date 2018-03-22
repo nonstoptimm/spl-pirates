@@ -16,8 +16,8 @@ Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
 
 Datafile: 		no immediate import data in this quantlet, see SOEPQ1
 
-Input: 			(optional - delete if not used)
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1'
 
-Output:  		(optional - delete if not used)
+Output:  		'Plotting various measures of Fraction and Kaitz Index across German states'
 
-Example: 		for your plots, graphs, results etc. - delete if not used
+Example: 		'Density plots, Correlation visualization and Time Changes of Fraction and Kaitz Index'

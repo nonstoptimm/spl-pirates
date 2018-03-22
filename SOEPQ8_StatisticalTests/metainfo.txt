@@ -2,11 +2,11 @@ Name of Quantlet:	SOEPQ8_StatisticalTests
 
 Published in:		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		MUST NOT BE EMPTY!
+Description: 		'Building a loop for running given estimations through a variety of statistical tests in order to estimate the regression model rightfully.'
 
-Keywords: 		MUST NOT BE EMPTY!
+Keywords: 		test, testing, regression, estimation, robust estimation, heteroskedasticity
 
-See also: 		SOEPQ1
+See also: 		SOEPQ1, SOEPQ4, SOEPQ5, SOEPQ6, SOEPQ7
 
 Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
@@ -14,8 +14,7 @@ Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
 
 Datafile: 		no immediate import data in this quantlet, see SOEPQ1
 
-Input: 			(optional - delete if not used)
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1, the subdataset generated in SOEPQ6 and and regression models in SOEPQ7'
 
-Output:  		(optional - delete if not used)
+Output:  		'Robust regression estimation for a given regression input'
 
-Example: 		for your plots, graphs, results etc. - delete if not used

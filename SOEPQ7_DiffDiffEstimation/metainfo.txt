@@ -2,14 +2,12 @@ Name of Quantlet: 	SOEPQ7_DiffDiffEstimation
 
 Published in:		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		'This quantlet is about an estimation of the minimum wage effect on Employment.
-			We use regression estimations of Schmitz(2017) and Caliendo(2017)
-			Schmitz uses the log change of employment, Caliendo the log employment rate
-			We estimate some regressions from them'
+Description: 		'Estimation of Minimum Wage on Employment using a Dif&Dif Framework.
+			Regression models similar to Schmitz(2017) and Caliendo(2017).
 
-Keywords: 		MUST NOT BE EMPTY!
+Keywords: 		regression, estimation, panel-analysis, difference based estimator, error
 
-See also: 		SOEPQ1
+See also: 		SOEPQ1, SOEPQ4, SOEPQ5, SOEPQ6
 
 Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
@@ -17,8 +15,7 @@ Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
 
 Datafile: 		no immediate import data in this quantlet, see SOEPQ1
 
-Input: 			(optional - delete if not used)
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1 and the subdataset generated in SOEPQ6'
 
-Output:  		(optional - delete if not used)
+Output:  		'Estimation Tables using different regression model specifications'
 
-Example: 		for your plots, graphs, results etc. - delete if not used

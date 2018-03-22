@@ -15,8 +15,7 @@ Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
 
 Datafile: 		no immediate import data in this quantlet, see SOEPQ1
 
-Input: 			(optional - delete if not used)
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1 and the subdataset generate in SOEPQ2'
 
-Output:  		(optional - delete if not used)
+Output:  		'Graphical visualization of employment effect given a change in labor demand elasticity'
 
-Example: 		for your plots, graphs, results etc. - delete if not used
