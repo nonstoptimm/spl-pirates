@@ -9,8 +9,9 @@ Name of Quantlet: 	SOEPQ6_GraphicalAnalysisMinWage
 
 Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		'Combining data information about Earnings and Employment to identify German stages which are more affected to minimum wage introduction.
-			Computing continous and binary treatment variables.'
+Description: 		'Combining data information about Earnings and Employment to identify German stages
+which are more affected to minimum wage introduction.
+Computing continous and binary treatment variables.'
 
 Keywords: 		heat-map, empirical, time-series, plot, graphical representation
 

@@ -10,7 +10,7 @@ Name of Quantlet: 	SOEPQ2_DescriptiveAnalysis
 Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
 
 Description: 		'Descriptive Analysis of Data in 2013. Cleaning, editing and aggregating of labor related variables.
-			Plotting the desired variables of interest'
+Plotting the desired variables of interest'
 
 Keywords: 		plot, density, visualization, graphical representation, descriptive
 

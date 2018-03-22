@@ -10,7 +10,7 @@ Name of Quantlet: 	SOEPQ7_DiffDiffEstimation
 Published in:		Employment effects of the new German minimum wage (SOEP dataset)
 
 Description: 		'Estimation of Minimum Wage on Employment using a Dif&Dif Framework.
-			Regression models similar to Schmitz(2017) and Caliendo(2017).'
+Regression models similar to Schmitz(2017) and Caliendo(2017).'
 
 Keywords: 		regression, estimation, panel-analysis, difference based estimator, error
 

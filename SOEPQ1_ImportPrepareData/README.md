@@ -10,7 +10,7 @@ Name of Quantlet: SOEPQ1_ImportPrepareData
 Published in: Employment effects of the new German minimum wage (SOEP dataset)
 
 Description: 'Import, merge, preparation and variable selection of the SOEP data for multiple waves.
-			  The selection of the desired variables are adjustable in the soep-var-selection.csv-file.'
+The selection of the desired variables are adjustable in the soep-var-selection.csv-file.'
 
 Keywords: process, transformation, standardization
 
