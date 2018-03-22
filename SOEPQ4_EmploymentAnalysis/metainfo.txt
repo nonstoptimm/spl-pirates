@@ -2,9 +2,9 @@ Name of Quantlet: 	SOEPQ4_EmploymentAnalysis
 
 Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		MUST NOT BE EMPTY!
+Description: 		'Generating output of different employment measures. Usage of different regions and employment statuses.'
 
-Keywords: 		MUST NOT BE EMPTY!
+Keywords: 		plot, graphical representation, distribution, density, panel, empirical 
 
 See also: 		SOEPQ1
 

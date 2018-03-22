@@ -2,11 +2,12 @@ Name of Quantlet: 	SOEPQ3_SimulationMinimumWageEffect
 
 Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
 
-Description: 		MUST NOT BE EMPTY!
+Description: 		'Simulation of Minimum Wage. 
+Usage of data from the year 2013 to simulate an employment effect due to the wage shift through minimum wage realization.'
 
-Keywords: 		MUST NOT BE EMPTY!
+Keywords: 		plot, graphical representation, simulation, estimation, empirical
 
-See also: 		SOEPQ1
+See also: 		SOEPQ1, SOEPQ2
 
 Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
 
