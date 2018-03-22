@@ -29,8 +29,7 @@ The source code uses additional packages beside the standard packages in RStudio
 
 ## Important Note:
 > Set your working directory, where the **InstallPackages.R** is located!  
-This is really important to execute the quantlets correctly, as the execution of the Quantlets is always initiated by the root directory.
-
->**Examples:**  
+This is really important to execute the quantlets correctly, as the execution of the Quantlets is always initiated by the root directory.    
+**Examples:**  
 setwd("Your/Directory/spl-pirates") -> **RIGHT**  
 setwd("Your/Directory/spl-pirates/SOEPQ1_ImportPrepareData") -> **WRONG!**

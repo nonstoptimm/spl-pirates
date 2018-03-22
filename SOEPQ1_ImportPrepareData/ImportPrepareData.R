@@ -15,7 +15,7 @@ i = 1  # iterator to step through the list of years
 k = 2  # iterator to step through the columns in variable list
 # List all directories within the input data, non-recursive
 list_dirs = list.dirs(path = "SOEPQ1_ImportPrepareData/input-data", recursive = FALSE)
-# Extract the year name of the directories, so the last 4 digits and make it numeric
+# Extract the year name of the directories, so the last 4 digits
 list_years = str_sub(list_dirs, -4)
 # Create Variable names for every merged year based on the style merged[year]
 list_varnames = paste("merged", list_years, sep = "")
@@ -65,9 +65,9 @@ for (years in list_years) {
     k = k + 1
 }
 
-# Merge all data into one dataframe and add a column with the respective year, called 'Wave' Create a
-# new dataframe
-merged_all <- data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
+# Merge all data into one dataframe and add a column with the respective year, called 'Wave' 
+# Create a new dataframe
+merged_all = data.frame(matrix(ncol = nrow(soep_selection), nrow = 0))
 # Name the dataframe using the first column of the csv
 colnames(merged_all) <- soep_selection[, 1]
 # Add 'Wave' column to the dataframe
