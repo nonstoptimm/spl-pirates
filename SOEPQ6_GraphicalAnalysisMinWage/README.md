@@ -5,7 +5,26 @@
 
 ```yaml
 
+Name of Quantlet: 	SOEPQ6_GraphicalAnalysisMinWage
 
+Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: 		'Combining data information about Earnings and Employment to identify German stages which are more affected to minimum wage introduction.
+			Computing continous and binary treatment variables.'
+
+Keywords: 		heat-map, empirical, time-series, plot, graphical representation
+
+See also: 		SOEPQ1, SOEPQ4, SOEPQ5
+
+Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: 		geodata/DEU_adm1.rds
+
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1 and the subdatasets generated in SOEPQ4 and SOEPQ5'
+
+Output:  		'Visualization of treatment assignment across Germany. Time-series of Employment using Treatment and Control Groups'
 
 ```
 
@@ -247,19 +266,19 @@ plot_result_factor = function(x) {
 # Apply Plot Functions Plot Binary Treatment Variable
 plot_result_factor(final_map)
 ```
-![Binary Groups](plots/plot-factor.png =250x)
+![Binary Groups](plots/plot-factor.png)
 ```r
 plot_result_binary = plot_result_factor(final_map)
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-factor.png', plot_result_binary) Plot Kaitz Index
 plot_result_index(final_map, "Kaitz", "blue")
 ```
-![Kaitz-Index](plots/plot-kaitz.png =250x)
+![Kaitz-Index](plots/plot-kaitz.png)
 ```r
 plot_result_kaitz = plot_result_index(final_map, "Kaitz", "blue")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-kaitz.png', plot_result_kaitz) Plot Fraction Index
 plot_result_index(final_map, "Fraction", "red")
 ```
-![Fraction Index](plots/plot-fraction.png =250x)
+![Fraction Index](plots/plot-fraction.png)
 ```r
 plot_result_fraction = plot_result_index(final_map, "Fraction", "red")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot-fraction.png', plot_result_fraction)

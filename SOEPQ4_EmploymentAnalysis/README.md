@@ -5,7 +5,27 @@
 
 ```yaml
 
+Name of Quantlet: 	SOEPQ4_EmploymentAnalysis
 
+Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: 		'Generating output of different employment measures. Usage of different regions and employment statuses.'
+
+Keywords: 		plot, graphical representation, distribution, density, panel, empirical
+
+See also: 		SOEPQ1
+
+Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: 		no immediate import data in this quantlet, see SOEPQ1
+
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ'
+
+Output: 		'Graphical visualization of employment variable changes over time'
+
+Example: 		'Time Series of Log Values and Growth Rates of Full Time Employment, Part Time Employment, Marginal Employment'
 
 ```
 

@@ -5,7 +5,26 @@
 
 ```yaml
 
+Name of Quantlet: 	SOEPQ3_SimulationMinimumWageEffect
 
+Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: 		'Simulation of Minimum Wage.
+Usage of data from the year 2013 to simulate an employment effect due to the wage shift through minimum wage realization.'
+
+Keywords: 		plot, graphical representation, simulation, estimation, empirical
+
+See also: 		SOEPQ1, SOEPQ2
+
+Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: 		no immediate import data in this quantlet, see SOEPQ1
+
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1 and the subdataset generate in SOEPQ2'
+
+Output:  		'Graphical visualization of employment effect given a change in labor demand elasticity'
 
 ```
 

@@ -5,7 +5,29 @@
 
 ```yaml
 
+Name of Quantlet: 	SOEPQ5_IdentificationAffectedRegions
 
+Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: 		'Estimation and graphical analysis of bites, Fraction Index and Kaitz Index for each German State.
+			Fraction Index is ratio of affected individuals by the minimum legal wage.
+			Kaitz Index is ratio between the minimum legal wage and the average wage'
+
+Keywords: 		ratio, plot, index, empirical, density, analysis
+
+See also: 		SOEPQ1
+
+Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: 		no immediate import data in this quantlet, see SOEPQ1
+
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1'
+
+Output:  		'Plotting various measures of Fraction and Kaitz Index across German states'
+
+Example: 		'Density plots, Correlation visualization and Time Changes of Fraction and Kaitz Index'
 
 ```
 

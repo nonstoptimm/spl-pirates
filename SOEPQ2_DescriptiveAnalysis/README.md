@@ -5,7 +5,28 @@
 
 ```yaml
 
+Name of Quantlet: 	SOEPQ2_DescriptiveAnalysis
 
+Published in: 		Employment effects of the new German minimum wage (SOEP dataset)
+
+Description: 		'Descriptive Analysis of Data in 2013. Cleaning, editing and aggregating of labor related variables.
+			Plotting the desired variables of interest'
+
+Keywords: 		plot, density, visualization, graphical representation, descriptive
+
+See also: 		SOEPQ1
+
+Authors: 		Meret Borchmann, Jupp Kerschek, Albert Thieme, Timm Walz
+
+Submitted: 		30th of March 2018 by the research team mentioned in "Authors"
+
+Datafile: 		no immediate import data in this quantlet, see SOEPQ1
+
+Input: 			'Usage of merged and filtered dataset generated in SOEPQ1'
+
+Output:  		'Summary Statistics of variables of interest'
+
+Example: 		'Density plots Age, Hourly Earnings, Monthly Earnings, Actual Work Tim per Week, Gender'
 
 ```
 
