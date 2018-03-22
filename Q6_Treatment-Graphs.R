@@ -1,9 +1,8 @@
 ## Quantlet 6 - GraphicalAnalysisMinWage
-## Graphical Analysis for Employment Rates of Treatment and Control Groups
 ## Load Packages used in Q6
 library(ggplot2)
 library(sp)
-# Execution of Q1 is necessary beforehand!
+# Execution of Q1, Q4 and Q5 is necessary beforehand!
 
 # Combine Information of Q4 and Q5
 # We use the averaged data from Q4 for the employment rates and add the Fraction and Keitz Index from Q5
@@ -18,7 +17,7 @@ analyze_tc = combine_data(Employment.yearly.state, dbys)
 
 # Treatment Identification with Keitz Index
 # Use Median of Keitz Index in 2013 for identification
-# 1.Standart treatment: If Kaitz higher than Median the State will be treatmant, otherwise control
+# 1.Standard treatment: If Kaitz higher than Median the State will be treatmant, otherwise control
 # 2.Robust treatment: If Kaitz higher than 60% - Percetil will be treatment, if under 40% 
 data_selector = function(analyze_tc, wave) {
   select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz, Fraction))
@@ -235,13 +234,12 @@ plot_result_factor = function(x) {
 # APPLY Plot Functions
 # Plot Binary Treatment Variable
 plot_result_binary = plot_result_factor(final_map)
+# ggsave("plots/plot-factor.png", plot_result_binary)
 # Plot Kaitz Index
 plot_result_kaitz = plot_result_index(final_map, "Kaitz", "blue")
+# ggsave("plots/plot-kaitz.png", plot_result_kaitz)
 # Plot Fraction Index
 plot_result_fraction = plot_result_index(final_map, "Fraction", "red")
-
-# SAVE the Plots
-# ggsave("plots/plot-kaitz.png", plot_result_kaitz)
 # ggsave("plots/plot-fraction.png", plot_result_fraction)
-# ggsave("plots/plot-factor.png", plot_result_binary)
+
 

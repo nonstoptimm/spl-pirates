@@ -71,6 +71,7 @@ yearly_employment = function(x) { x %>%
             Not.Employment = length(Employment.Status[as.numeric(Employment.Status) == 15])
   )
 }
+
 # Apply yearly_employment to the reduced_merged dataset without NAs
 Employment.yearly = yearly_employment(Reduced_merged_noNA)
 
@@ -262,5 +263,4 @@ plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Margi
 # Not employed growth rate
 plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
 # ggsave("plots/plot_graphs_growth_not.png", plot_graphs_growth_not)
-
 
