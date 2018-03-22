@@ -8,8 +8,10 @@
 **Topic**:  
 *Employment Effects of the new German minimum wage (SOEP Dataset)*
 
-Humboldt-University of Berlin
+Humboldt-University of Berlin  
 
+Date of Submission:  
+30th of March 2018
 
 **Team Members:**  
 Albert Thieme  
@@ -17,6 +19,8 @@ Timm Walz
 Meret Borchmann  
 Jupp Kerschek  
 
+**Instruction for the Documentation:**  
+Within the "Documentation"-folder, you can find the project documentation as pdf with the respective .tex-file as well as the presentation conducted in January 2018.
 
 **Instruction for the Source Code:**  
 The quantlets are ordered by numbers (Q1-Q8) and we strongly recommend to execute them number-by-number, as the quantlets partly refer to previously created objects and variables. In the metadata.txt as well as in the README.md of each quantlet, the exact quantlet-dependencies are listed.
