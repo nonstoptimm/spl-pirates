@@ -295,6 +295,7 @@ plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employ
 ```r
 plot_graphs_share_marginal = plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employment")
 # ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_marginal.png', plot_graphs_share_marginal)
+
 # Not employed share
 plot_graphs_share(Employment.yearly.state, "Not", "Share of Not Employed")
 

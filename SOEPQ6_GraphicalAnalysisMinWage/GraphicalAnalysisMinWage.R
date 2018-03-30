@@ -3,8 +3,8 @@ library(ggplot2)
 library(sp)
 # Execution of Q1, Q4 and Q5 is necessary beforehand!
 
-# Combine Information of Q4 and Q5 We use the averaged data from Q4 for the employment rates and add
-# the Fraction and Keitz Index from Q5
+# Combine Information of Q4 and Q5 
+# We use the averaged data from Q4 for the employment rates and add the Fraction and Kaitz Index from Q5
 combine_data = function(x, y) {
     combined = merge(x, y)
     combined = combined %>% group_by(Wave, State.of.Residence) %>% arrange(Wave)
@@ -14,9 +14,10 @@ combine_data = function(x, y) {
 # Apply combine_data to merge, filter, group and arrange Employment.yearly.state and dbys
 analyze_tc = combine_data(Employment.yearly.state, dbys)
 
-# Treatment Identification with Keitz Index Use Median of Keitz Index in 2013 for identification
-# 1.Standard treatment: If Kaitz higher than Median the State will be treatmant, otherwise control
-# 2.Robust treatment: If Kaitz higher than 60% - Percetil will be treatment, if under 40%
+# Treatment Identification with Kaitz Index 
+# Use Median of Kaitz Index in 2013 for identification
+# 1.Standard treatment: If Kaitz higher than Median the State will be treatment, otherwise control
+# 2.Robust treatment: If Kaitz higher than 60% - Percentil will be treatment, if under 40%
 data_selector = function(analyze_tc, wave) {
     select(filter(analyze_tc, Wave == wave), c(Wave, State.of.Residence, Kaitz, Fraction))
 }
@@ -66,8 +67,8 @@ aggregate_treatment_control = function(x, y) {
     return(x)
 }
 
-# Apply aggregate_standard_treatment_control to analyze_tc either with binary_treatment11 or
-# binary_treatment12
+# Apply aggregate_standard_treatment_control to analyze_tc either with binary_treatment1 or
+# binary_treatment2
 Treatment.analysis1 = aggregate_treatment_control(analyze_tc, 1)
 Treatment.analysis2 = aggregate_treatment_control(analyze_tc, 2)
 
@@ -78,7 +79,8 @@ drop_sub_na = function(x) {
 # Apply drop_sub_na to Treatment.analysis2 to drop lines with missing values
 Treatment.analysis2_noNA = drop_sub_na(Treatment.analysis2)
 
-# GRAPHS # Function to plot log employment of binary treatmentgroup for different employment status
+# GRAPHS 
+# Function to plot log employment of binary treatmentgroup for different employment status
 plot_treatment = function(x, yaxis, treatment, title) {
     if (yaxis == "Full") {
         x$yaxis = x$Avg.Log.Full.Employment
@@ -102,33 +104,39 @@ plot_treatment = function(x, yaxis, treatment, title) {
         labels = c("Control", "Treatment")) + coord_cartesian(xlim = c(1.6, 7))
 }
 
-# Apply the function to different treatment analysis datasets For Full Time Employment
-# T1
+# Apply the function to different treatment analysis datasets 
+# For Full Time Employment, T1
 plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of Binary Groups1 for Full Employment")
 plot_treatment_t1full = plot_treatment(Treatment.analysis1, "Full", 1, "Log Employment of Binary Groups1 for Full Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_t1full.png', plot_treatment_t1full) 
+
 # For Part Time Employment, T1
 plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of Binary Groups1 for Part Employment")
 plot_treatment_t1part = plot_treatment(Treatment.analysis1, "Part", 1, "Log Employment of Binary Groups1 for Part Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_t1part.png', plot_treatment_t1part) 
+
 # For Marginal Time Employment, T1
 plot_treatment(Treatment.analysis1, "Marginal", 1, "Log Employment of Binary Groups1 for Marginal Employment")
 plot_treatment_ta1marginal = plot_treatment(Treatment.analysis1, "Marginal", 1, "Log Employment of Binary Groups1 for Marginal Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_ta1marginal.png', plot_treatment_ta1marginal) 
+
 # For Full Time Employment, T2
 plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of Binary Groups2 for Full Employment")
 plot_treatment_ta2full = plot_treatment(Treatment.analysis2, "Full", 2, "Log Employment of Binary Groups2 for Full Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_ta2full.png', plot_treatment_ta2full) 
+
 # For Part Time Employment, T2
 plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of Binary Groups2 for Part Employment")
 plot_treatment_ta2part = plot_treatment(Treatment.analysis2, "Part", 2, "Log Employment of Binary Groups2 for Part Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_ta2part.png', plot_treatment_ta2part) 
+
 # For Marginal Time Employment, T2
 plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of Binary Groups2 for Marginal Employment")
 plot_treatment_ta2marginal = plot_treatment(Treatment.analysis2, "Marginal", 2, "Log Employment of Binary Groups2 for Marginal Employment")
 # ggsave('SOEPQ6_GraphicalAnalysisMinWage/plots/plot_treatment_ta2marginal.png', plot_treatment_ta2marginal)
 
-# MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states Read Map File for Germany
+# MAP PLOTS to illustrate Kaitz, Fraction and Treatment for the German states 
+# Read Map File for Germany using readRS from sp-package
 map = readRDS("SOEPQ6_GraphicalAnalysisMinWage/geodata/DEU_adm1.rds")
 
 # Unify the States

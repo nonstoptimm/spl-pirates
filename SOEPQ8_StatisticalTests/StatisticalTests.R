@@ -94,8 +94,8 @@ estimate_appropriate_model = function(fe, re) {
     return(output)
 }
 
-# Apply estimate_appropriate_model-function to the regressions in Q7 Use did_2.2.2 and specify
-# counterpart random model
+# Apply estimate_appropriate_model-function to the regressions in Q7 
+# Use did_2.2.2 and specify counterpart random model
 fixed.1 = did_2.2.2
 random.1 = plm(Log.Part.Employment.Rate ~ DiD.estimator.Fraction + Log.Population + Interaction_Fraction_y13 + 
     Interaction_Fraction_y12, data = estimation, index = c("State.of.Residence", "Wave"), model = "random")
