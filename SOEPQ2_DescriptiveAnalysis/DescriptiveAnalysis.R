@@ -5,7 +5,8 @@ library(stringr)
 library(stargazer)
 # Execution of Q1 is necessary beforehand!
 
-# Descriptive Analysis of Data in 2013 Code can be applied for any year as it's created as functions
+# Descriptive Analysis of Data in 2013 
+# Code can be applied for any year as it's created as functions
 # Data Cleaning, Summary Statistics, Output
 
 # Definition of data_selector Function to be able to select variables for a special wave
@@ -73,7 +74,7 @@ gender_correction = function(x) {
     x$Sexnum = NA
     # Convert as numeric for analysis
     x$Sexnum = as.numeric(x$Sex) - 7
-    # 0 = men, 1 = women Turn impausible values to NA
+    # 0 = men, 1 = women Turn implausible values to NA
     x$Sexnum[x$Sexnum <= -1] = NA
     return(x)
 }
@@ -120,7 +121,8 @@ set_na_not_affected = function(x) {
 sub2013 = set_na_not_affected(sub2013)
 
 # View over the Qualification High if college degree, middle if vocational degree, low if school
-# degree, non if no school degree High = 3, Middle = 2, Low = 1, Non = 0 Create a function for it
+# degree, non if no school degree High = 3, Middle = 2, Low = 1, Non = 0 
+# Create a function for it
 check_qualification = function(x) {
     view = c()
     view = c(view, "SCHOOL LEAVING DEGREE")
@@ -172,7 +174,8 @@ rearrange_qualification = function(x) {
 # Apply the rearrange_qualification Function to sub 2013
 sub2013 = rearrange_qualification(sub2013)
 
-# Income Set Values of -2 to 0 -> People who have no Monthly Income Create a function for it
+# Income Set Values of -2 to 0 -> People who have no Monthly Income 
+# Create a function for it
 set_income = function(x) {
     x$Current.Gross.Labor.Income.in.Euro[(x$Current.Gross.Labor.Income.in.Euro) == -2] = 0
     return(x)
@@ -181,8 +184,11 @@ set_income = function(x) {
 # Apply the set_income function to the 2013 dataset
 sub2013 = set_income(sub2013)
 
-# Working Time Set -3 to NA -> Implausible Answer Set -2 to 0 -> No working time Set -1 to NA -> Don't
-# know working time Function to correct the working times
+# Working Time: 
+# Set -3 to NA (Implausible Answer),
+# Set -2 to 0, 
+# No working time Set -1 to NA (Don't know working time)
+# Function to correct the working times
 set_working_time = function(x) {
     x$Actual.Work.Time.Per.Week[(x$Actual.Work.Time.Per.Week) == -3] = NA
     x$Actual.Work.Time.Per.Week[(x$Actual.Work.Time.Per.Week) == -2] = 0
@@ -221,7 +227,8 @@ calc_hourly_earnings = function(x) {
 # Apply calc_hourly_earnings Function to the 2013 dataset
 sumsub2013 = calc_hourly_earnings(sumsub2013)
 
-# Dummy for Affected by Minimum Wage 1 if hourly earnings < 8.50 Function to make it reusable
+# Dummy for Affected by Minimum Wage 1 if hourly earnings < 8.50 
+# Function to make it reusable
 dummy_minimum_wage = function(x) {
     x$Subject.to.minwage = NA
     x$Subject.to.minwage[x$Hourly.earnings < 8.5] = 1

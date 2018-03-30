@@ -250,54 +250,58 @@ plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmploy
     "Log Employment rate in %")
 # ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_logemployrates.png', plot_graphs_year_logemployrates)
 
-# OUTPUT Graphs for each state of the employment variables over time Define a function with different
-# employment modes
-plot_graphs_growth = function(input, mode, title) {
-    if (mode == "Full") {
-        v1 = input$Full.Employment.Rate
-    } else if (mode == "Part") {
-        v1 = input$Part.Employment.Rate
-    } else if (mode == "Marginal") {
-        v1 = input$Marginal.Employment.Rate
-    } else if (mode == "Not") {
-        v1 = input$Not.Employment.Rate
-    }
-    ggplot(data = input, aes(x = Period, group = State.of.Residence, color = State.of.Residence)) + geom_line(aes(y = v1)) +
-        theme_classic() + labs(title = title, y = "Growth Rate in %", x = "Years") + geom_vline(xintercept = 5,
-        color = "red") + coord_cartesian(xlim = c(1.6, 7)) + scale_colour_hue(name = "States", labels = c("Schleswig-Holstein",
-        "Hamburg", "Lower Saxony", "Bremen", "North-RhineWestfalia", "Hessen", "Rheinland-Pfalz", "Baden-Wuerttemberg",
-        "Bavaria", "Saarland", "Berlin", "Brandenburg", "Mecklemburg-Vorpommern", "Saxony", "Saxony-Anhalt",
-        "Thuringia"))
+# OUTPUT Graphs for each state of the employment variables over time
+# Define a function with different employment modes
+plot_graphs_share = function(input, mode, title) {
+  if (mode == "Full") {
+    v1 = input$Full.Employment.Rate
+  } else if (mode == "Part") {
+    v1 = input$Part.Employment.Rate
+  } else if (mode == "Marginal") {
+    v1 = input$Marginal.Employment.Rate
+  } else if (mode == "Not") {
+    v1 = input$Not.Employment.Rate
+  }
+  ggplot(data = input, aes(x = Period, group = State.of.Residence, color = State.of.Residence)) + geom_line(aes(y = v1)) +
+    theme_classic() + labs(title = title, y = "Share in %", x = "Years") + geom_vline(xintercept = 5,
+                                                                                            color = "red") + coord_cartesian(xlim = c(1.6, 7)) + scale_colour_hue(name = "States", labels = c("Schleswig-Holstein",
+                                                                                                                                                                                              "Hamburg", "Lower Saxony", "Bremen", "North-RhineWestfalia", "Hessen", "Rheinland-Pfalz", "Baden-Wuerttemberg",
+                                                                                                                                                                                              "Bavaria", "Saarland", "Berlin", "Brandenburg", "Mecklemburg-Vorpommern", "Saxony", "Saxony-Anhalt",
+                                                                                                                                                                                              "Thuringia"))
 }
 
-# Apply plot_graphs_growth to Employment.yearly.state using different employment types Full time
-# employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
+# Apply plot_graphs_share to Employment.yearly.state using different employment types
+# Full time employment share
+plot_graphs_share(Employment.yearly.state, "Full", "Share of Full Time Employment")
 ```
-![Growth Rate Full Time Employment](plots/plot_graphs_growth_full.png)
+![Growth Rate Full Time Employment](plots/plot_graphs_share_full.png)
 ```r
-plot_graphs_growth_full = plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_full.png', plot_graphs_growth_full)
-# Part time employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
+plot_graphs_share_full = plot_graphs_share(Employment.yearly.state, "Full", "Share of Full Time Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_full.png', plot_graphs_share_full)
+
+# Part time employment share
+plot_graphs_share(Employment.yearly.state, "Part", "Share of Part Time Employment")
+
 ```
-![Growth Rate Part Time Employment](plots/plot_graphs_growth_part.png)
+![Growth Rate Part Time Employment](plots/plot_graphs_share_part.png)
 ```r
-plot_graphs_growth_part = plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_part.png', plot_graphs_growth_part)
-# Marginal employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
+plot_graphs_share_part = plot_graphs_share(Employment.yearly.state, "Part", "Share of Part Time Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_part.png', plot_graphs_share_part)
+
+# Marginal employment share
+plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employment")
 ```
-![Picture1](plots/plot_graphs_growth_marginal.png)
+![Picture1](plots/plot_graphs_share_marginal.png)
 ```r
-plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_marginal.png', plot_graphs_growth_marginal)
-# Not employed growth rate
-plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
+plot_graphs_share_marginal = plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_marginal.png', plot_graphs_share_marginal)
+# Not employed share
+plot_graphs_share(Employment.yearly.state, "Not", "Share of Not Employed")
+
 ```
-![Picture1](plots/plot_graphs_growth_not.png)
+![Picture1](plots/plot_graphs_share_not.png)
 ```r
-plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_not.png', plot_graphs_growth_not)
+plot_graphs_share_not = plot_graphs_share(Employment.yearly.state, "Not", "Share of Not Employed")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_not.png', plot_graphs_share_not)
 
 ```

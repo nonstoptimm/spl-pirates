@@ -253,9 +253,9 @@ plot_result_index = function(input, mode, highcolor) {
 }
 
 # Function to plot the Factors. The dataset created with createMapdata has to be used for this
-plot_result_factor = function(x) {
-    Treatment = factor(x$binary_treatment1)
-    ggplot(x) + aes(x = long, y = lat, group = group, fill = Treatment) + geom_polygon(color = "black") +
+plot_result_factor = function(input) {
+    Treatment = factor(input$binary_treatment1)
+    ggplot(input) + aes(x = long, y = lat, group = group, fill = Treatment) + geom_polygon(color = "black") +
         coord_map() + scale_fill_manual(values = c("white", "blue"), labels = c("Control", "Treatment")) +
         geom_path(color = "black") + theme(legend.position = "bottom", panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(), panel.background = element_blank(), axis.line = element_blank(),

@@ -3,17 +3,13 @@ library(dplyr)
 library(ggplot2)
 # Execution of Q1 is necessary beforehand!
 
-# Employment Graphs This Quantlet produces output of different employment measures
-
-# We look at people in our dataset that are either full time employed, part time employed, marginal
-# employed or not employed.  Data pre-processing for analysis by defining a function
+# Data pre-processing/selection for analysis by defining a function
 data_selector = function(merged_all) {
     select(filter(merged_all), c(Wave, never.Changing.Person.ID, State.of.Residence, Employment.Status, 
         Labor.Force.Status, Actual.Work.Time.Per.Week, Current.Gross.Labor.Income.in.Euro))
 }
 
-# Create for dataframe with only variables of interest by using the data_selector function on
-# merged_all
+# Create for dataframe with only variables of interest by using the data_selector function on merged_all
 Reduced_merged = data_selector(merged_all)
 
 # Adjust Labor Force Variable Sort out people not in working force anymore
@@ -80,10 +76,12 @@ yearly_employment_state = function(x) {
 # Apply yearly_employment_state to the dataset used above
 Employment.yearly.state = yearly_employment_state(Reduced_merged)
 
-# Generate different employment measures, Log Employment and % change of Log Employment and Employment
-# Rates 1. Log Values of full/part/marginal/not employment 2. % change of log full/part/marginal/not
-# employment 3. Employment Rate of full/part/marginal/not employment in % 4. Log Employment Rate of
-# full/part/marginal/not employment
+# Generate different employment measures, Log Employment and % change of 
+# Log Employment and Employment Rates 
+# 1. Log Values of full/part/marginal/not employment 
+# 2. % change of log full/part/marginal/not employment 
+# 3. Employment Rate of full/part/marginal/not employment in % 
+# 4. Log Employment Rate of full/part/marginal/not employment
 calc_employment_variables = function(input, type) {
     if (type == "Full") {
         input$v1 = log(input$Full.Employment)
@@ -204,41 +202,41 @@ plot_graphs_year_logemployrates = plot_graphs_year(Employment.yearly, "LogEmploy
     "Log Employment rate in %")
 # ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_year_logemployrates.png', plot_graphs_year_logemployrates)
 
-# OUTPUT Graphs for each state of the employment variables over time Define a function with different
-# employment modes
-plot_graphs_growth = function(input, mode, title) {
-    if (mode == "Full") {
-        v1 = input$Full.Employment.Rate
-    } else if (mode == "Part") {
-        v1 = input$Part.Employment.Rate
-    } else if (mode == "Marginal") {
-        v1 = input$Marginal.Employment.Rate
-    } else if (mode == "Not") {
-        v1 = input$Not.Employment.Rate
-    }
-    ggplot(data = input, aes(x = Period, group = State.of.Residence, color = State.of.Residence)) + geom_line(aes(y = v1)) + 
-        theme_classic() + labs(title = title, y = "Growth Rate in %", x = "Years") + geom_vline(xintercept = 5, 
-        color = "red") + coord_cartesian(xlim = c(1.6, 7)) + scale_colour_hue(name = "States", labels = c("Schleswig-Holstein", 
-        "Hamburg", "Lower Saxony", "Bremen", "North-RhineWestfalia", "Hessen", "Rheinland-Pfalz", "Baden-Wuerttemberg", 
-        "Bavaria", "Saarland", "Berlin", "Brandenburg", "Mecklemburg-Vorpommern", "Saxony", "Saxony-Anhalt", 
-        "Thuringia"))
+# OUTPUT Graphs for each state of the employment variables over time 
+# Define a function with different employment modes
+plot_graphs_share = function(input, mode, title) {
+  if (mode == "Full") {
+    v1 = input$Full.Employment.Rate
+  } else if (mode == "Part") {
+    v1 = input$Part.Employment.Rate
+  } else if (mode == "Marginal") {
+    v1 = input$Marginal.Employment.Rate
+  } else if (mode == "Not") {
+    v1 = input$Not.Employment.Rate
+  }
+  ggplot(data = input, aes(x = Period, group = State.of.Residence, color = State.of.Residence)) + geom_line(aes(y = v1)) + 
+    theme_classic() + labs(title = title, y = "Share in %", x = "Years") + geom_vline(xintercept = 5, 
+                                                                                            color = "red") + coord_cartesian(xlim = c(1.6, 7)) + scale_colour_hue(name = "States", labels = c("Schleswig-Holstein", 
+                                                                                                                                                                                              "Hamburg", "Lower Saxony", "Bremen", "North-RhineWestfalia", "Hessen", "Rheinland-Pfalz", "Baden-Wuerttemberg", 
+                                                                                                                                                                                              "Bavaria", "Saarland", "Berlin", "Brandenburg", "Mecklemburg-Vorpommern", "Saxony", "Saxony-Anhalt", 
+                                                                                                                                                                                              "Thuringia"))
 }
 
-# Apply plot_graphs_growth to Employment.yearly.state using different employment types Full time
-# employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
-plot_graphs_growth_full = plot_graphs_growth(Employment.yearly.state, "Full", "Growth Rate Full Time Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_full.png', plot_graphs_growth_full) 
-# Part time employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
-plot_graphs_growth_part = plot_graphs_growth(Employment.yearly.state, "Part", "Growth Rate Part Time Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_part.png', plot_graphs_growth_part) 
-# Marginal employment growth rate
-plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
-plot_graphs_growth_marginal = plot_graphs_growth(Employment.yearly.state, "Marginal", "Growth Rate Marginal Employment")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_marginal.png', plot_graphs_growth_marginal) 
-# Not employed growth rate
-plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
-plot_graphs_growth_not = plot_graphs_growth(Employment.yearly.state, "Not", "Growth Rate Not Employed")
-# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_growth_not.png', plot_graphs_growth_not)
+# Apply plot_graphs_share to Employment.yearly.state using different employment types
+# Full time employment share
+plot_graphs_share(Employment.yearly.state, "Full", "Share of Full Time Employment")
+plot_graphs_share_full = plot_graphs_share(Employment.yearly.state, "Full", "Share of Full Time Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_full.png', plot_graphs_share_full) 
+# Part time employment share
+plot_graphs_share(Employment.yearly.state, "Part", "Share of Part Time Employment")
+plot_graphs_share_part = plot_graphs_share(Employment.yearly.state, "Part", "Share of Part Time Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_part.png', plot_graphs_share_part) 
+# Marginal employment share
+plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employment")
+plot_graphs_share_marginal = plot_graphs_share(Employment.yearly.state, "Marginal", "Share of Marginal Employment")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_marginal.png', plot_graphs_share_marginal) 
+# Not employed share
+plot_graphs_share(Employment.yearly.state, "Not", "Share of Not Employed")
+plot_graphs_share_not = plot_graphs_share(Employment.yearly.state, "Not", "Share of Not Employed")
+# ggsave('SOEPQ4_EmploymentAnalysis/plots/plot_graphs_share_not.png', plot_graphs_share_not)
 

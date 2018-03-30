@@ -2,8 +2,8 @@
 library(dplyr)
 # Execution of Q1 and Q2 is necessary beforehand
 
-# Simulation of Minimum Wage Function to gather average wages for employees affected by minimum wage
-# for each employment status
+# Simulation of Minimum Wage 
+# Function to gather average wages for employees affected by minimum wage for each employment status
 minwage_affect = function(x) {
     x %>% group_by(Employment.Status, Subject.to.minwage) %>% summarise(n(), avg_Age = mean(Age, na.rm = TRUE), 
         avg_Sex = mean(Sexnum, na.rm = TRUE), avg_Hourly.earnings = mean(Hourly.earnings), avg_monthly.earnings = mean(Current.Gross.Labor.Income.in.Euro, 
@@ -60,7 +60,7 @@ employ_effect_monopsonic = function(x, y, m) {
             effect_matrix = rbind(effect_matrix, curr_row)
         } else {
             curr_row = ((8.5 - y$avg_Hourly.earnings[lines])/(0.5 * m * y$avg_Hourly.earnings[lines])) * 
-                (1 - ((1 + 0.5 * m)/(1 + y$avg_Hourly.earnings[lines]))^(-x[5]))
+                (1 - ((1 + 0.5 * m)/(1 + m))^(-x))
             effect_matrix = rbind(effect_matrix, curr_row)
         }
     }

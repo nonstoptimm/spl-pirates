@@ -108,7 +108,7 @@ gender_correction = function(x) {
     x$Sexnum = NA
     # Convert as numeric for analysis
     x$Sexnum = as.numeric(x$Sex) - 7
-    # 0 = men, 1 = women Turn impausible values to NA
+    # 0 = men, 1 = women Turn implausible values to NA
     x$Sexnum[x$Sexnum <= -1] = NA
     return(x)
 }
