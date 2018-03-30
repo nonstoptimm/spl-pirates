@@ -20,34 +20,34 @@ Submitted:		30th of March 2018 by the research team mentioned in Authors
 
 Datafiles:
 - 1: variable-selection/soep-var-selection.csv
-- 2: input-data/2010_bap.dta
-- 3: input-data/2010_bapequiv.dta
-- 4: input-data/2010_bapgen.dta
-- 5: input-data/2010_bapkal.dta
-- 6: input-data/2011_bbp.dta
-- 7: input-data/2011_bbpequiv.dta
-- 8: input-data/2011_bbpgen.dta
-- 9: input-data/2011_bbpkal.dta
-- 10: input-data/2012_bcp.dta
-- 11: input-data/2012_bcpequiv.dta
-- 12: input-data/2012_bcpgen.dta
-- 13: input-data/2012_bcpkal.dta
-- 14: input-data/2013_bdp.dta
-- 15: input-data/2013_bdpequiv.dta
-- 16: input-data/2013_bdpgen.dta
-- 17: input-data/2013_bdpkal.dta
-- 18: input-data/2014_bep.dta
-- 19: input-data/2014_bepequiv.dta
-- 20: input-data/2014_bepgen.dta
-- 21: input-data/2014_bepkal.dta
-- 22: input-data/2015_bfp.dta
-- 23: input-data/2015_bfpequiv.dta
-- 24: input-data/2015_bfpgen.dta
-- 25: input-data/2015_bfpkal.dta
-- 26: input-data/2016_bgp.dta
-- 27: input-data/2016_bgpequiv.dta
-- 28: input-data/2016_bgpgen.dta
-- 29: input-data/2016_bgpkal.dta
+- 2: input-data/2010/2010_bap.dta
+- 3: input-data/2010/2010_bapequiv.dta
+- 4: input-data/2010/2010_bapgen.dta
+- 5: input-data/2010/2010_bapkal.dta
+- 6: input-data/2011/2011_bbp.dta
+- 7: input-data/2011/2011_bbpequiv.dta
+- 8: input-data/2011/2011_bbpgen.dta
+- 9: input-data/2011/2011_bbpkal.dta
+- 10: input-data/2012/2012_bcp.dta
+- 11: input-data/2012/2012_bcpequiv.dta
+- 12: input-data/2012/2012_bcpgen.dta
+- 13: input-data/2012/2012_bcpkal.dta
+- 14: input-data/2013/2013_bdp.dta
+- 15: input-data/2013/2013_bdpequiv.dta
+- 16: input-data/2013/2013_bdpgen.dta
+- 17: input-data/2013/2013_bdpkal.dta
+- 18: input-data/2014/2014_bep.dta
+- 19: input-data/2014/2014_bepequiv.dta
+- 20: input-data/2014/2014_bepgen.dta
+- 21: input-data/2014/2014_bepkal.dta
+- 22: input-data/2015/2015_bfp.dta
+- 23: input-data/2015/2015_bfpequiv.dta
+- 24: input-data/2015/2015_bfpgen.dta
+- 25: input-data/2015/2015_bfpkal.dta
+- 26: input-data/2016/2016_bgp.dta
+- 27: input-data/2016/2016_bgpequiv.dta
+- 28: input-data/2016/2016_bgpgen.dta
+- 29: input-data/2016/2016_bgpkal.dta
 
 Input:			'Input data provided by SOEP, ending with .dta as well as a csv-file created by the authors of this research, containing labels and variable names.'
 
