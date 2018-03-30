@@ -25,6 +25,7 @@ data_selector = function(analyze_tc, wave) {
 # Create subset for 2013
 analyze_2013 = data_selector(analyze_tc, 2013)
 
+# Function add_treatment to add binary treatment variables
 add_treatment = function(x) {
     x$binary_treatment1 = NA
     x$binary_treatment1[x$Kaitz > median(x$Kaitz)] = 1

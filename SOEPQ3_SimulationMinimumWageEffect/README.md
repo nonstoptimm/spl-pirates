@@ -33,6 +33,7 @@ Output:  		'Graphical visualization of employment effect given a change in labor
 
 ## Quantlet 3 - SimulationMinimumWageEffect Load Packages used in Q3
 library(dplyr)
+library(ggplot2)
 # Execution of Q1 and Q2 is necessary beforehand
 
 # Simulation of Minimum Wage Function to gather average wages for employees affected by minimum wage
